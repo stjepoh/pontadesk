@@ -24,8 +24,32 @@ final class DataImportController extends AdminController
             <form method="post" action="/data-import" enctype="multipart/form-data" class="content">
                 <div class="grid-2">
                     <div>
-                        <label>JSON export *</label>
-                        <input class="input" type="file" name="export_file" accept=".json,application/json" required>
+                        <label>Client JSON *</label>
+                        <input class="input" type="file" name="client_file" accept=".json,application/json" required>
+                    </div>
+                    <div>
+                        <label>Contract JSON</label>
+                        <input class="input" type="file" name="contract_file" accept=".json,application/json">
+                    </div>
+                    <div>
+                        <label>WorkLog JSON</label>
+                        <input class="input" type="file" name="worklog_file" accept=".json,application/json">
+                    </div>
+                    <div>
+                        <label>Project JSON</label>
+                        <input class="input" type="file" name="project_file" accept=".json,application/json">
+                    </div>
+                    <div>
+                        <label>ClientNote JSON</label>
+                        <input class="input" type="file" name="clientnote_file" accept=".json,application/json">
+                    </div>
+                    <div>
+                        <label>ClientTask JSON</label>
+                        <input class="input" type="file" name="clienttask_file" accept=".json,application/json">
+                    </div>
+                    <div>
+                        <label>NotificationSettings JSON</label>
+                        <input class="input" type="file" name="notificationsettings_file" accept=".json,application/json">
                     </div>
                     <div>
                         <label>Reset baze</label><br>
@@ -57,32 +81,41 @@ final class DataImportController extends AdminController
     {
         $this->requireAdmin();
 
-        if (!isset($_FILES['export_file']) || !is_array($_FILES['export_file']) || ($_FILES['export_file']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
-            http_response_code(400);
-            echo 'Nije učitana JSON datoteka.';
-            return;
-        }
-
-        $tmp = (string) ($_FILES['export_file']['tmp_name'] ?? '');
-        $json = file_get_contents($tmp);
-        if ($json === false) {
-            http_response_code(400);
-            echo 'Ne mogu pročitati upload.';
-            return;
-        }
-
-        $export = json_decode($json, true);
-        if (!is_array($export)) {
-            http_response_code(400);
-            echo 'Upload nije valjani JSON.';
-            return;
-        }
-
         $map = ImportMap::load();
         $reset = isset($_POST['reset']);
 
         try {
-            $result = (new ImportService())->import($export, $map, $reset);
+            $bundled = [];
+            foreach ([
+                'Client' => 'client_file',
+                'Contract' => 'contract_file',
+                'WorkLog' => 'worklog_file',
+                'Project' => 'project_file',
+                'ClientNote' => 'clientnote_file',
+                'ClientTask' => 'clienttask_file',
+                'NotificationSettings' => 'notificationsettings_file',
+            ] as $entity => $field) {
+                if (!isset($_FILES[$field]) || !is_array($_FILES[$field]) || ($_FILES[$field]['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+                    continue;
+                }
+
+                $json = file_get_contents((string) $_FILES[$field]['tmp_name']);
+                if ($json === false) {
+                    continue;
+                }
+                $data = json_decode($json, true);
+                if (is_array($data)) {
+                    $bundled[$entity] = $data;
+                }
+            }
+
+            if (($bundled['Client'] ?? []) === []) {
+                http_response_code(400);
+                echo 'Nije učitan Client JSON.';
+                return;
+            }
+
+            $result = (new ImportService())->importBundle($bundled, $map, $reset);
         } catch (\Throwable $e) {
             http_response_code(500);
             echo 'Import nije uspio: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');

@@ -127,3 +127,18 @@ CREATE TABLE client_tasks (
   INDEX idx_client_tasks_client_id (client_id),
   CONSTRAINT fk_client_tasks_client_id FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
+
+CREATE TABLE notification_settings (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id VARCHAR(191) NOT NULL,
+  project_deadline_warnings TINYINT(1) NOT NULL DEFAULT 0,
+  project_status_changes TINYINT(1) NOT NULL DEFAULT 0,
+  task_assignments TINYINT(1) NOT NULL DEFAULT 0,
+  task_status_changes TINYINT(1) NOT NULL DEFAULT 0,
+  client_interactions TINYINT(1) NOT NULL DEFAULT 0,
+  calendar_reminders TINYINT(1) NOT NULL DEFAULT 0,
+  email_notifications TINYINT(1) NOT NULL DEFAULT 0,
+  in_app_notifications TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

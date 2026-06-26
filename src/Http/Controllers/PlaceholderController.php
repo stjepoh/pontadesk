@@ -29,6 +29,7 @@ final class PlaceholderController extends AdminController
     public function reportsPdf(): void
     {
         $this->requireAdmin();
+
         $clients = (new ClientRepository())->all();
         $workLogs = (new WorkLogRepository())->all();
 
@@ -38,7 +39,7 @@ final class PlaceholderController extends AdminController
         $billedOnly = isset($_GET['billed']) && (string) $_GET['billed'] !== '0';
 
         $data = $this->filterWorkLogs($workLogs, $clients, $period, $range, $clientId, $billedOnly);
-        $title = $this->reportPdfTitle($clients, $period, $range, $clientId);
+        $title = $this->reportTitle($clients, $period, $range, $clientId);
         $pdf = $this->buildPdf($title, $data);
 
         header('Content-Type: application/pdf');
@@ -78,6 +79,7 @@ final class PlaceholderController extends AdminController
             default => 'Mjesečni',
         };
         $rangeLabel = $this->rangeLabel($period, $range);
+        $titleLabel = $this->reportTitle($clients, $period, $range, $clientId);
         $rows = $data['rows'];
         $totals = $data['totals'];
         $pdfUrl = '/reports/pdf?' . http_build_query([
@@ -90,8 +92,12 @@ final class PlaceholderController extends AdminController
         ob_start();
         ?>
         <section class="panel pad" style="margin-bottom:18px">
-            <div class="section-title">
-                <h2>Radovi po klijentu</h2>
+            <div class="section-title" style="align-items:flex-start">
+                <div>
+                    <div class="chip" style="background:#eaf1ff;color:#1f4ed8">Izvještaj</div>
+                    <h2 style="margin-top:10px"><?= htmlspecialchars($titleLabel, ENT_QUOTES, 'UTF-8') ?></h2>
+                    <div class="muted" style="margin-top:8px">Radovi po klijentu • <?= htmlspecialchars($periodLabel . ' · ' . $rangeLabel, ENT_QUOTES, 'UTF-8') ?></div>
+                </div>
                 <a class="btn secondary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">PDF</a>
             </div>
             <form method="get" action="/reports" class="grid-4" style="align-items:end" id="reports-filter-form">
@@ -153,15 +159,45 @@ final class PlaceholderController extends AdminController
                 <tbody>
                 <?php if ($rows === []): ?>
                     <tr><td colspan="5" class="muted">Nema radova za odabrane kriterije.</td></tr>
-                <?php else: foreach ($rows as $row): ?>
+                <?php else: ?>
+                    <?php
+                    $dayTotals = [];
+                    foreach ($rows as $row) {
+                        $dateKey = (string) ($row['work_date'] ?? '');
+                        $dayTotals[$dateKey]['minutes'] = ($dayTotals[$dateKey]['minutes'] ?? 0) + (int) ($row['duration_minutes'] ?? 0);
+                        $dayTotals[$dateKey]['amount'] = ($dayTotals[$dateKey]['amount'] ?? 0) + (float) ($row['amount'] ?? 0);
+                    }
+                    $currentDate = null;
+                    foreach ($rows as $row):
+                        $dateKey = (string) ($row['work_date'] ?? '');
+                        if ($currentDate !== $dateKey):
+                            $currentDate = $dateKey;
+                            $dateSummaryMinutes = (int) ($dayTotals[$dateKey]['minutes'] ?? 0);
+                            $dateSummaryAmount = (float) ($dayTotals[$dateKey]['amount'] ?? 0);
+                    ?>
+                        <tr style="background:#fbfdff">
+                            <td colspan="5" style="font-weight:700;color:#1f2d4d">
+                                <?= htmlspecialchars($this->formatDate($dateKey), ENT_QUOTES, 'UTF-8') ?>
+                                <span class="muted" style="font-weight:500"> · <?= htmlspecialchars(number_format($dateSummaryMinutes / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h · <?= htmlspecialchars(number_format($dateSummaryAmount, 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</span>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                     <tr>
-                        <td><strong><?= htmlspecialchars($this->formatDate((string) ($row['work_date'] ?? '')), ENT_QUOTES, 'UTF-8') ?></strong></td>
+                        <td></td>
                         <td><?= htmlspecialchars((string) ($row['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars(number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
                         <td style="font-weight:700"><?= htmlspecialchars(number_format((float) ($row['amount'] ?? 0), 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
                         <td><span class="chip <?= ((int) ($row['billed'] ?? 0) === 1) ? 'green' : 'gray' ?>"><?= ((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne' ?></span></td>
                     </tr>
-                <?php endforeach; endif; ?>
+                    <?php endforeach; ?>
+                    <tr style="background:#f3f6fb;font-weight:700">
+                        <td>UKUPNO</td>
+                        <td></td>
+                        <td><?= htmlspecialchars(number_format($totals['minutes'] / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars(number_format((float) $totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
+                        <td></td>
+                    </tr>
+                <?php endif; ?>
                 </tbody>
             </table>
         </section>
@@ -178,11 +214,6 @@ final class PlaceholderController extends AdminController
         field.addEventListener('change', function () {
             form.requestSubmit ? form.requestSubmit() : form.submit();
         });
-        field.addEventListener('keyup', function (e) {
-            if (e.key === 'Enter') {
-                form.requestSubmit ? form.requestSubmit() : form.submit();
-            }
-        });
     });
 })();
 </script>
@@ -197,15 +228,13 @@ HTML;
             $rateByClient[(int) ($client['id'] ?? 0)] = (float) ($client['hourly_rate'] ?? 0);
         }
 
-        $rows = array_map(function (array $row): array {
+        $rows = array_map(static function (array $row) use ($rateByClient): array {
+            $row['hourly_rate'] = $rateByClient[(int) ($row['client_id'] ?? 0)] ?? 0;
             $minutes = (int) ($row['duration_minutes'] ?? 0);
             $rate = (float) ($row['hourly_rate'] ?? 0);
             $row['amount'] = round(($minutes / 60) * $rate, 2);
             return $row;
-        }, array_map(static function (array $row) use ($rateByClient): array {
-            $row['hourly_rate'] = $rateByClient[(int) ($row['client_id'] ?? 0)] ?? 0;
-            return $row;
-        }, $rows));
+        }, $rows);
 
         $rows = array_values(array_filter($rows, function (array $row) use ($period, $range, $clientId, $billedOnly): bool {
             if ($clientId > 0 && (int) ($row['client_id'] ?? 0) !== $clientId) {
@@ -214,12 +243,10 @@ HTML;
             if ($billedOnly && (int) ($row['billed'] ?? 0) !== 1) {
                 return false;
             }
-
             $date = (string) ($row['work_date'] ?? '');
             if ($date === '') {
                 return false;
             }
-
             return $this->matchesPeriod($date, $period, $range);
         }));
 
@@ -306,7 +333,7 @@ HTML;
         return ($months[(int) $m[2]] ?? $m[2]) . ' ' . $m[1];
     }
 
-    private function reportPdfTitle(array $clients, string $period, string $range, int $clientId): string
+    private function reportTitle(array $clients, string $period, string $range, int $clientId): string
     {
         $client = $clientId > 0 ? $this->clientNameById($clients, $clientId) : 'Svi klijenti';
         return 'Izvještaj ' . $client . ' ' . $this->rangeLabel($period, $range);

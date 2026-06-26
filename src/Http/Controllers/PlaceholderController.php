@@ -39,7 +39,8 @@ final class PlaceholderController extends AdminController
 
         $data = $this->filterWorkLogs($workLogs, $clients, $period, $range, $clientId, $billedOnly);
         $title = $this->reportTitle($clients, $period, $range, $clientId);
-        $pdf = $this->buildPdf($title, $data);
+        $clientName = $clientId > 0 ? $this->clientNameById($clients, $clientId) : 'Svi klijenti';
+        $pdf = $this->buildPdf($title, $data, $clientName, $this->rangeLabel($period, $range));
 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="izvjestaj.pdf"');
@@ -419,66 +420,76 @@ HTML;
         return 'Klijent';
     }
 
-    private function buildPdf(string $title, array $data): string
+    private function buildPdf(string $title, array $data, string $clientName = '', string $periodLabel = ''): string
     {
         $totals = $data['totals'];
         $rows = $data['rows'];
         $pages = [];
         $content = '';
         $pageNumber = 1;
-        $y = $this->pdfStartPage($content, $title, $totals, $pageNumber);
+        $y = $this->pdfStartPage($content, $title, $totals, $pageNumber, $clientName, $periodLabel);
         $lastDate = null;
+        $rowIndexForDate = [];
 
         foreach ($rows as $row) {
             $date = (string) ($row['work_date'] ?? '');
             $description = trim((string) ($row['description'] ?? ''));
-            $descriptionLines = $this->wrapPdfText($description, 88);
-            $rowHeight = max(24, 11 + (count($descriptionLines) * 10));
-            $needsDateHeader = $date !== $lastDate;
-            $blockHeight = $rowHeight + ($needsDateHeader ? 22 : 0);
+            $descriptionLines = $this->wrapPdfText($description, 70);
+            $rowHeight = max(18, 8 + (count($descriptionLines) * 9));
 
-            if ($y - $blockHeight < 58) {
+            if ($y - $rowHeight < 78) {
                 $this->pdfFooter($content, $pageNumber);
                 $pages[] = $content;
                 $content = '';
                 $pageNumber++;
-                $y = $this->pdfStartPage($content, $title, $totals, $pageNumber);
+                $y = $this->pdfStartPage($content, $title, $totals, $pageNumber, $clientName, $periodLabel);
                 $lastDate = null;
-                $needsDateHeader = true;
             }
 
-            if ($needsDateHeader) {
-                $this->pdfRect($content, 42, $y - 16, 511, 18, '0.97 0.98 1');
-                $this->pdfTextAt($content, 48, $y - 4, 9, $this->formatDate($date), true, '0.08 0.15 0.28');
-                $y -= 22;
+            $dateText = '';
+            if ($date !== $lastDate) {
+                $dateText = $this->formatDate($date);
                 $lastDate = $date;
+                $rowIndexForDate[$date] = 0;
             }
+            $rowIndexForDate[$date] = ($rowIndexForDate[$date] ?? 0) + 1;
 
-            $this->pdfLine($content, 42, $y + 5, 553, $y + 5, '0.88 0.91 0.95');
-            $lineY = $y - 5;
+            $fill = (($rowIndexForDate[$date] ?? 1) % 2 === 0) ? '0.98 0.99 1' : '1 1 1';
+            $this->pdfRect($content, 42, $y - $rowHeight + 5, 511, $rowHeight, $fill);
+            $this->pdfLine($content, 42, $y + 5, 553, $y + 5, '0.87 0.90 0.94');
+            $this->pdfTextAt($content, 46, $y - 7, 9, $dateText, true, '0.05 0.05 0.05');
+
+            $lineY = $y - 7;
             foreach ($descriptionLines as $line) {
-                $this->pdfTextAt($content, 119, $lineY, 8, $line, false, '0.08 0.15 0.28');
-                $lineY -= 10;
+                $this->pdfTextAt($content, 112, $lineY, 8, $line, false, '0 0 0');
+                $lineY -= 9;
             }
 
             $hours = number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, '.', '');
-            $amount = number_format((float) ($row['amount'] ?? 0), 2, '.', '') . ' EUR';
-            $billed = ((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne';
+            $amount = number_format((float) ($row['amount'] ?? 0), 2, '.', '');
 
-            $this->pdfTextAt($content, 474, $y - 5, 8, $hours, false, '0.08 0.15 0.28');
-            $this->pdfTextAt($content, 518, $y - 5, 8, $amount, true, '0.08 0.15 0.28');
-            $this->pdfTextAt($content, 548, $y - 5, 7, $billed, false, '0.42 0.50 0.60');
+            $this->pdfTextAt($content, 430, $y - 7, 9, $hours, false, '0 0 0');
+            $this->pdfTextAt($content, 492, $y - 7, 9, $amount, false, '0 0 0');
             $y -= $rowHeight;
         }
 
         if ($rows === []) {
-            $this->pdfTextAt($content, 48, $y - 10, 9, 'Nema radova za odabrane kriterije.', false, '0.42 0.50 0.60');
+            $this->pdfTextAt($content, 48, $y - 10, 9, 'Nema radova za odabrane kriterije.', false, '0.42 0.42 0.42');
+            $y -= 28;
         }
 
-        $this->pdfLine($content, 42, $y, 553, $y, '0.75 0.80 0.88');
-        $this->pdfTextAt($content, 48, $y - 17, 9, 'UKUPNO', true, '0.08 0.15 0.28');
-        $this->pdfTextAt($content, 474, $y - 17, 9, number_format(((int) $totals['minutes']) / 60, 1, '.', ''), true, '0.08 0.15 0.28');
-        $this->pdfTextAt($content, 518, $y - 17, 9, number_format((float) $totals['amount'], 2, '.', '') . ' EUR', true, '0.08 0.15 0.28');
+        if ($y < 92) {
+            $this->pdfFooter($content, $pageNumber);
+            $pages[] = $content;
+            $content = '';
+            $pageNumber++;
+            $y = $this->pdfStartPage($content, $title, $totals, $pageNumber, $clientName, $periodLabel);
+        }
+
+        $this->pdfRect($content, 42, $y - 20, 511, 20, '0.12 0.78 0.34');
+        $this->pdfTextAt($content, 46, $y - 14, 11, 'UKUPNO', true, '1 1 1');
+        $this->pdfTextAt($content, 430, $y - 14, 11, number_format(((int) $totals['minutes']) / 60, 1, '.', ''), true, '1 1 1');
+        $this->pdfTextAt($content, 486, $y - 14, 11, number_format((float) $totals['amount'], 2, '.', '') . ' EUR', true, '1 1 1');
 
         $this->pdfFooter($content, $pageNumber);
         $pages[] = $content;
@@ -492,29 +503,50 @@ HTML;
         return $converted !== false ? $converted : $value;
     }
 
-    private function pdfStartPage(string &$content, string $title, array $totals, int $pageNumber): int
+    private function pdfCleanPeriod(string $value): string
     {
-        $this->pdfRect($content, 0, 790, 595, 52, '0.05 0.09 0.17');
-        $this->pdfTextAt($content, 42, 813, 16, 'PontaDesk', true, '1 1 1');
-        $this->pdfTextAt($content, 42, 778, 17, $title, true, '0.08 0.15 0.28');
-        $this->pdfTextAt($content, 42, 760, 9, 'Izvjestaj radova po odabranim kriterijima', false, '0.42 0.50 0.60');
+        $value = str_replace(
+            ['siječanj', 'veljača', 'ožujak', 'svibanj', 'lipanj', 'srpanj', 'kolovoz', 'rujan', 'listopad', 'studeni', 'prosinac'],
+            ['sijecanj', 'veljaca', 'ozujak', 'svibanj', 'lipanj', 'srpanj', 'kolovoz', 'rujan', 'listopad', 'studeni', 'prosinac'],
+            $value
+        );
 
-        $this->pdfStatBox($content, 42, 704, 'Radova', (string) (int) $totals['count']);
-        $this->pdfStatBox($content, 170, 704, 'Ukupno vrijeme', number_format(((int) $totals['minutes']) / 60, 1, '.', '') . ' h');
-        $this->pdfStatBox($content, 298, 704, 'Cijena/sat', number_format((float) $totals['hourly_rate'], 2, '.', '') . ' EUR');
-        $this->pdfStatBox($content, 426, 704, 'Ukupan iznos', number_format((float) $totals['amount'], 2, '.', '') . ' EUR', true);
+        return trim($this->pdfText($value));
+    }
 
-        $this->pdfRect($content, 42, 668, 511, 24, '0.97 0.98 1');
-        $this->pdfTextAt($content, 48, 676, 8, 'Datum', true, '0.42 0.50 0.60');
-        $this->pdfTextAt($content, 119, 676, 8, 'Opis', true, '0.42 0.50 0.60');
-        $this->pdfTextAt($content, 474, 676, 8, 'Sati', true, '0.42 0.50 0.60');
-        $this->pdfTextAt($content, 518, 676, 8, 'Iznos', true, '0.42 0.50 0.60');
+    private function pdfStartPage(string &$content, string $title, array $totals, int $pageNumber, string $clientName, string $periodLabel): int
+    {
+        $period = $this->pdfCleanPeriod($periodLabel);
+        $client = $clientName !== '' ? $clientName : 'Klijent';
+
+        $this->pdfTextAt($content, 42, 790, 26, 'PONT', false, '0 0 0');
+        $this->pdfTextAt($content, 128, 790, 26, 'A', true, '0.90 0.18 0.14');
+        $this->pdfTextAt($content, 362, 805, 9, 'PONTA, Obrt za internetske portale, vl. Stjepo Hladilo', false, '0 0 0');
+        $this->pdfTextAt($content, 426, 792, 9, 'Nova Mokosica, Vinogradarska 7', false, '0 0 0');
+        $this->pdfTextAt($content, 451, 779, 9, 'OIB: 77663681014', false, '0 0 0');
+
+        $this->pdfRect($content, 42, 708, 511, 52, '0.24 0.50 0.93');
+        $this->pdfTextAt($content, 212, 733, 20, 'IZVJESTAJ O RADOVIMA', true, '1 1 1');
+        $this->pdfTextAt($content, 266, 716, 11, $period, false, '1 1 1');
+
+        $this->pdfTextAt($content, 42, 666, 10, 'Klijent:', true, '0 0 0');
+        $this->pdfTextAt($content, 142, 666, 10, $client, true, '0 0 0');
+        $this->pdfTextAt($content, 142, 651, 9, ' ', false, '0 0 0');
+        $this->pdfTextAt($content, 42, 616, 10, 'Cijena po satu:', false, '0 0 0');
+        $this->pdfTextAt($content, 142, 616, 10, number_format((float) $totals['hourly_rate'], 2, '.', '') . ' EUR', true, '0 0 0');
+
+        $this->pdfRect($content, 42, 574, 511, 18, '0.94 0.96 0.98');
+        $this->pdfStrokeRect($content, 42, 574, 511, 18, '0.84 0.88 0.93');
+        $this->pdfTextAt($content, 46, 580, 9, 'Datum', true, '0 0 0');
+        $this->pdfTextAt($content, 112, 580, 9, 'Opis', true, '0 0 0');
+        $this->pdfTextAt($content, 430, 580, 9, 'Sati', true, '0 0 0');
+        $this->pdfTextAt($content, 492, 580, 9, 'Iznos (EUR)', true, '0 0 0');
 
         if ($pageNumber > 1) {
-            $this->pdfTextAt($content, 510, 778, 8, 'Stranica ' . $pageNumber, false, '0.42 0.50 0.60');
+            $this->pdfTextAt($content, 510, 616, 8, 'Stranica ' . $pageNumber, false, '0.42 0.42 0.42');
         }
 
-        return 654;
+        return 562;
     }
 
     private function pdfStatBox(string &$content, int $x, int $y, string $label, string $value, bool $green = false): void
@@ -530,9 +562,10 @@ HTML;
 
     private function pdfFooter(string &$content, int $pageNumber): void
     {
-        $this->pdfLine($content, 42, 38, 553, 38, '0.88 0.91 0.95');
-        $this->pdfTextAt($content, 42, 24, 7, 'PontaDesk', false, '0.42 0.50 0.60');
-        $this->pdfTextAt($content, 512, 24, 7, 'Stranica ' . $pageNumber, false, '0.42 0.50 0.60');
+        $this->pdfTextAt($content, 248, 44, 7, 'Generirano: ' . date('d/m/Y H:i'), false, '0.62 0.62 0.62');
+        if ($pageNumber > 1) {
+            $this->pdfTextAt($content, 512, 44, 7, 'Stranica ' . $pageNumber, false, '0.62 0.62 0.62');
+        }
     }
 
     private function wrapPdfText(string $text, int $maxChars): array

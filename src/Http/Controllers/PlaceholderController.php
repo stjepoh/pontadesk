@@ -127,7 +127,19 @@ final class PlaceholderController extends AdminController
             .reports-empty{padding:24px;color:#6f7f97}
             .reports-amount{font-weight:800}
             @media (max-width: 1260px){.reports-filter-grid{grid-template-columns:1fr 1fr;}.reports-summary{grid-template-columns:repeat(2,minmax(0,1fr));}}
-            @media (max-width: 760px){.reports-filter-grid,.reports-summary{grid-template-columns:1fr;}.reports-title{font-size:26px}.reports-tab{min-width:0;flex:1}}
+            @media (max-width: 760px){.reports-filter-grid,.reports-summary{grid-template-columns:1fr;}.reports-title{font-size:25px}.reports-tab{min-width:0;flex:1}}
+            .reports-shell .panel{border-radius:18px}
+            .reports-shell .reports-panel{padding:14px}
+            .reports-shell .reports-summary{gap:10px}
+            .reports-shell .reports-stat{padding:12px 14px}
+            .reports-shell .reports-stat .value{font-size:21px}
+            .reports-shell .reports-stat .icon{width:38px;height:38px;font-size:17px;border-radius:13px}
+            .reports-shell .reports-table table thead th{padding:9px 10px}
+            .reports-shell .reports-table table tbody td{padding:9px 10px}
+            .reports-shell .reports-date-row td{padding-top:10px;padding-bottom:7px}
+            .reports-shell .reports-date-row .summary{font-size:11px}
+            .reports-shell .reports-tab{height:28px;min-width:136px;font-size:13px}
+            .reports-shell .reports-btn{height:36px;padding:0 12px;font-size:13px}
         </style>
         <div class="reports-shell">
             <section class="reports-head">

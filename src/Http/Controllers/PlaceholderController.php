@@ -421,24 +421,69 @@ HTML;
 
     private function buildPdf(string $title, array $data): string
     {
-        $lines = [];
-        $lines[] = $this->pdfText($title);
-        $lines[] = $this->pdfText('Ukupno radova: ' . (int) $data['totals']['count']);
-        $lines[] = $this->pdfText('Ukupno minuta: ' . (int) $data['totals']['minutes']);
-        $lines[] = $this->pdfText('Ukupan iznos: ' . number_format((float) $data['totals']['amount'], 2, '.', '') . ' EUR');
-        $lines[] = '';
+        $totals = $data['totals'];
+        $rows = $data['rows'];
+        $pages = [];
+        $content = '';
+        $pageNumber = 1;
+        $y = $this->pdfStartPage($content, $title, $totals, $pageNumber);
+        $lastDate = null;
 
-        foreach ($data['rows'] as $row) {
-            $lines[] = $this->pdfText(
-                $this->formatDate((string) ($row['work_date'] ?? ''))
-                . ' | ' . (string) ($row['description'] ?? '')
-                . ' | ' . number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, '.', '')
-                . ' h | ' . number_format((float) ($row['amount'] ?? 0), 2, '.', '')
-                . ' EUR | ' . (((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne')
-            );
+        foreach ($rows as $row) {
+            $date = (string) ($row['work_date'] ?? '');
+            $description = trim((string) ($row['description'] ?? ''));
+            $descriptionLines = $this->wrapPdfText($description, 88);
+            $rowHeight = max(24, 11 + (count($descriptionLines) * 10));
+            $needsDateHeader = $date !== $lastDate;
+            $blockHeight = $rowHeight + ($needsDateHeader ? 22 : 0);
+
+            if ($y - $blockHeight < 58) {
+                $this->pdfFooter($content, $pageNumber);
+                $pages[] = $content;
+                $content = '';
+                $pageNumber++;
+                $y = $this->pdfStartPage($content, $title, $totals, $pageNumber);
+                $lastDate = null;
+                $needsDateHeader = true;
+            }
+
+            if ($needsDateHeader) {
+                $this->pdfRect($content, 42, $y - 16, 511, 18, '0.97 0.98 1');
+                $this->pdfTextAt($content, 48, $y - 4, 9, $this->formatDate($date), true, '0.08 0.15 0.28');
+                $y -= 22;
+                $lastDate = $date;
+            }
+
+            $this->pdfLine($content, 42, $y + 5, 553, $y + 5, '0.88 0.91 0.95');
+            $lineY = $y - 5;
+            foreach ($descriptionLines as $line) {
+                $this->pdfTextAt($content, 119, $lineY, 8, $line, false, '0.08 0.15 0.28');
+                $lineY -= 10;
+            }
+
+            $hours = number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, '.', '');
+            $amount = number_format((float) ($row['amount'] ?? 0), 2, '.', '') . ' EUR';
+            $billed = ((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne';
+
+            $this->pdfTextAt($content, 474, $y - 5, 8, $hours, false, '0.08 0.15 0.28');
+            $this->pdfTextAt($content, 518, $y - 5, 8, $amount, true, '0.08 0.15 0.28');
+            $this->pdfTextAt($content, 548, $y - 5, 7, $billed, false, '0.42 0.50 0.60');
+            $y -= $rowHeight;
         }
 
-        return $this->makeSimplePdf($lines);
+        if ($rows === []) {
+            $this->pdfTextAt($content, 48, $y - 10, 9, 'Nema radova za odabrane kriterije.', false, '0.42 0.50 0.60');
+        }
+
+        $this->pdfLine($content, 42, $y, 553, $y, '0.75 0.80 0.88');
+        $this->pdfTextAt($content, 48, $y - 17, 9, 'UKUPNO', true, '0.08 0.15 0.28');
+        $this->pdfTextAt($content, 474, $y - 17, 9, number_format(((int) $totals['minutes']) / 60, 1, '.', ''), true, '0.08 0.15 0.28');
+        $this->pdfTextAt($content, 518, $y - 17, 9, number_format((float) $totals['amount'], 2, '.', '') . ' EUR', true, '0.08 0.15 0.28');
+
+        $this->pdfFooter($content, $pageNumber);
+        $pages[] = $content;
+
+        return $this->makeSimplePdf($pages);
     }
 
     private function pdfText(string $value): string
@@ -447,30 +492,118 @@ HTML;
         return $converted !== false ? $converted : $value;
     }
 
-    private function makeSimplePdf(array $lines): string
+    private function pdfStartPage(string &$content, string $title, array $totals, int $pageNumber): int
     {
-        $content = "BT /F1 12 Tf 50 790 Td ";
-        $first = true;
-        foreach ($lines as $line) {
-            if ($line === '') {
-                $content .= "T* ";
+        $this->pdfRect($content, 0, 790, 595, 52, '0.05 0.09 0.17');
+        $this->pdfTextAt($content, 42, 813, 16, 'PontaDesk', true, '1 1 1');
+        $this->pdfTextAt($content, 42, 778, 17, $title, true, '0.08 0.15 0.28');
+        $this->pdfTextAt($content, 42, 760, 9, 'Izvjestaj radova po odabranim kriterijima', false, '0.42 0.50 0.60');
+
+        $this->pdfStatBox($content, 42, 704, 'Radova', (string) (int) $totals['count']);
+        $this->pdfStatBox($content, 170, 704, 'Ukupno vrijeme', number_format(((int) $totals['minutes']) / 60, 1, '.', '') . ' h');
+        $this->pdfStatBox($content, 298, 704, 'Cijena/sat', number_format((float) $totals['hourly_rate'], 2, '.', '') . ' EUR');
+        $this->pdfStatBox($content, 426, 704, 'Ukupan iznos', number_format((float) $totals['amount'], 2, '.', '') . ' EUR', true);
+
+        $this->pdfRect($content, 42, 668, 511, 24, '0.97 0.98 1');
+        $this->pdfTextAt($content, 48, 676, 8, 'Datum', true, '0.42 0.50 0.60');
+        $this->pdfTextAt($content, 119, 676, 8, 'Opis', true, '0.42 0.50 0.60');
+        $this->pdfTextAt($content, 474, 676, 8, 'Sati', true, '0.42 0.50 0.60');
+        $this->pdfTextAt($content, 518, 676, 8, 'Iznos', true, '0.42 0.50 0.60');
+
+        if ($pageNumber > 1) {
+            $this->pdfTextAt($content, 510, 778, 8, 'Stranica ' . $pageNumber, false, '0.42 0.50 0.60');
+        }
+
+        return 654;
+    }
+
+    private function pdfStatBox(string &$content, int $x, int $y, string $label, string $value, bool $green = false): void
+    {
+        $fill = $green ? '0.22 0.66 0.28' : '1 1 1';
+        $labelColor = $green ? '0.88 1 0.90' : '0.42 0.50 0.60';
+        $valueColor = $green ? '1 1 1' : '0.08 0.15 0.28';
+        $this->pdfRect($content, $x, $y, 116, 52, $fill);
+        $this->pdfStrokeRect($content, $x, $y, 116, 52, $green ? '0.22 0.66 0.28' : '0.86 0.90 0.95');
+        $this->pdfTextAt($content, $x + 12, $y + 31, 8, $label, false, $labelColor);
+        $this->pdfTextAt($content, $x + 12, $y + 13, 13, $value, true, $valueColor);
+    }
+
+    private function pdfFooter(string &$content, int $pageNumber): void
+    {
+        $this->pdfLine($content, 42, 38, 553, 38, '0.88 0.91 0.95');
+        $this->pdfTextAt($content, 42, 24, 7, 'PontaDesk', false, '0.42 0.50 0.60');
+        $this->pdfTextAt($content, 512, 24, 7, 'Stranica ' . $pageNumber, false, '0.42 0.50 0.60');
+    }
+
+    private function wrapPdfText(string $text, int $maxChars): array
+    {
+        $text = preg_replace('/\s+/', ' ', trim($text)) ?? '';
+        if ($text === '') {
+            return [''];
+        }
+
+        $words = explode(' ', $text);
+        $lines = [];
+        $line = '';
+        foreach ($words as $word) {
+            $candidate = $line === '' ? $word : $line . ' ' . $word;
+            if (strlen($candidate) > $maxChars && $line !== '') {
+                $lines[] = $line;
+                $line = $word;
                 continue;
             }
-            $escaped = str_replace(['\\', '(', ')'], ['\\\\', '\\(', '\\)'], $line);
-            if (!$first) {
-                $content .= "T* ";
-            }
-            $content .= '(' . $escaped . ') Tj ';
-            $first = false;
+            $line = $candidate;
         }
-        $content .= "ET";
+        $lines[] = $line;
+
+        return array_slice($lines, 0, 8);
+    }
+
+    private function pdfTextAt(string &$content, int $x, int $y, int $size, string $text, bool $bold = false, string $color = '0 0 0'): void
+    {
+        $font = $bold ? 'F2' : 'F1';
+        $escaped = str_replace(['\\', '(', ')'], ['\\\\', '\\(', '\\)'], $this->pdfText($text));
+        $content .= $color . " rg BT /{$font} {$size} Tf {$x} {$y} Td ({$escaped}) Tj ET\n";
+    }
+
+    private function pdfRect(string &$content, int $x, int $y, int $w, int $h, string $fill): void
+    {
+        $content .= "{$fill} rg {$x} {$y} {$w} {$h} re f\n";
+    }
+
+    private function pdfStrokeRect(string &$content, int $x, int $y, int $w, int $h, string $color): void
+    {
+        $content .= "{$color} RG 0.8 w {$x} {$y} {$w} {$h} re S\n";
+    }
+
+    private function pdfLine(string &$content, int $x1, int $y1, int $x2, int $y2, string $color): void
+    {
+        $content .= "{$color} RG 0.6 w {$x1} {$y1} m {$x2} {$y2} l S\n";
+    }
+
+    private function makeSimplePdf(array $pageContents): string
+    {
+        $pageCount = count($pageContents);
+        $fontRegularObject = 3 + ($pageCount * 2);
+        $fontBoldObject = $fontRegularObject + 1;
 
         $objects = [];
         $objects[] = '<< /Type /Catalog /Pages 2 0 R >>';
-        $objects[] = '<< /Type /Pages /Kids [3 0 R] /Count 1 >>';
-        $objects[] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>';
-        $objects[] = '<< /Length ' . strlen($content) . ' >> stream' . "\n" . $content . "\n" . 'endstream';
+        $kids = [];
+        foreach ($pageContents as $index => $pageContent) {
+            $kids[] = (3 + ($index * 2)) . ' 0 R';
+        }
+        $objects[] = '<< /Type /Pages /Kids [' . implode(' ', $kids) . '] /Count ' . $pageCount . ' >>';
+
+        foreach ($pageContents as $index => $pageContent) {
+            $pageObject = 3 + ($index * 2);
+            $contentObject = $pageObject + 1;
+            $objects[] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents ' . $contentObject . ' 0 R /Resources << /Font << /F1 ' . $fontRegularObject . ' 0 R /F2 ' . $fontBoldObject . ' 0 R >> >> >>';
+            $objects[] = '<< /Length ' . strlen($pageContent) . ' >> stream' . "\n" . $pageContent . "\n" . 'endstream';
+        }
+
         $objects[] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
+        $objects[] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
 
         $pdf = "%PDF-1.4\n";
         $offsets = [];

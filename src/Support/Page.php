@@ -65,6 +65,11 @@ final class Page
             .toplinks{display:flex;gap:10px;flex-wrap:wrap}
             .mini-list{display:grid;gap:10px}
             .mini-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border:1px solid #edf1f6;border-radius:14px;background:#fcfdff}
+            .date-field{position:relative;display:flex;align-items:center;gap:8px}
+            .date-field .date-display{padding-right:42px}
+            .date-field .date-native{position:absolute;inset:0;opacity:0;cursor:pointer}
+            .date-field .date-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:#eef4ff;color:#3761db;width:30px;height:30px;border-radius:10px;cursor:pointer}
+            .date-field .date-toggle:hover{background:#dfe9ff}
             @media (max-width: 1080px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr}.hero{flex-direction:column;align-items:flex-start}}
             @media (max-width: 760px){.nav{display:none}.page{padding:18px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero h1{font-size:34px}.topbar{padding:0 16px}}
         </style></head><body>';
@@ -83,6 +88,55 @@ final class Page
         echo '<main class="page">';
         echo '<div class="hero"><div><h1>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h1><p>' . htmlspecialchars($subtitle, ENT_QUOTES, 'UTF-8') . '</p></div></div>';
         echo $content;
+        echo '<script>
+        document.querySelectorAll("[data-date-field]").forEach(function (field) {
+            const display = field.querySelector(".date-display");
+            const native = field.querySelector(".date-native");
+            const button = field.querySelector(".date-toggle");
+            if (!display || !native) return;
+
+            function pad(n) { return String(n).padStart(2, "0"); }
+            function formatDate(value) {
+                if (!value) return "";
+                const parts = value.split("-");
+                if (parts.length !== 3) return value;
+                return parts[2] + "/" + parts[1] + "/" + parts[0];
+            }
+            function parseDate(value) {
+                if (!value) return "";
+                const parts = value.split("/");
+                if (parts.length !== 3) return "";
+                const d = parts[0].padStart(2, "0");
+                const m = parts[1].padStart(2, "0");
+                const y = parts[2];
+                return y + "-" + m + "-" + d;
+            }
+
+            display.value = native.value ? formatDate(native.value) : display.value;
+            native.addEventListener("change", function () {
+                display.value = native.value ? formatDate(native.value) : "";
+            });
+            display.addEventListener("keydown", function (e) {
+                e.preventDefault();
+                native.showPicker ? native.showPicker() : native.focus();
+            });
+            display.addEventListener("click", function () {
+                native.showPicker ? native.showPicker() : native.focus();
+            });
+            if (button) {
+                button.addEventListener("click", function () {
+                    native.showPicker ? native.showPicker() : native.focus();
+                });
+            }
+            native.addEventListener("change", function () {
+                display.value = native.value ? formatDate(native.value) : "";
+            });
+            field.closest("form")?.addEventListener("submit", function () {
+                const parsed = parseDate(display.value.trim());
+                if (parsed) native.value = parsed;
+            });
+        });
+        </script>';
         echo '</main></body></html>';
     }
 }

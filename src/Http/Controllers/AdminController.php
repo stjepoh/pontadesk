@@ -73,4 +73,36 @@ abstract class AdminController
 
         return $value;
     }
+
+    protected function dateField(string $name, ?string $value, bool $required = false): string
+    {
+        $isoValue = $this->normalizeDate($value ?? '');
+        $displayValue = $isoValue !== '' ? $this->formatDate($isoValue) : '';
+        $requiredAttr = $required ? ' required' : '';
+        $id = 'date-' . preg_replace('/[^a-zA-Z0-9_-]/', '-', $name) . '-' . substr(md5($name), 0, 6);
+
+        return '<div class="date-field" data-date-field>'
+            . '<input type="text" class="input date-display" value="' . htmlspecialchars($displayValue, ENT_QUOTES, 'UTF-8') . '" placeholder="dd/mm/yyyy" inputmode="numeric" readonly>'
+            . '<input type="date" class="date-native" id="' . htmlspecialchars($id, ENT_QUOTES, 'UTF-8') . '" name="' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '" value="' . htmlspecialchars($isoValue, ENT_QUOTES, 'UTF-8') . '"' . $requiredAttr . '>'
+            . '<button type="button" class="date-toggle" aria-label="Otvori kalendar">📅</button>'
+            . '</div>';
+    }
+
+    protected function normalizeDate(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        foreach (['Y-m-d', 'd/m/Y', 'd/m/Y H:i:s', DATE_ATOM] as $format) {
+            $date = \DateTimeImmutable::createFromFormat($format, $value);
+            if ($date instanceof \DateTimeImmutable) {
+                return $date->format('Y-m-d');
+            }
+        }
+
+        $timestamp = strtotime($value);
+        return $timestamp !== false ? date('Y-m-d', $timestamp) : $value;
+    }
 }

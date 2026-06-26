@@ -12,7 +12,10 @@ final class WorkLogController extends AdminController
     {
         $this->requireAdmin();
         $rows = (new WorkLogRepository())->all();
-        $this->renderPage('Radovi', 'Evidencija obavljenih radova.', $this->indexContent($rows), 'work');
+        $clients = (new ClientRepository())->all();
+        $selectedClientId = (int) ($_GET['client_id'] ?? 0);
+        $showBilled = isset($_GET['billed']) && (string) $_GET['billed'] !== '0';
+        $this->renderPage('Radovi', 'Evidencija obavljenih radova.', $this->indexContent($rows, $clients, $selectedClientId, $showBilled), 'work');
     }
 
     public function create(): void
@@ -100,8 +103,25 @@ final class WorkLogController extends AdminController
         exit;
     }
 
-    private function indexContent(array $rows): string
+    private function indexContent(array $rows, array $clients, int $selectedClientId, bool $showBilled): string
     {
+        if ($selectedClientId > 0) {
+            $rows = array_values(array_filter($rows, static fn(array $row): bool => (int) ($row['client_id'] ?? 0) === $selectedClientId));
+        }
+
+        if ($showBilled) {
+            $rows = array_values(array_filter($rows, static fn(array $row): bool => (int) ($row['billed'] ?? 0) === 1));
+        }
+
+        $selectedClientName = 'Svi';
+        foreach ($clients as $client) {
+            if ((int) ($client['id'] ?? 0) === $selectedClientId) {
+                $selectedClientName = (string) ($client['name'] ?? 'Svi');
+                break;
+            }
+        }
+
+        $totalMinutesAll = array_sum(array_map(static fn(array $row): int => (int) ($row['duration_minutes'] ?? 0), $rows));
         $groups = [];
         foreach ($rows as $row) {
             $key = (string) ($row['client_name'] ?? $row['client_id'] ?? 'Nepoznato') . '|' . (string) ($row['work_date'] ?? '');
@@ -110,6 +130,7 @@ final class WorkLogController extends AdminController
             $groups[$key]['items'][] = $row;
             $groups[$key]['total_minutes'] = ($groups[$key]['total_minutes'] ?? 0) + (int) ($row['duration_minutes'] ?? 0);
         }
+        $groupCount = count($groups);
 
         uasort($groups, static function (array $a, array $b): int {
             return strcmp((string) ($b['date'] ?? ''), (string) ($a['date'] ?? ''));
@@ -117,6 +138,43 @@ final class WorkLogController extends AdminController
 
         ob_start();
         ?>
+        <section class="panel pad" style="margin-bottom:18px;background:linear-gradient(135deg,#fff 0,#f8fbff 100%)">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap">
+                <div>
+                    <div class="chip" style="background:#eaf1ff;color:#1f4ed8">Radovi</div>
+                    <div class="muted" style="margin-top:10px"><?= $groupCount ?> dana, <?= $totalMinutesAll ?> minuta ukupno</div>
+                </div>
+                <div class="actions">
+                    <span class="chip gray">Klijent: <?= htmlspecialchars($selectedClientName, ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="chip gray">Naplaćeni: <?= $showBilled ? 'Da' : 'Ne' ?></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel pad" style="margin-bottom:18px">
+            <div class="section-title">
+                <h2>Filtri</h2>
+                <div class="muted">Pregled po klijentu i naplaćenim radovima.</div>
+            </div>
+            <form method="get" action="/work-logs" class="grid-2" style="align-items:end">
+                <div>
+                    <label>Svi klijenti</label>
+                    <select class="input" name="client_id">
+                        <option value="0">Svi klijenti</option>
+                        <?php foreach ($clients as $client): ?>
+                            <option value="<?= (int) $client['id'] ?>" <?= $selectedClientId === (int) $client['id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars((string) $client['name'], ENT_QUOTES, 'UTF-8') ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+                    <button class="btn secondary" type="submit" name="billed" value="1">Prikaži naplaćene</button>
+                    <a class="btn secondary" href="/work-logs">Poništi filtre</a>
+                </div>
+            </form>
+        </section>
+
         <section class="content">
             <?php if ($groups === []): ?>
                 <div class="panel pad">
@@ -130,6 +188,7 @@ final class WorkLogController extends AdminController
                     $weekdayLabel = $this->weekdayLabel($dateValue);
                     $totalMinutes = (int) ($group['total_minutes'] ?? 0);
                     $totalHours = number_format($totalMinutes / 60, 1, ',', '.');
+                    $taskCount = count($group['items'] ?? []);
                     $clientId = (string) ($group['items'][0]['client_id'] ?? '');
                     ?>
                     <div class="section-title" style="margin-top:22px">
@@ -143,6 +202,7 @@ final class WorkLogController extends AdminController
                             <div>
                                 <span class="chip" style="background:#eaf1ff;color:#1f4ed8"><?= htmlspecialchars((string) $group['client_name'], ENT_QUOTES, 'UTF-8') ?></span>
                                 <span class="muted" style="margin-left:10px">🕒 <?= $totalMinutes ?> min (<?= $totalHours ?> h)</span>
+                                <span class="chip gray" style="margin-left:10px"><?= $taskCount ?> zadataka</span>
                             </div>
                             <div class="actions">
                                 <a class="chip" href="/work-logs/create?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>">+ Dodaj zadatak</a>
@@ -152,15 +212,16 @@ final class WorkLogController extends AdminController
 
                         <div style="margin-top:16px">
                             <?php foreach ($group['items'] as $index => $item): ?>
-                                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:12px 0;border-top:1px solid #eef2f7">
-                                    <div style="display:flex;gap:10px;align-items:flex-start;flex:1;min-width:0">
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:12px 0;<?= $index === 0 ? '' : 'border-top:1px solid #eef2f7;' ?>">
+                            <div style="display:flex;gap:12px;align-items:flex-start;flex:1;min-width:0">
                                         <div style="color:#8a98b0;font-weight:700;min-width:24px"><?= (int) $index + 1 ?>.</div>
                                         <div style="min-width:0;flex:1">
                                             <div style="font-weight:600;color:#14213d;line-height:1.5"><?= htmlspecialchars((string) ($item['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></div>
+                                            <div class="muted" style="margin-top:4px"><?= ((int) ($item['billed'] ?? 0) === 1) ? 'Naplaćeno' : '' ?></div>
                                         </div>
                                     </div>
                                     <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-                                        <span class="muted"><?= (int) ($item['duration_minutes'] ?? 0) ?> min</span>
+                                        <span class="muted" style="font-weight:700"><?= (int) ($item['duration_minutes'] ?? 0) ?> min</span>
                                         <a class="chip gray" href="/work-logs/edit?id=<?= (int) $item['id'] ?>">Uredi</a>
                                         <a class="chip gray" href="/work-logs/delete?id=<?= (int) $item['id'] ?>" onclick="return confirm('Obrisati zapis?')">Briši</a>
                                     </div>
@@ -246,7 +307,7 @@ final class WorkLogController extends AdminController
                     </div>
                     <div>
                         <label>Datum *</label>
-                        <input class="input" type="text" name="work_date" inputmode="numeric" placeholder="dd/mm/yyyy" required value="<?= htmlspecialchars($selectedDate, ENT_QUOTES, 'UTF-8') ?>">
+                        <?= $this->dateField('work_date', $selectedDate, true) ?>
                     </div>
                 </div>
 

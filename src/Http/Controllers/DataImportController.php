@@ -22,37 +22,16 @@ final class DataImportController extends AdminController
             </div>
 
             <form method="post" action="/data-import" enctype="multipart/form-data" class="content">
-                <div class="grid-2">
-                    <div>
-                        <label>Client JSON *</label>
-                        <input class="input" type="file" name="client_file" accept=".json,application/json" required>
+                <div class="panel pad" style="background:#f8fbff;border-style:dashed">
+                    <div class="section-title">
+                        <h2>Jedna datoteka</h2>
+                        <span class="muted">Učitaj samo <strong>base44-bundle.json</strong></span>
                     </div>
-                    <div>
-                        <label>Contract JSON</label>
-                        <input class="input" type="file" name="contract_file" accept=".json,application/json">
+                    <div style="max-width:560px">
+                        <label>Bundle JSON *</label>
+                        <input class="input" type="file" name="bundle_file" accept=".json,application/json" required>
                     </div>
-                    <div>
-                        <label>WorkLog JSON</label>
-                        <input class="input" type="file" name="worklog_file" accept=".json,application/json">
-                    </div>
-                    <div>
-                        <label>Project JSON</label>
-                        <input class="input" type="file" name="project_file" accept=".json,application/json">
-                    </div>
-                    <div>
-                        <label>ClientNote JSON</label>
-                        <input class="input" type="file" name="clientnote_file" accept=".json,application/json">
-                    </div>
-                    <div>
-                        <label>ClientTask JSON</label>
-                        <input class="input" type="file" name="clienttask_file" accept=".json,application/json">
-                    </div>
-                    <div>
-                        <label>NotificationSettings JSON</label>
-                        <input class="input" type="file" name="notificationsettings_file" accept=".json,application/json">
-                    </div>
-                    <div>
-                        <label>Reset baze</label><br>
+                    <div style="margin-top:12px">
                         <label><input type="checkbox" name="reset" value="1"> Očisti postojeće podatke prije importa</label>
                     </div>
                 </div>
@@ -62,7 +41,7 @@ final class DataImportController extends AdminController
                         <h2>Import mapa</h2>
                         <a class="btn secondary" href="/import-map">Uredi mapu</a>
                     </div>
-                    <p class="muted" style="margin-top:0">Ako neki ugovori ili radovi nisu povezani, ovdje treba biti upisana mapa starih Base44 ID-jeva prema nazivima klijenata.</p>
+                    <p class="muted" style="margin-top:0">Ovdje je automatski pripremljena mapa starih Base44 ID-jeva prema nazivima klijenata. To koristi import za povezivanje ugovora, radova, taskova i bilješki.</p>
                     <pre style="white-space:pre-wrap;background:#f7f9fc;border:1px solid #dbe3ee;border-radius:14px;padding:14px;margin:0"><?= htmlspecialchars((string) json_encode($map, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), ENT_QUOTES, 'UTF-8') ?></pre>
                 </div>
 
@@ -85,6 +64,19 @@ final class DataImportController extends AdminController
         $reset = isset($_POST['reset']);
 
         try {
+            if (isset($_FILES['bundle_file']) && is_array($_FILES['bundle_file']) && ($_FILES['bundle_file']['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_OK) {
+                $json = file_get_contents((string) $_FILES['bundle_file']['tmp_name']);
+                if ($json === false) {
+                    throw new \RuntimeException('Ne mogu pročitati bundle JSON.');
+                }
+
+                $bundle = json_decode($json, true);
+                if (!is_array($bundle)) {
+                    throw new \RuntimeException('Bundle JSON nije valjan.');
+                }
+
+                $result = (new ImportService())->importBundle($bundle, $map, $reset);
+            } else {
             $bundled = [];
             foreach ([
                 'Client' => 'client_file',
@@ -116,6 +108,7 @@ final class DataImportController extends AdminController
             }
 
             $result = (new ImportService())->importBundle($bundled, $map, $reset);
+            }
         } catch (\Throwable $e) {
             http_response_code(500);
             echo 'Import nije uspio: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');

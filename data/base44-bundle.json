@@ -1,0 +1,2614 @@
+{
+    "Client": [
+        {
+            "country": "Hrvatska",
+            "track_work": false,
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Ivana Vlahušić",
+            "city": "",
+            "industry": "",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "Općina Ston",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "country": "Hrvatska",
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Marko Potrebica",
+            "city": "",
+            "industry": "hospitality",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "Studentski centar Dubrovnik",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "",
+            "secondary_phones": [],
+            "company_size": "51-200"
+        },
+        {
+            "country": "Hrvatska",
+            "track_work": false,
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Dijana Brkić",
+            "city": "",
+            "industry": "",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "Vrtić Pčelica",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "country": "Hrvatska",
+            "track_work": false,
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Dragica Brać",
+            "city": "",
+            "industry": "",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "Dječji vrtići Dubrovnik",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "country": "Hrvatska",
+            "track_work": false,
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Davorka",
+            "city": "",
+            "industry": "",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 700,
+            "name": "EMIP časopis",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "davorka.turcinovic@unidu.hr",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "country": "Hrvatska",
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Davorka",
+            "city": "",
+            "industry": "",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 700,
+            "name": "Naše more časopis",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "davorka.turcinovic@unidu.hr",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "country": "Hrvatska",
+            "track_work": false,
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Davorka",
+            "city": "",
+            "industry": "education",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 700,
+            "name": "DIEM časopis",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "davorka.turcinovic@unidu.hr",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "name": "Adriana Cavtat",
+            "contact_person": "Katarina Miljas",
+            "email": "",
+            "secondary_emails": [],
+            "phone": "",
+            "secondary_phones": [],
+            "address": "",
+            "city": "",
+            "postal_code": "",
+            "country": "Hrvatska",
+            "vat_id": "",
+            "category": "regular",
+            "sales_stage": "lead",
+            "industry": "other",
+            "company_size": "1-10",
+            "notes": "",
+            "website": "",
+            "hourly_rate": 40
+        },
+        {
+            "name": "Kjaro",
+            "contact_person": "Ivan Ivičević Bakulić",
+            "phone": "",
+            "email": "ivanibakulic@gmail.com",
+            "hourly_rate": 40
+        },
+        {
+            "address": null,
+            "notes": null,
+            "contact_person": "",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "Renesansa",
+            "email": ""
+        },
+        {
+            "address": null,
+            "notes": null,
+            "contact_person": "Ante Krmek",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "KRMEK",
+            "email": "ante@krmek.hr"
+        },
+        {
+            "name": "Royal Hotels & Resort",
+            "contact_person": "Dennis Zovko",
+            "email": "dennis.zovko@royaldubrovnik.com",
+            "phone": "",
+            "address": "Kardinala Stepinca 32",
+            "city": "Dubrovnik",
+            "postal_code": "20000",
+            "vat_id": "",
+            "hourly_rate": 33.18
+        },
+        {
+            "country": "Hrvatska",
+            "track_work": false,
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Ivo",
+            "city": "",
+            "industry": "",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "FLAG Šabakun",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "country": "Hrvatska",
+            "track_work": false,
+            "website": "",
+            "address": "",
+            "notes": "",
+            "contact_person": "Vedran Kunica",
+            "city": "",
+            "industry": "",
+            "secondary_emails": [],
+            "sales_stage": "lead",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "FLAG Južni Jadran",
+            "vat_id": "",
+            "postal_code": "",
+            "category": "regular",
+            "email": "",
+            "secondary_phones": [],
+            "company_size": ""
+        },
+        {
+            "address": null,
+            "notes": null,
+            "contact_person": "Jelena",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "FATIGA",
+            "email": "jelena@fatiga.hr"
+        },
+        {
+            "address": "Ilica 123, Zagreb",
+            "notes": "Mjesečno održavanje web aplikacije",
+            "contact_person": "Martina Bačelić",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "ALMEL",
+            "email": "almel@almel.hr"
+        },
+        {
+            "address": "Vukovarska 15, Zagreb",
+            "notes": "IT podrška i development",
+            "contact_person": "Robert",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "Atlant Agent",
+            "email": "robert.kalcic@atlantagent.com"
+        },
+        {
+            "address": null,
+            "notes": "Održavanje CRM sustava",
+            "contact_person": "Roko Plenkovic",
+            "phone": "",
+            "hourly_rate": 40,
+            "name": "Aurora Constructions",
+            "email": "roko@auroraconstruction.com"
+        }
+    ],
+    "Contract": [
+        {
+            "end_date": "2027-03-10",
+            "maintenance_billing_period": "none",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju računala i računalne opreme",
+            "client_id": "698d1990d7c4be97e903568a",
+            "maintenance_amount": null,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 20,
+            "value": 6600,
+            "auto_renewal": false,
+            "start_date": "2026-03-10",
+            "status": "active"
+        },
+        {
+            "end_date": "2027-01-07",
+            "maintenance_billing_period": "monthly",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju web stranice",
+            "client_id": "698d1ab40a405eb5af1c1bce",
+            "maintenance_amount": 70,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 30,
+            "value": 840,
+            "auto_renewal": false,
+            "start_date": "2026-01-07",
+            "status": "active"
+        },
+        {
+            "end_date": "2026-12-05",
+            "maintenance_billing_period": "annual",
+            "notes": "",
+            "contract_name": "Ugovor o odrzavanju web stranice flag-sabakun",
+            "client_id": "69846d4f1a486fda60499d6c",
+            "maintenance_amount": 600,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 20,
+            "value": 600,
+            "auto_renewal": false,
+            "start_date": "2025-12-05",
+            "status": "active"
+        },
+        {
+            "end_date": "2026-12-05",
+            "maintenance_billing_period": "annual",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju web stranice flag-juzni-jadran.hr",
+            "client_id": "69846d38a9cb3c5d36f0a199",
+            "maintenance_amount": 600,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 20,
+            "value": 600,
+            "auto_renewal": false,
+            "start_date": "2025-12-05",
+            "status": "active"
+        },
+        {
+            "end_date": "2026-03-10",
+            "maintenance_billing_period": "monthly",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju računala i računalne opreme",
+            "client_id": "698d1990d7c4be97e903568a",
+            "maintenance_amount": 500,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 20,
+            "value": 6000,
+            "auto_renewal": false,
+            "start_date": "2025-03-10",
+            "status": "expired"
+        },
+        {
+            "end_date": "2026-09-01",
+            "maintenance_billing_period": "monthly",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju računala i računalne opreme",
+            "client_id": "698d18bf8d866039aa161b52",
+            "maintenance_amount": 300,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 15,
+            "value": 3600,
+            "auto_renewal": false,
+            "start_date": "2025-09-01",
+            "status": "active"
+        },
+        {
+            "end_date": "2026-09-01",
+            "maintenance_billing_period": "monthly",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju web stranice na domeni dv-pcelica.hr",
+            "client_id": "698d18bf8d866039aa161b52",
+            "maintenance_amount": 90,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 15,
+            "value": 1080,
+            "auto_renewal": false,
+            "start_date": "2025-09-01",
+            "status": "active"
+        },
+        {
+            "end_date": "2026-09-03",
+            "maintenance_billing_period": "monthly",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju računala i računalne opreme",
+            "client_id": "698d170e9617541d55fc243b",
+            "maintenance_amount": 360,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 15,
+            "value": 4320,
+            "auto_renewal": false,
+            "start_date": "2025-09-03",
+            "status": "active"
+        },
+        {
+            "end_date": "2026-09-03",
+            "maintenance_billing_period": "monthly",
+            "notes": "",
+            "contract_name": "Ugovor o održavanju web stranice na domeni vrtici-du.hr",
+            "client_id": "698d170e9617541d55fc243b",
+            "maintenance_amount": 90,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 30,
+            "value": 1080,
+            "auto_renewal": false,
+            "start_date": "2025-09-03",
+            "status": "active"
+        },
+        {
+            "end_date": "2027-02-11",
+            "maintenance_billing_period": "annual",
+            "notes": "Miloslavić je izvođač",
+            "contract_name": "Naše more časopis",
+            "client_id": "698c3b7953e9f5a4f07d7012",
+            "maintenance_amount": 700,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 15,
+            "value": 700,
+            "auto_renewal": false,
+            "start_date": "2026-02-11",
+            "status": "active"
+        },
+        {
+            "end_date": "2027-02-11",
+            "maintenance_billing_period": "monthly",
+            "notes": "Usmeno smo dogovorili, Roko je rekao da ne treba nikakav ugovor",
+            "contract_name": "Mjesečni paušal Renesansa",
+            "client_id": "69846dfb1bfb479345c82b3a",
+            "maintenance_amount": 200,
+            "contract_file_name": "",
+            "contract_file_url": "",
+            "contract_number": "",
+            "reminder_days": 15,
+            "value": 2400,
+            "auto_renewal": false,
+            "start_date": "2026-02-11",
+            "status": "active"
+        },
+        {
+            "end_date": "2027-02-11",
+            "maintenance_billing_period": "annual",
+            "notes": "",
+            "contract_name": "Časopis EMIP web stranica",
+            "client_id": "698c3c0e5af748504da697c5",
+            "maintenance_amount": 700,
+            "contract_file_name": "IT Drito-Ponuda-2026-02-EPIM.pdf",
+            "contract_file_url": "https://base44.app/api/apps/6983aeb5bc5c15ab99adf9a0/files/public/6983aeb5bc5c15ab99adf9a0/2b06c02da_ITDrito-Ponuda-2026-02-EPIM.pdf",
+            "contract_number": "",
+            "reminder_days": 15,
+            "value": 700,
+            "auto_renewal": false,
+            "start_date": "2026-02-11",
+            "status": "active"
+        },
+        {
+            "end_date": "2027-02-11",
+            "maintenance_billing_period": "annual",
+            "notes": "Miloslavić riješava",
+            "contract_name": "DIEM časopis održavanje ",
+            "client_id": "698c3adb11538cf1165d7349",
+            "maintenance_amount": 700,
+            "contract_file_name": "IT Drito-Ponuda-2026-03-DIEM.pdf",
+            "contract_file_url": "https://base44.app/api/apps/6983aeb5bc5c15ab99adf9a0/files/public/6983aeb5bc5c15ab99adf9a0/b72f75e87_ITDrito-Ponuda-2026-03-DIEM.pdf",
+            "contract_number": "",
+            "reminder_days": 15,
+            "value": 700,
+            "auto_renewal": false,
+            "start_date": "2026-02-11",
+            "status": "active"
+        }
+    ],
+    "WorkLog": [
+        {
+            "date": "2026-06-22",
+            "description": "Kamera u radioni Blue ne radi već dugo vremena. Riješio sam je da radi preko Ubiquity AP-a koji je u radioni",
+            "billed": false,
+            "duration_minutes": 70,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-22",
+            "description": "Ažurirao sam sve reklamne ekrane sa novim sadržajem koji je Samantha poslala",
+            "billed": false,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-22",
+            "description": "Dodao sam wifi mrežu za dva kioska na Blue i Princess recepciji, to otkada su premješteni a nije bilo potrebe mijenjati sadržaj nikada nije napravljeno",
+            "billed": false,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-18",
+            "description": "Struja u Aristonu, kvar agregatske mreže, ugasio se cluster, prespojili sve na novi UPS, iskoristili priliku za presložiti mrežu i ostatke koji se više ne koriste. Do 23:00 više nitko nije javio da nešto ne radi.",
+            "billed": false,
+            "duration_minutes": 180,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-18",
+            "description": "Printer broj 2 na recepciji Ariston - slomljena ladica za papir. ",
+            "billed": false,
+            "duration_minutes": 40,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-16",
+            "description": "Nina Raguž poslala mail: Nedavno smo preko Phobs-a kreirali grupni rezervacijski link za nadolazeću grupu u listopadu. Organizatori su javili da im link ne funkcionira, to jest da ih odvede na drugu stranicu, ili im izađe ova notifikacija:\n\n\n \n\nNiže također šaljem kreirani link, dužu i kraću verziju\nhttp://bit.ly/43BroL6\nhttps://book.royaldubrovnik.com/booking.php?company_id=6daf8dab5fad0a4a21198f829b0e223d&partners_access=HLK2026\nPoveznice noramalno funkcioniraju našem timu. Je li možda do njihovog zadanog fonta u word dokumentu?\nNadam se da ćeš mi moći pomoći, nisam sigurna je li ovo u tvojoj domeni posla.\n\n\nOdgovorio sam: Pregledom poveznice utvrdio sam da je Bitly link aktivan te ispravno preusmjerava na rezervacijski sustav Royal Dubrovnik. Testiranjem nisam dobio problem s poveznicom niti s Word dokumentom.\nBudući da se greška pojavljuje unutar Microsoft Worda prije otvaranja internetskog preglednika, najvjerojatnije se radi o lokalnim postavkama računala korisnika (zadani preglednik, sigurnosne politike ili blokiranje Bitly servisa na njihovoj mreži).\nKao provjeru predlažem da korisnici kopiraju poveznicu u adresnu traku preglednika ili koriste puni URL naveden ispod skraćene poveznice.\nZa buduće rezervacijske poveznice preporučio bih korištenje direktnog URL-a bez Bitly skraćivanja kako bismo izbjegli moguće sigurnosne restrikcije pojedinih organizacija i mreža.\n",
+            "billed": false,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-16",
+            "description": "Andrea Basarić , popravak instalacije Opere na njenom računalu, Danijel je bio s druge strane",
+            "billed": false,
+            "duration_minutes": 40,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-15",
+            "description": "Na novom računalu Goran Cesarec, skinuta instalacija Office 2016 64-bit i instalirana lošija verzija Office 2016 32-bit jer Materials Control program ne podržava 64-bitni office i ne može slati mailove za narudžbe preko njega.",
+            "billed": false,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-15",
+            "description": "Pressjednicki apartman nabacivanje keystone na mrezne kabele, trazenje svakog kabela u ormaru, potrosio 6 konektora (5€ svaki), konfiguracija switcheva za te portove",
+            "billed": false,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-15",
+            "description": "Pressjednicki apartman nabacivanje keystone na mrezne kabele, trazenje svakog kabela u ormaru, potrosio 6 konektora (5€ svaki), konfiguracija switcheva za te portove",
+            "billed": false,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-15",
+            "description": "Na novom računalu Goran Cesarec, skinuta instalacija Office 2016 64-bit i instalirana lošija verzija Office 2016 32-bit jer Materials Control program ne podržava 64-bitni office i ne može slati mailove za narudžbe preko njega.",
+            "billed": false,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-13",
+            "description": "Pregledavao sam sve kamere i sve snimače u Resortu prema popisu koji je Almel dostavio još krajem 2024 godine i ustanovio da imamo 10 kamera koje bi trebale raditi, da su svi snimači ispravni, samo se jedan hard disk ne koristi na jednom snimaču a to je Neptun sa adresom 88 - jer je tamo stavljen veći drugi HDD pa je prvi disk u standby modu.\nUsput sam napravio aplikaciju koja svaku noć pregleda sve snimače i kamere spojene na njih i pošalje rezultat pregleda na mail tako da na nivou 24 sata možemo znati da li su nam sve kamere ispravne. Proširiti ću slanje tog izvještaja na Tehničku službu tako da i oni imaju uvid u to koje su kamere ispravne svaki dan.",
+            "billed": false,
+            "duration_minutes": 300,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-13",
+            "description": "Isto problem sa slanjem mailova sa skenera u Prodaji i u uredu šefa recepcije - riješeno",
+            "billed": false,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-13",
+            "description": "almir javio da ima problem sa printanjem",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-13",
+            "description": "Zamjena core switcha u Princess hotelu i provjera svih funkcionalnosti i uređaja spojenih na njega",
+            "billed": false,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-11",
+            "description": "Konfiguracija novog switcha i priprema za zamjenu core switcha u Princess hotelu jer je trenutni u problemu i ne može mu se pristupiti a i neki portovi pokazuju ozbiljne probleme koji uzrokuju nestabilan rad periferije spojene na njih",
+            "billed": false,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-12",
+            "description": "Danijel Duvnjak pomoć pri formatriranju izvještaja kojeg dobije iz MC i u učitavanje u excelu",
+            "billed": false,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-12",
+            "description": "Tijekom dana izvršena je analiza i migracija sustava za slanje skeniranih dokumenata s Canon multifunkcijskog uređaja sa starog A1 SMTP poslužitelja na Microsoft 365 SMTP Relay.\n\nU sklopu radova provedene su provjere DNS i MX zapisa domene, konfiguriran je Exchange Online SMTP Relay connector, ažurirane SMTP postavke uređaja te izvršena provjera SPF zapisa domene. Tijekom testiranja uređaj je prijavljivao SMTP grešku (#806) te nije bilo moguće pouzdano utvrditi radi li se o problemu DNS rezolucije, Microsoft 365 konfiguracije, javne IP adrese objekta ili samog uređaja.\n\nDodatni problem predstavljali su rezultati SMTP testova koji su u pojedinim trenucima vraćali poruku da je javna IP adresa objekta blokirana putem Spamhaus provjera, zbog čega su provedena dodatna testiranja SMTP komunikacije s više lokacija i različitih mreža. Istovremeno je bilo potrebno provjeriti ispravnost Exchange Online connectora, SPF zapisa, DNS rezolucije i dostupnosti Microsoft 365 MX poslužitelja.\n\nNakon provedene analize potvrđena je ispravnost Microsoft 365 SMTP Relay konfiguracije te je uspješno potvrđeno slanje poruka putem SMTP Relay servisa korištenjem testnih SMTP poruka. Daljnji rad usmjeren je na završno usklađivanje i testiranje postavki samog Canon uređaja kako bi se osiguralo pouzdano slanje skeniranih dokumenata putem nove platforme.",
+            "billed": false,
+            "duration_minutes": 240,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-15",
+            "description": "Napravljena internet stranica i ažuriranje booking platforme",
+            "billed": true,
+            "duration_minutes": 3600,
+            "client_id": "698909165677308211afb0fa"
+        },
+        {
+            "date": "2026-06-11",
+            "description": "Printer princess desno - razlog crkava sw161",
+            "billed": false,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-11",
+            "description": "Tirena parking mreza provjera",
+            "billed": false,
+            "duration_minutes": 60,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "date": "2026-06-01",
+            "description": "Samantha poslala nove materijala za sve ekran u Resortu - LED display, televizije i toteme",
+            "billed": false,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-11",
+            "description": "BAckup i upload nove verzije na Ubiquity Unifi switcheve u royal palm",
+            "billed": false,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-10",
+            "description": "Petar Krvarić tražio da dodam još usera u distribucijsku grupu dpo@royaldubrovnik.com",
+            "billed": false,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-10",
+            "description": "Jozo Prlić micanje WPS sa računala - inače ovo traje 15 minuta, ali u ovom slučaju je Jozo instalirao aplikacju na vanjski H: disk i nikako nisam mogao naći kako ga maknuti\n\nWPS nije bio instaliran klasično preko MSI-a ili Setupa nego kao korisnička instalacija u DFS home folder:\n\n\\\\importanne.lo\\dfs\\User_Dubrovnik\\jozo.prlic\\Kingsoft\\WPS Office\\12.1.0.26880\n\ns uninstall zapisom u:\n\nHKU\\SID\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Kingsoft Office\n\nZato ga:\n\nRevo nije vidio,\nnije bio u HKLM,\nnije ga bilo u Programs and Features,\na ipak se prikazivao u Installed Apps.\n\nMoram priznati da je ovo bio jedan od neobičnijih slučajeva WPS Officea koje sam vidio — instalacija u DFS home folder korisnika s registracijom samo u HKU, zbog čega ju niti Revo niti standardne metode nisu mogle normalno pronaći.",
+            "billed": false,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-10",
+            "description": "Goran Cesarec instalacija .NET framework tražio HRS",
+            "billed": false,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-09",
+            "description": "Mljet dva puta",
+            "billed": false,
+            "duration_minutes": 1725,
+            "client_id": "69846dfb1bfb479345c82b3a"
+        },
+        {
+            "date": "2026-06-06",
+            "description": "Instalacija novog računala za Goran Cesarec, sve aplikacije+mail, prebacivanje podataka sa starog računala, spajanje na domenu, printer instalacija u uredu",
+            "billed": false,
+            "duration_minutes": 240,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-06",
+            "description": "Krešo Poslek zvao da dolazi u ponedjeljak i da mu ipak presložim mrežu na način da  se sa wireless mreže može doći do Russound uređaja u President apartmanu. Otvorio sam zaseban VLAN 151 na glavnom routeru i provukao ga sve do AP-a u apartmanu, testirao spajanje i sve radi.",
+            "billed": false,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-05",
+            "description": "Dogovor oko nadogradnje licenci za Adria Scan i podrška Adriascanu za instalaciju na recepciji Royal Blue",
+            "billed": false,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-02",
+            "description": "Vlatko Stefanov problem sa printanjem u hip uredu",
+            "billed": false,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-02",
+            "description": "Novi monitor za Matija Skok",
+            "billed": false,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-06-02",
+            "description": "U Villi se nešto događa sa wirelessom - port 8 na sw 172 flappa ugasio sam ga skroz - to je AP  (WiFi-1kat-soba2) - moram provjeriti što se s njim točno događa\n",
+            "billed": false,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-12",
+            "description": "Objava novih materijala za veliki LED ekran na glavnoj recepciji, update playera prvi put ove godine - poslala Samantha",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-29",
+            "description": "Novi telefon za sobi 3208",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-28",
+            "description": "Navodno neki mailovi koji idu prema recepciji ne stignu u mailbox, Ana Barović prijavila.\nIzvršena je analiza problema vezanog uz navodno nedostavljanje e-mail poruka na mailbox reception@royaldubrovnik.com. Analizom Exchange Online message trace logova potvrđeno je da su sporni mailovi uspješno dostavljeni u mailbox, uključujući poruku „Vista doručak” pošiljatelja Matija Skok od 12.04.2026. u 12:03 te poruku „FW: Airport transfer - price increase” pošiljatelja Samantha Todd od 28.05.2026. u 07:16. Dodatnom provjerom headera potvrđeno je da su poruke inicijalno završile u Inbox folderu mailboxa. Nije utvrđen problem u Microsoft 365 sustavu dostave niti problem sa spam filtriranjem ili transportom poruka. S obzirom da shared mailbox koristi više korisnika na više računala, najvjerojatniji uzrok problema su Outlook pravila, Ignore Conversation/Clean Up funkcionalnosti ili ručno premještanje poruka u druge foldere.",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-27",
+            "description": "Problem sa Edikio printerom zvao Jozo ",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-27",
+            "description": "Podrška Špici za instalaciju software na Igorov laptop",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-26",
+            "description": "S Duvnjakom testirato da li radi AP za Skladište pića u podrumu Blue",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-24",
+            "description": "Montaža i testiranje avih 15 citaca rfid kartica na 15 kasa. Almir popravak postavki printera. Namjestanje racunala ta Danijel Divnjak i Maja u uredu računovodstva",
+            "billed": true,
+            "duration_minutes": 180,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-24",
+            "description": "Update svih uređaja na Unifi wifi mreži i kontrolera za Unifi - 77 APova i 2 switcha, provjera rada i zapisivanje APova koji lošije rade",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-23",
+            "description": "Konfiguriranje 15 čitača RFID novih kartica koje idu na Kase na punktovima i koristiti će se za naplatu preko gostinjskih kartica",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-23",
+            "description": "Problem sa printanjem iz Opere na računalu Royal Blue Recepcija, riješeno\nI oni imaju instaliran WPS i preuzelo im je sve office dokumente - deinstalirano\nOčito se to dogodilo svima koji su otvorili mail u kojem je Leona zapakirala WPS link. ",
+            "billed": true,
+            "duration_minutes": 40,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-23",
+            "description": "WPS instaliran na računalo Princess - desno od VingCard - Željan prijavio, došlo mailom sa Leoninog outlooka na mobitelu",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-22",
+            "description": "Kreso Tomic otvoren email sa Kiosk licencom, podaci poslani Ana Barovic, dodan u MOD grupu",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-21",
+            "description": "Problem sa printanjem u operi na GR Ariston",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-21",
+            "description": "Dolazak u hotel, zamjena magnetnog čitača kreditnih kartica na Blue recepciji i programiranje čitača u suradnji sa Belmin iz Opera supporta, konfiguracija računala za ured nabave Milan Dumić, nabava mail i spajanje na printer (prvo sam popravio računalo IRPC-117 koje se nije moglo upaliti, crko je jedan memorijski modul)\n",
+            "billed": true,
+            "duration_minutes": 100,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-20",
+            "description": "Samantha ipak želi da Shared mailbox Concierge postane pravi email account jer kaže da je već sa tim mailom osigurala revenue od 1200€ - napravio sam pravi mailbox i dodao ga na njeno računalo",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-20",
+            "description": "Nina Raguž default program za PDF",
+            "billed": true,
+            "duration_minutes": 10,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-20",
+            "description": "Napravljen novi telefon za sobu 3208",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-20",
+            "description": "MAtija Skok i Almir dodani u grupe MOD, Checklist i Dolasci",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-20",
+            "description": "Setup računala koje je prije bilo od Dolores za novog zaposlenika Milan Dumnić, nošenje računala u ured i spajanje. DAnijelovo privremeno računalo je spojeno na mrežu u server sobi Ariston kako bi mogao raditi na njemu iz Zagreba",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-20",
+            "description": "Instalacija nove verzije 5520 na 5526 i čišćenje NAS",
+            "billed": false,
+            "duration_minutes": 20,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-05-19",
+            "description": "Tražio sam ispravno računalo za Milan Dumnić u nabavi, našao sam 4 komada nijedan ne daje sliku, jedan se ni ne pali.\nNapravio sam novi telefon velikog formata za sobu 1203",
+            "billed": true,
+            "duration_minutes": 100,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-19",
+            "description": "Belmin Ulzun podrška od opera - komunikacija oko mag. čitača na Royal Blue - tražio software od Borne iz Posiflex,  instalacija software od Posiflex ",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-19",
+            "description": "Kreiranje novog domenskog usera Milan Dumnić",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-19",
+            "description": "Problem sa radom EBA-e korisnicima u Dubrovniku - tražio razlog - ispalo je da Đino radi backup na server u Zg i to je zagušilo 7Mbps Metrolink",
+            "billed": true,
+            "duration_minutes": 10,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-18",
+            "description": "Dolazak u hotel 16:00\nLaptop za Valentinu i prodaji, citac kartica na RB recepciji, konfiguracija switch za kreso poslek, ap za kreso poslek, posebna mreža za predsjednički apartman\n\nDva nova telefona za sobe 2105 i 2413 - Leona inzistirala da stavim velike recepcijske jer su dobili loše reviewove na te sobe",
+            "billed": true,
+            "duration_minutes": 195,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-18",
+            "description": "Danijel Duvnjak - excelice sa statistikama na File server i dijeljenje sa drugima",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-18",
+            "description": "Aistencija špici za spajanje na komp od Kadrovske + admin pristup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-18",
+            "description": "valentina Šibalić komp ne radi kako treba, nema start, task bar... neupotrebljiv",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-15",
+            "description": "Blue telefon neispravan, napravljen novi, printer RPR mjenjacnica ne printa. Neznam zasto su stavili da se koristi izvanmrezno",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-17",
+            "description": "Otvoren mail i domenski user za Đivo Zvone, dodan u grupe Hip, Checklist, Dolasci i Dining",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-17",
+            "description": "Otvorena mail adresa za Valentina Prepolec (prodaja), otvoren i domenski user, dodana u grupe mailova u kojima je bila i Katija Raič, setupiran laptop na novi profil, opera, potpis na mail, dodan mail, očišćen laptop, mailovi od Katije preusmjereni na Valentinu\nSvi mail rulovi koji su bili namješteni za Ana Kolić, Marijana Rajš i MICE grupa, sve je preusmjereno sa Katije na Valentinu",
+            "billed": true,
+            "duration_minutes": 80,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-14",
+            "description": "Podrška adria scanu kod popravljanja skenera dokumenata na Royal Princess recepciji",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-12",
+            "description": "Port 8 na sw172 flapa - ili je AP u banani ili je kabel u banani, trebati ću poći zamijeniti port pa vidjeti da li će se opet događati , to je u Villa Elita, Dennis je prijavio da mu wifi prekida",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-12",
+            "description": "NE radi lijevi printer na princess recepciji, izgubio adresu, nikako je vratiti na kraju je problem bio i mrežni port na telefonu, prebacio ga na dummy switch na pultu i spojio već kabel",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-11",
+            "description": "NE rade telefoni u Resortu, restart centrale i traženje uzroka.... proces zaglavio cijelu centralu",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-11",
+            "description": "Problem sa printerom u ured HIP",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-11",
+            "description": "Printanje iz Opere na Blue recepciji",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-10",
+            "description": "Zvali sa Guestrelation da im ne radi office, a ustvari nisu bili na dobrom profilu",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-08",
+            "description": "Igor i Dijana problem s mailom na mobitelima",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-06",
+            "description": "Printeri ispali iz share, na martininom i mladenovom kompu nadjeni avast alati i wps",
+            "billed": false,
+            "duration_minutes": 90,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "date": "2026-05-05",
+            "description": "Laura Munoz email adresa, domenski account- HIP grupa",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-05",
+            "description": "Yasser Hanafi Imam mail podaci poslani Jozu, ponovo generirao lozinku za domenski account",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-05-04",
+            "description": "Igor Begić laptop se ne želi više upaliti. Pošao po njega, riješio ga i vrati u hotel.",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-30",
+            "description": "Ana Barović laptop - update sa win10 na win11, podešen da ga ona može koristiti i stavljen njen mail i potpis, Opera nova instalacija, EBA",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-30",
+            "description": "Ciscenje prostora na NAS, upgrade NAS na novu verziju, Instalacija nove verzije Synesis 5512",
+            "billed": false,
+            "duration_minutes": 45,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-03-02",
+            "description": "Instalacija nove verzije Synesis 5506",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-02-23",
+            "description": "Instalacija nove verzije Synesis 5497",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-02-16",
+            "description": "Instalacija nove verzije Synesis 5488",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-02-09",
+            "description": "Instalacija nove verzije Synesis 5482",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-02-02",
+            "description": "Instalacija nove verzije Synesis 5471",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-01-26",
+            "description": "Instalacija nove verzije Synesis 5465 i brisanje recycle bina od backupa",
+            "billed": false,
+            "duration_minutes": 20,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-01-19",
+            "description": "Instalacija nove verzije Synesis 5452",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-01-12",
+            "description": "Instalacija nove verzije Synesis 5439",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-01-05",
+            "description": "Instalacija nove verzije Synesis 5422",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-03-05",
+            "description": "provjera ima li zabrane za primanje mailova od Konzuma iz njihove Task aplikacije",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "date": "2026-02-15",
+            "description": "Zvonimirov laptop za konfiguraciju vatrodojavnih centrala, zamjena ekrana ",
+            "billed": false,
+            "duration_minutes": 120,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "date": "2026-01-09",
+            "description": "dodatak za eporeznu insaliran na računalu od Marine - (mateo odradio)",
+            "billed": false,
+            "duration_minutes": 30,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "date": "2026-04-18",
+            "description": "Matija Skok WPS office deinstalacija",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-18",
+            "description": "Instalacija novog racunalanza Ana Barovic",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-18",
+            "description": "Instalacija novog racunala AIO za Leonu na RPR recepciji",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2025-12-16",
+            "description": "pun NAS za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-04-30",
+            "description": "Na 4 računala recepcije je zbog update-a MS Office 2019 bilo onemogućeno korištenje maila u outlooku. Bilo je potrebno deinstalirati kompletan office i sve tragove accounta kako bi ponovno instalirao Office 2019 i dodijelo mu mail account recepction@royaldubrovnik.com\nProblem su licence za svako računalo jer kako je Luka Markić 2022 godine bio preuzeo održavanje računala i odradio instalacije na novim računalima, na starim računalima je napravio preimenovanje i onda je trebalo sad povezati koje računalo pripada kojoj licenci što mi je oduzelo dosta vremena u istraživanju. Sada sva recepcijska računala rade",
+            "billed": true,
+            "duration_minutes": 180,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-29",
+            "description": "Mail restaurants@royaldubrovnik.com u dogovoru s Matijom Skok će biti korišteni za sve zamjenike voditelja. proslijeđen password za mail dir.Tomu i Matiji",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-29",
+            "description": "Petra Matijaš, kreiran mailbox, dodan na računalo i napravljen potpis, napravljeno preusmjerenje mailova Ana Đano na Petru",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-28",
+            "description": "Instalacija novog racunala RRPC-204 za ured racunovodstva Jelena Jurisic, office 2021 licencu sam prebacio sa IRPC-129 (aktivirana 10.3.2022)\nOstalo dodati eba, virga skeniranje u eba",
+            "billed": true,
+            "duration_minutes": 150,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-28",
+            "description": "Otvaranje shared mailboxa concierge@royaldubrovnik.com prema nalogu Samanthe, također je taj mail dodan i u njen outlook - po potrebi se može share-ati sa svima s kim želite. Testirano, sve radi\nPopravljeno joj ulogiravanje u Operu",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-25",
+            "description": "office 2019 na računalu GR Princess - prijavila Samantha - je nekako izgubio licencu. TO je inače ogroman problem, ali uspio sam naći kada je office prvi put instaliran i na osnovu toga izvući koji je ključ na taj dan dodijeljen tom računalu. MS Office 2019 sada radi",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-24",
+            "description": "Mariji ne radi Time&Space, nisam uspio riješiti prema uputama od Špice pa sam njih kontaktirao i oni su riješili. Ne baš prema uputama :)",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-23",
+            "description": "Donio novi komp za Ivu Vuletic, spojio, printer, shared files…\nIvan katic wps deintalacija",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-22",
+            "description": "Instalcija novog racunala za Iva Vuletic RRPC-202 umjesto IRPC-121 jer se taj jutros nije mogao pokrenuti ispravno - disk otisao ali ima problem i sa dva usb porta na kojima su bili tipkovnica i mis, ali nevalja mu ni mrezni port jer nije mogao imati dhcp dodjelu adresa. ",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-22",
+            "description": "Iva vuletic - srusio se komp irpc121 - privremeno prebacena na komp od Dore dok ne napravim novi",
+            "billed": true,
+            "duration_minutes": 35,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-22",
+            "description": "Leona dodavanje reception maila na racunalo. Leona i Barovic dodavanje mailova u grupe za recepcije iste kao i kod Nikse",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-22",
+            "description": "Iva vuletic - srusio se komp irpc121 - privremeno prebacena na komp od Dore dok ne napravim novi",
+            "billed": true,
+            "duration_minutes": 35,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-22",
+            "description": "Leona dodavanje reception maila na racunalo. Leona i Barovic dodavanje mailova u grupe za recepcije iste kao i kod Nikse",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-21",
+            "description": "Asistencija AdriaScann suppportu za spajanje na 4 računala koja imaju Skener dokumenata i potreban i je administrator pristup za izmjene na instalacijama, rade upgrade softwarea za skeniranje - na Royal Blue licenca ne postoji - nije važeća, kažu da se već 3 godine ne koristi licenca tako da tamo ništa nije napravljeno",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-21",
+            "description": "Proširenje arhive mailboxa za reservations.com mailbox. Izvlačenje statistike korištenja mailboxa u svrhu promjene retention policy-a. Poslao sam mail Katiću i Dennisu da vidimo da li ćemo mijenjati retentino policy sa 2 godine na 1 godinu.\n\npogledao sam promet e-mailova za adresu reservations@royaldubrovnik.com i situacija je ovakva:\n•\tdnevno dolazi otprilike 200 do 500+ e-mailova\n•\tu nekim danima ide i preko 500 poruka\n•\tu tjedan dana to je više od 1000 e-mailova (realno i više, jer sustav ne pokaže sve odjednom)\n\nZbog toga trenutni način čuvanja e-mailova više nije idealan.\n\nTrenutno je postavljeno da e-mailovi ostaju u inboxu 2 godine, a tek nakon toga idu u arhivu. Kod ovakvog broja poruka to znači da se inbox stalno puni i s vremenom dolazimo do limita.\n\nSamo kratko pojašnjenje — “retention” (pravilo čuvanja e-mailova) znači da sustav automatski odlučuje:\n•\tkoliko dugo e-mail ostaje u inboxu\n•\tkada se premješta u arhivu\n\nVažno: arhiva nije brisanje — svi mailovi i dalje postoje i mogu se normalno pretraživati, samo nisu u glavnom inboxu.\nPrijedlog je da promijenimo pravilo na:\n•\t1 godina u inboxu\n•\tsve starije od toga ide automatski u arhivu\n\nNa taj način:\n•\tinbox ostaje pregledan i brži za rad\n•\tnema rizika da se zapuni\n•\tsvi stariji mailovi su i dalje dostupni kad zatrebaju\n•\t\nAko se slažete, napravio bih ovu izmjenu.\n\nLijep pozdrav,\n",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-20",
+            "description": "Edikio printeru HIP ne želi printati kartice - spooler zakrčen s 60-tak dokumenata",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-20",
+            "description": "27.3.2026 - iskrcavanje lampi na rampi RPR garaže - tri palete + kada",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-20",
+            "description": "Instalacija nove verzije sa 5512 na 5520",
+            "billed": false,
+            "duration_minutes": 15,
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "date": "2026-04-19",
+            "description": "Odnio kompove leoni i ani barovic na stol, spojio, printeri, opera printeri, RRPC-201 i 203",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-16",
+            "description": "Pojacalo Denon u Villi",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-14",
+            "description": "Marko Kadum, setup printera za novi PC, Opera...",
+            "billed": true,
+            "duration_minutes": 10,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-14",
+            "description": "Danijel Duvnjak postaljanje RDP pristupa za spajanje na računalu uredu Nabave Dbk i promjena AnyDesk verzije za spajanje na sva ostala računala.",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-14",
+            "description": "Asistencija Špici kod konfiguracije računa za lokal user account na Ariston recepciji",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-13",
+            "description": "dolazak u hotel u 8:40\nnašao se  sa Domagojem iz Špica, izvukao LAN utičnice za tri programatora na sve tri recepcije, Marko Kadum našao port za printer u novom uredu, Leoni spoji oba recepcijska printera na laptop\nodlazak 10:00",
+            "billed": true,
+            "duration_minutes": 80,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-13",
+            "description": "Pomoć dečkima iz Špica oko kriranja mreže, otvaranja portova, slobodnih IP adresa.... krivo su instalirali software na serveru, problemi sa klijentom.... totalno nepripremljeni",
+            "billed": true,
+            "duration_minutes": 240,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-12",
+            "description": "Započeo instalaciju računala za Ana Barović - potrebno je još nabaviti office i odnijeti u ured spojiti te prebaciti sve podatke sa laptop i spojiti na printer i servise",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-11",
+            "description": "- dolazak 18.00\n- Ana barovic mreza do stola konfiguracija\n- Ana barovic setup monitora na stol\n- Napravio novi bixolon printer za neptun terrace kuhinju- 192.168.81.142\n- Napravio 4 telefona - 1204, 2417, 1208, 5001-AnaBarovic\n- Spojen ekran na rpr spa za goste \n- Odlazak 21:00",
+            "billed": true,
+            "duration_minutes": 180,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-08",
+            "description": "Zamjena i provjera svih mreznih uticnica na sanki Sky Bar",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-08",
+            "description": "Spajanje racunala u uredu na recepciji Princess, osposobljavanje telefona i uticnice u u zidu da Leona moze koristit LAN mrezu za pristup operi a ne preko VPN",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-08",
+            "description": "Popravak svih mreznih konektora (6kom) na On the beach baru, slaganje instalacija i spajanje svih uređaja na mrežu. Provjera razglasa i raspberry pi za kameru koja gleda Daksu",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-04",
+            "description": "Update Synology NAS na najnoviju verziju firmware",
+            "billed": false,
+            "duration_minutes": 30,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "date": "2026-04-03",
+            "description": "Ana Barovic setup vpn na laptop od Nejdi i podesavanje maila i potpisa",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-03",
+            "description": "Ana Barović - otvaranje maila i domenskog usera, dodijeljivanje VPN pristupa",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-03",
+            "description": "Otvaranje i instalacija mail adrese za ana.marusic@royal u računovodstu na računalu od Veronika Begušić",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-31",
+            "description": "10.2.2026 - Marko Kadum ima problem sa printanjem dokumenata na oba računala - zaboravio sam unijeti u evidenciju za veljaču",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-02",
+            "description": "Duvnjak provjera mreže na Visti kod spajanja kase - srednja utičnica daje neki 172.21 range, to ću morati popraviti",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-04-02",
+            "description": "Dodavanje printera Kopirka prodaja na računalo do dir. Tom",
+            "billed": true,
+            "duration_minutes": 10,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-31",
+            "description": "Napravljeno 5 novih telefona za sobe: 3132, 2403, 2319, 3325, 3328",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-31",
+            "description": "Lana potpisni modul",
+            "billed": true,
+            "duration_minutes": 10,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-03-31",
+            "description": "Duvnjak ima problema sa spajanjem na svoje računalo u Zagrebu",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-30",
+            "description": "Konfiguracija televizije ispočetka u sobi 2309 Lukša bio",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-29",
+            "description": "Setup i spajanje racunala za Danijel Duvnjak u ured nabave sa dva monitora",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-28",
+            "description": "Zvao Njego da u Ariston SPA nema interneta na računalo",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-28",
+            "description": "Ariston Spa touch screen na recepciji ne ragira na touch i otvara se kriva stranica na njemu",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-28",
+            "description": "Vraceni svi APovi u Royal princess sobe",
+            "billed": true,
+            "duration_minutes": 240,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-28",
+            "description": "Brisanje WPS aplikacija sa računala na Ariston recepciji PC2",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-28",
+            "description": "Provjera snimki sa kamera koje nisu snimala u Royal Princess nakon što je Almel odradio inicijalizaciju snimača... sad sve radi",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-20",
+            "description": "Prestao raditi ruckus controller ne emitiraju ssidove",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-23",
+            "description": "Pokupio tri laptopa u hotelu jer je kongresni laptop radio probleme na hdmi portu, uzeo sam sivi koji je nekada bio od kadrovske i reinstalrio ga i pripremio za kongres te onaj treci je lenovo 520 koji je ispravan ali nema adapter",
+            "billed": true,
+            "duration_minutes": 200,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-23",
+            "description": "Otvorena mail adresa za Leona Simović",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-17",
+            "description": "poskidao sve POS uređaje sa recepcija i opremu koja je tamo bila. Jedan POS sam prebacio u Ariston SPA i stari uređaj zajedno sa svim novima stavio u kutiju u Nikšin ured.",
+            "billed": true,
+            "duration_minutes": 75,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-18",
+            "description": "Patrik Prigl i Ilija Gjorgiev - skinute licence, napravljeni kako shared mailbox i napravljen rule da svi njihovi mailovi idu na Tom Zovko, također maknuti iz svih grupa",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-03-18",
+            "description": "Jelena Jurišić podešavanje na računalu u računovodstvu radi novog radnog mjesta",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-27",
+            "description": "Problem sa mail accountom ana@krmek.hr na računalu se mape ne sinkroniziraju ispravno prema redosljedu u outlooku, a outlook mi ne dozvoljava brisanje accounta budući se radi o default mail accountu",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-03-16",
+            "description": "Problem sa info mail accountom na računalu od gđe Ane - outlook krivo slaže mape Poslano, Dolazno, koje se na serveru zovu Sent, Inbox",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-02-04",
+            "description": "CNUS server nakon prebacivanja na Proxmox nema dobru IP adresu, iskomunicirano i popravljeno sa Marojem i testiran Ruckus ",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-04",
+            "description": "snimka lomljenja tanjura u menzi - tražio Igor",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-04",
+            "description": "printanje iz opere na dva računala Gl_REC1 i GL_REC2",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-05",
+            "description": "Shared mailbox od Margareta Anđelković sam dodao Nikolina Slade u Outlook",
+            "billed": true,
+            "duration_minutes": 25,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-05",
+            "description": "Dodao Vide Maslać u grupe kako je tražila Valentina",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-05",
+            "description": "Sastanak sa Housse oko mreže u Predsjedničkom apartmanu",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-06",
+            "description": "Duvnjak - spajanje na kasu POS7",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-26",
+            "description": "Napravljen novi wifi ssid za royal ariston spa zbog nove pametne rasvjete",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-27",
+            "description": "- greta trazila postavljanje printera za Operu na kompu od studenta u Zg uredu",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-02",
+            "description": "Ne radi wakeup call sa recepcije - centrala se ne odaziva na managrement adresu - promijenjeno, podešeno i testirano",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-02",
+            "description": "otvaranje maila i usera Vide Maslać trazio Matija",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-25",
+            "description": "Veeam backup se ne može updateati na kompu od gđe Ane i desno od nje zbog nekakvog certifikata. NA srednjem kompu je prošlo ok, ali kod gđe Ane sam morao sve ispočetka konfati",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-02-19",
+            "description": "gđa Ana zvala da nismo napravili slanje maila za IOS iz Divente na kompu preko puta nje",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-02-11",
+            "description": "kreiranje prostora, usera i pristupa da bi ITI Computers mogao složiti backup na novi NAS",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-02-04",
+            "description": "notifikacija o virusu na kompu gđe Ane",
+            "billed": true,
+            "duration_minutes": 20,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-01-08",
+            "description": "setupiran immutable backup na NAS - bilo je problema sa aktiviranjem, restartali, iskopcan port LAN2",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-01-07",
+            "description": "konfiguracija mail na komp pc2 preko puta Ana",
+            "billed": true,
+            "duration_minutes": 30,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-01-05",
+            "description": "dolazak u 10:30\n- stavio dva nova komp i prebacio na njih sve dokumente, konfiguracija maila, setup backupa, printeri, dodao NAS \nodlazak 15:45",
+            "billed": true,
+            "duration_minutes": 315,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-12-30",
+            "description": "dolazak u ured u 13:30\nprebacivanje podataka sa komp na ulazu \nspajanje NASa, grupe, korisnici, passwordi i dokumenti shareani na NAS prebačeni - davanje pristupa na svakom kompu\nodlazak 16:30",
+            "billed": true,
+            "duration_minutes": 180,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-12-27",
+            "description": "Preuzimanje novog NAS i setup kod kuće, format diskova, slaganje polja za backup...",
+            "billed": true,
+            "duration_minutes": 180,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-11-28",
+            "description": "pun NAS disk za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-11-14",
+            "description": "pun NAS disk za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-10-31",
+            "description": "pun NAS disk za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-10-29",
+            "description": "problemmi od 9:25 sati, izlazak  na teren, stao diventa server, kod Antonije instaliran skener, mail računi, potpis na mail, slanje na mail iz Divente - iOS\nKod Josipe potpis na mail\nKod Tine instalirano skeniranje\nodlazak 11:25",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-10-16",
+            "description": "pun NAS disk za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-10-01",
+            "description": "Izmjenjene adrese na NAS i printeru promjenom operatera prije 3 mjeseca",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-09-11",
+            "description": "pun NAS disk za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-08-25",
+            "description": "pun NAS disk za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2025-07-08",
+            "description": "pun NAS disk za backup",
+            "billed": true,
+            "duration_minutes": 15,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "date": "2026-02-17",
+            "description": "Dolazak u hotel u 16:00, programiranje televizije Samsung u sobi 3107 sa kopijom iz sobe 3406, instalacija računala i prebacivanje svih dokumenata, mailova, instalacija software i flexkeeping na računalo, Ivan Katić ne radi kamera na laptopu (riješeno reinstalacijom) - odlazak 20:00",
+            "billed": true,
+            "duration_minutes": 240,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-16",
+            "description": "otvaranje nove mail adrese za Antonela Žile u Nabavi, otvaranje domenskog usera, setup na komp, preusmjeravanje mailova, grupa mailova",
+            "billed": true,
+            "duration_minutes": 60,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-12",
+            "description": "Duvnjak tražio da mu nađem opciju kako da vodi napomene vezane uz mail, na kraju smo aktivirali Microsoft One Note i to mu se pokazalo odlično",
+            "billed": true,
+            "duration_minutes": 90,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "date": "2026-02-11",
+            "description": "Greta iz Zg ureda tražila za studentski PC instalaciju Opera-e",
+            "billed": true,
+            "duration_minutes": 45,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-21",
+            "duration_minutes": 260,
+            "description": "Dennis kloniranje laptopa lenovi x201 na novi disk - 1 sat + cijena novog diska 110€",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-21",
+            "duration_minutes": 20,
+            "description": "Ado problem sa slanjem wetransfer link, problem sa zipanim folderom",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-22",
+            "duration_minutes": 30,
+            "description": "Ivan Katic - problem sa teams, otvaranje pdf i neki treci problem",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-30",
+            "duration_minutes": 360,
+            "description": "Demontaza svih apova po royal princess sobama\n",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-30",
+            "duration_minutes": 15,
+            "description": "Partynet blue svira neka tehno muzika - promijenio na breakfast",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-27",
+            "duration_minutes": 60,
+            "description": "Katarina Amanda Lozic - otvaranje maila, i postavljanje potpisa, također dodavanje reservations maila na računalu u Zagreb uz prethodni dogovor oko spajanja",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-22",
+            "duration_minutes": 15,
+            "description": "Ado problem sa spajanjem na teams i prikaz na ekranima\n",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-21",
+            "duration_minutes": 20,
+            "description": "Virga Niksi na komp\n\n",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-20",
+            "duration_minutes": 45,
+            "description": "novi video materijali na kiosk Ariston - tražila Samantha",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-19",
+            "duration_minutes": 60,
+            "description": "exchange bussines basic licence za sharepoint omoguciti na 5 usera kako je Dennis trazio - kupljene i implementirane",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-15",
+            "duration_minutes": 90,
+            "description": "dennis laptop popravak windows",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-14",
+            "duration_minutes": 45,
+            "description": "pretvaranje corel draw datoteka u pdf za Rilovića",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-13",
+            "duration_minutes": 20,
+            "description": "zoom instalacija i kreiranje sastanka za strojarski sastanak 14.1 u 14 sati",
+            "billed": true
+        },
+        {
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "date": "2026-01-04",
+            "duration_minutes": 180,
+            "description": "Spajanje linkova za fixne POS aparate na svim recepcijama 6 linkova i podesavanje mreze\nNapravio dva velika lan kabela begic trazio",
+            "billed": true
+        },
+        {
+            "date": "2026-02-04",
+            "description": "Razna popravljanja po sajtovima i instalacije sajtova",
+            "billed": true,
+            "duration_minutes": 450,
+            "client_id": "69847477dfd1c82569f2eef0"
+        },
+        {
+            "date": "2026-01-28",
+            "description": "laptop za Nikoletu, instalacija i podesavanje svega ",
+            "billed": true,
+            "duration_minutes": 180,
+            "client_id": "69846dfb1bfb479345c82b3a"
+        },
+        {
+            "date": "2026-01-25",
+            "description": "kroz 1 mjesec Karlu prebacivao podatke sa NAS",
+            "billed": true,
+            "duration_minutes": 120,
+            "client_id": "69846dfb1bfb479345c82b3a"
+        }
+    ],
+    "Project": [
+        {
+            "name": "WEb aplikacija za Katarinu",
+            "client_id": "69846de159e6a3f1e39619e5",
+            "description": "sdfdsfsdf",
+            "deadline": "2026-08-30",
+            "status": "in_progress",
+            "reminder": true,
+            "reminder_days": 1,
+            "reminder_sent": false
+        }
+    ],
+    "ClientNote": [
+        {
+            "pinned": false,
+            "attachments": [],
+            "importance": "normal",
+            "title": "Royal Dubrovnik – Canon imageRUNNER 1643 – SMTP Relay preko Microsoft 365 Problem",
+            "category": "technical",
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "content": "Royal Dubrovnik – Canon imageRUNNER 1643 – SMTP Relay preko Microsoft 365\nProblem\n\nCanon imageRUNNER 1643 prestao je pouzdano slati skenove putem A1 SMTP poslužitelja (mail.a1net.hr).\n\nOdlučeno je prebacivanje na Microsoft 365 SMTP Relay putem Exchange Online Connectora i porta 25 bez autentikacije.\n\nKoraci koji su napravljeni\n1. Provjera DNS i MX zapisa\n\nPotvrđeno:\n\nroyaldubrovnik.com\nMX -> royaldubrovnik-com.mail.protection.outlook.com\n\nProvjereno:\n\nnslookup -type=mx royaldubrovnik.com\n2. Provjera SMTP dostupnosti\n\nS hotelske mreže potvrđeno:\n\nTest-NetConnection royaldubrovnik-com.mail.protection.outlook.com -Port 25\n\nRezultat:\n\nTcpTestSucceeded : True\n\nPort 25 prema Microsoft 365 dostupan.\n\n3. Izrada Exchange Online Connectora\n\nMicrosoft 365:\n\nMail Flow\n→ Connectors\n→ New Connector\n\nPostavke:\n\nFrom: Your organization's email server\nTo: Office 365\n\nNaziv:\n\nCanon SMTP Relay\n\nAutentikacija:\n\nBy verifying that the IP address of the sending server matches...\n\nDodana javna IP:\n\n78.134.212.114\n\nProvjera:\n\nGet-InboundConnector | fl Name,Enabled,SenderIPAddresses\n\nRezultat:\n\nName: Canon SMTP Relay\nEnabled: True\nSenderIPAddresses: {78.134.212.114}\n4. SPF zapis\n\nPotvrđen SPF zapis:\n\nv=spf1 +a +mx +ip4:185.58.73.129 +ip4:78.134.212.114 +include:spf.protection.outlook.com -all\n\nNije bilo potrebno dodatno mijenjati SPF.\n\n5. Canon konfiguracija\n\nSMTP Server:\n\nroyaldubrovnik-com.mail.protection.outlook.com\n\nPort:\n\n25\n\nSMTP Authentication:\n\nOff\n\nTLS:\n\nOff\n\nPOP prije SMTP:\n\nOff\n6. DNS i IPv6 provjere\n\nProvjereno:\n\nIPv6 isključen\nDNS serveri ispravno postavljeni\nDNS rezolucija radi\n\nProblem nije bio DNS.\n\n7. SMTP testovi\n\nPrvi testovi odmah nakon kreiranja connectora vraćali:\n\n5.7.1 Service unavailable, Client host [78.134.212.114] blocked using Spamhaus\n\nZbog toga se sumnjalo na:\n\nSpamhaus\nA1 IP adresu\nMicrosoft blokadu\n\nProvjerom:\n\n78.134.212.114\n\nnije pronađena aktivna Spamhaus blokada.\n\n8. Ključni dokaz\n\nTestirano s hotelskog računala:\n\nSend-MailMessage `\n-SmtpServer \"royaldubrovnik-com.mail.protection.outlook.com\" `\n-Port 25 `\n-From \"stjepo.hladilo@royaldubrovnik.com\" `\n-To \"stjepo.hladilo@royaldubrovnik.com\" `\n-Subject \"Test\" `\n-Body \"Test\"\n\nNakon propagacije connectora poruka uspješno isporučena.\n\nZaključak:\n\nMicrosoft 365 SMTP Relay radi.\nJavna IP adresa radi.\nConnector radi.\nSpecifičnost za budućnost\n\nKod Microsoft 365 Connectora može proći određeno vrijeme (deseci minuta do nekoliko sati) prije nego svi EOP frontend serveri počnu primjenjivati novi connector.\n\nTijekom tog perioda mogu se pojavljivati greške tipa:\n\n5.7.1 Client host blocked using Spamhaus\n\niako je connector ispravno konfiguriran.\n\nPrije daljnjeg otklanjanja problema uvijek napraviti test:\n\nSend-MailMessage `\n-SmtpServer \"royaldubrovnik-com.mail.protection.outlook.com\" `\n-Port 25 `\n-From \"test@royaldubrovnik.com\" `\n-To \"test@royaldubrovnik.com\" `\n-Subject \"Test\" `\n-Body \"Test\"\n\ns računala unutar iste mreže iz koje šalje uređaj.\n\nAko PowerShell šalje uspješno, problem više nije u Microsoft 365 relay konfiguraciji nego u samom uređaju.\n\nKonačni status\n\n✅ Exchange Online Connector aktivan\n\n✅ SMTP Relay preko porta 25 funkcionalan\n\n✅ Javna IP 78.134.212.114 prihvaćena\n\n✅ SPF ispravan\n\n✅ Microsoft 365 relay potvrđen PowerShell testom\n\n🔍 Ako Canon i dalje javlja #806, daljnja analiza treba biti usmjerena isključivo na Canon konfiguraciju, a ne na Microsoft 365 ili mrežu.\n\n\n\n\n\nCANON PRINTER IZ PRODAJE\nKod Canon imageRUNNER ADVANCE DX uređaja nakon promjene SMTP servera može se pojaviti poruka za ponovno postavljanje SMTP AUTH lozinke. Čak i kada SMTP AUTH nije aktivan, potrebno je označiti \"Change Password\" i unijeti lozinku kako bi uređaj prihvatio nove SMTP postavke i omogućio SMTP test."
+        },
+        {
+            "pinned": false,
+            "attachments": [],
+            "importance": "normal",
+            "title": ".NET Framework za HRS aplikacije kao MC",
+            "category": "technical",
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "content": ".NET framework sam instalirao tako da sam mounta-o instalacijski iso sa win 11 25H2 i koristeći ovu naredbu u powerhell povukao sve potrebno za instalaciju\n\nOdlično. Ovo je metoda koju bih i ja koristio na Importanne računalu.\n\n1. Mountaj ISO\n\nKad se ISO skine:\n\nDesni klik na ISO\nMount (Priključi)\n\nDobit ćeš novi disk, npr.:\n\nD:\n\nili\n\nE:\n\nProvjeri koje je slovo.\n\n2. Provjeri postoji li SXS folder\n\nOtvori CMD:\n\ndir D:\\sources\\sxs\n\n(zamijeni D: stvarnim slovom)\n\nTrebao bi vidjeti puno .cab datoteka.\n\nAko dobiješ:\n\nFile Not Found\n\nili\n\nThe system cannot find the path specified\n\njavi mi koji si ISO skinuo.\n\n3. Otvori Administrator CMD\n\nStart → upiši:\n\ncmd\n\nDesni klik:\n\nRun as administrator\n4. Instalacija .NET 3.5\n\nAko je ISO na D:\n\nDISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:D:\\sources\\sxs\nObjašnjenje parametara\n/Online = radi na trenutno pokrenutom Windowsu\n/Enable-Feature = uključuje značajku\n/FeatureName:NetFx3 = .NET 3.5\n/All = instalira i sve ovisnosti\n/LimitAccess = NE koristi WSUS ni Windows Update\n/Source = koristi datoteke s ISO-a\n5. Očekivani rezultat\n\nAko je sve u redu:\n\nThe operation completed successfully.\n\ni nešto poput:\n\nRestart Needed : No\n\nili\n\nRestart Needed : Yes\n6. Provjera nakon instalacije\n\nPokreni:\n\nGet-WindowsOptionalFeature -Online -FeatureName NetFx3\n\nTrebao bi dobiti:\n\nState : Enabled\nAko dobiješ grešku 0x800f081f\n\nTo znači da ISO ne odgovara instaliranom buildu.\n\nTada mi pošalji:\n\ndism /Get-WimInfo /WimFile:D:\\sources\\install.wim\n\nili ako postoji install.esd:\n\ndism /Get-WimInfo /WimFile:D:\\sources\\install.esd\n\npa ćemo vidjeti odgovara li ISO tvom buildu:\n\nWindows 11 Pro\nBuild 26200.8117"
+        },
+        {
+            "pinned": false,
+            "attachments": [
+                {
+                    "name": "opera gasenje security.png",
+                    "type": "image/png",
+                    "url": "https://base44.app/api/apps/6983aeb5bc5c15ab99adf9a0/files/mp/public/6983aeb5bc5c15ab99adf9a0/166c3c5b0_operagasenjesecurity.png"
+                }
+            ],
+            "importance": "high",
+            "title": "Opera gašenje ekrančića koji upozoravaju na nesigurnu aplikaciju",
+            "category": "technical",
+            "client_id": "69846da2c5684e04c5e0d5c2",
+            "content": "Kako bi maknula taj Block u Internet Exploreru treba u programu Java Config. napraviti ovo:\n\nOtvoris Windows START / search \"JAVA\" /odabrati Configure Java\nKada se otvori prozor od Java konfiguracije pod Advanced označiti kao sa slike u prilogu.\n(Do Not Check - dva puta kvačica).\n\nDrugo, kada ti se pojavi prozor Block potentially unsafe components from being run ? klikni na \"DON'T BLOCK \" pucu.\n\nAko ti je ovo komplicirano mozemo se spojiti ujutro na tvoj PC sa AnyDesk programom i podesiti sve\n"
+        },
+        {
+            "pinned": true,
+            "title": "Unos termina",
+            "category": "technical",
+            "client_id": "698909165677308211afb0fa",
+            "content": "Prilikom unosa ture/izleta/termina da bi se svaki sat/termin pokazao sa cijenom potrebno je prvo unijeti Inventory\n\n1. deaktivirati sve termine na turi dodavanjem Inventory=0\n2. Unijeti Inventory za svaku turu sa npr. količinom 40\n3. Unijeti Cijenu za svaku turu i svaki sat\nnakon toga se pokažu svi termini sa cijenama i vremenima",
+            "importance": "normal"
+        },
+        {
+            "pinned": false,
+            "title": "Instalacija Gemalto STIKA",
+            "category": "technical",
+            "client_id": "698d170e9617541d55fc243b",
+            "content": "Skinuti sa FINA stranica Gemalto paket za Windows\nodraditi instalaciju po uputi\naktivirati Fina Stick prema uputi iz maila",
+            "importance": "normal"
+        },
+        {
+            "pinned": false,
+            "title": "Diventa - dodavanje opcije slanja na mail za IOS",
+            "category": "technical",
+            "client_id": "69846de159e6a3f1e39619e5",
+            "content": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows Messaging Subsystem\n\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Messaging Subsystem\n\nAko ne postoji treba kreirati String Value s nazivom MAPI, a vrijednošću 1.",
+            "importance": "normal"
+        }
+    ],
+    "ClientTask": [
+        {
+            "notes": null,
+            "title": "Spojiti računala iz računovodstva u dvorani Lokrum na mrežu",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Dva telefona - po jedan za svaki SPA - emergency - Princess SPA je 5485",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Napraviti popis svih switcheva po lokacijama/ormarima",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Guest relation računala zamijeniti novima",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Napraviti računalo za Royal Blue recepciju od goranovog starog kompa",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "AP iza televizije u srednjoj sobi President Suite Princess - dodati i i skonfati port",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Miro Botica - ponudu za integraciju CNUS-a u jedan sustav",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "AP soba 2311 napraviti novi i zamijeniti",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Uzeti malu vagu iz hotela (bluetooth)",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Pametna vaga - koji je model?",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Totem blue da li radi POS wifi mreža",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Magnetni čitač kartica za kreditne kartice instalirati na Blue recepciji",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-06-24",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Zamijeniti keystone na Daksi vanjska utičnica",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-06-24",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Beskontaktni čitači - 15 komada montirati na kase",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-06-24",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Samantha objave na televizije i toteme",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-06-24",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Marija Trninić, pica problemi",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-05-20",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Antonija Čurčić tražila da sredim laptop od Nine Raguž za novu kolegicu Valentina Perpolec do 18.5.2026, novi mail i account domenski",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-05-20",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Tablet u vrtiću Kono vrattiti na tvorničke postavke",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "698d170e9617541d55fc243b"
+        },
+        {
+            "notes": null,
+            "title": "USB kabel u vrtić Pile2",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-05-20",
+            "client_id": "698d170e9617541d55fc243b"
+        },
+        {
+            "notes": null,
+            "title": "probati osposobiti dva-tri tableta koja su kupljena od HRS (ordermani) za otvaranje soba jer su postojeći tableti prespori",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Ana Barović laptop od Nejdi prekonfigurirati",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-05-14",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "odlazak na Mljet za wifi koji mora biti postaljen do 15.5",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-05-20",
+            "client_id": "69846dfb1bfb479345c82b3a"
+        },
+        {
+            "notes": null,
+            "title": "Blue Cave unijeti na stranicu",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-05-20",
+            "client_id": "698909165677308211afb0fa"
+        },
+        {
+            "notes": null,
+            "title": "pola kamera na Villi Etiti ne radi, a trebalo bi ih sve provjeriti kroz resort",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "notes": null,
+            "title": "Pedagogici mali novi printer",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "698d170e9617541d55fc243b"
+        },
+        {
+            "notes": null,
+            "title": "Stanki monitor",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "698d170e9617541d55fc243b"
+        },
+        {
+            "notes": null,
+            "title": "AP na restoranskoj zgradi neispravan",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Dati pristup Spici za spajanje na kolpove da mogu instalirati software za kodere",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Pripremiti mrezne kabele za citace kartica od Spica",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Vidjeti sa Đinom kako kompu pustiti update preko WSUS",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Vidjeti sto je sa kompom od valentine gdje je sjedio matija",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-06-24",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Display port kabel za Spa princess",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-12",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Ubaciti bateriju u ups za tavernu",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Rijesiti 4 telefona koja cekaju na stolu",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-11",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Napraviti jedan bixolon printer",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-11",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Leoni instalirati komp i dodati printer lexmark na laptop i komp",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Ana Barovic instalirati komp",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Provjeriti Denon pojacalo u Dennisovoj sobi",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Danijeli osposobiti pc na rpr recepciji",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-09",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Royal spa monitor",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-12",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Zamijeniti konektore na sky baru",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-09",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Osposobiti mrezu na on the rocks",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-09",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Valentina pc ne radi",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Nove baterije za bono bar, itlab ugraditi",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Provjeriti konektore na BlueSky prije otvaranja restorana",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-09",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "sliku cavtata i dubrovnika koje su iste zamijeniti na Duborvniku sa nekom besplatnom za koju ne trabaju autorska prava",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846d4f1a486fda60499d6c"
+        },
+        {
+            "notes": null,
+            "title": "Ana Barović - instalacija kompa i monitori novi od Bambole, dodati otvoreni maili VPN na laptop od Nejdi",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Mario bivši recepcioner - odnijeti mu komp od recepcije",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-25",
+            "client_id": "698d1990d7c4be97e903568a"
+        },
+        {
+            "notes": null,
+            "title": "Zvonimiru instalirati novi laptop za upravljanje centrala-doma imam HDD sa imageom",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "notes": null,
+            "title": "Riješiti toteme kojima zablesi sustav, Lukši na mail poslao koji SSD koriste",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "698d1990d7c4be97e903568a"
+        },
+        {
+            "notes": null,
+            "title": "telefon 3101 je kod mene na stolu, riješiti ga",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "skinuti pos aparate sa svih recepcija i jedan od njih prebaciti u Ariston SPA",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Ana Đano komp prijaviti na Jelena Š hitno do ponedjeljka",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Poseban wifi za spa ariston rasvjetu",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Marija Kadrovska - pogledat kako komp ima samo 8G memorije",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "dv-dubrovnik-linda-hancevic@vpn-proracunski  jhb534nkHJJDNMdkpfnduz!!   Security Protocol: SSTP   IMA PODACI U MAIL NA GMAIL",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "698d170e9617541d55fc243b"
+        },
+        {
+            "notes": null,
+            "title": "Stanki update certifikat",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-02-20",
+            "client_id": "698d170e9617541d55fc243b"
+        },
+        {
+            "notes": null,
+            "title": "Duvnjaku setupirati komp sa dva monitora na bivši Dijanin stol",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Došao novi UPS - ugraditi van radnog vremena kod ravnateljice je u uredu",
+            "priority": "high",
+            "done": false,
+            "done_date": null,
+            "client_id": "698d170e9617541d55fc243b"
+        },
+        {
+            "notes": null,
+            "title": "Računalo sa studentske linije popraviti - sad je u servisu, možda Mateo može riješiti jer je neko kinesko govno",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "698d1990d7c4be97e903568a"
+        },
+        {
+            "notes": null,
+            "title": "Danijelu na kompu omogućiti pristup zagrebačkom serveru dokumente u mapi Scen",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-02-26",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "„pametna“ vaga, excel-ica - Duvnjak i Dijana",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-06-24",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "poruka prilikom otvaranja PDF dokumenta iz maila - Duvnjak",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-06-24",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Zamijeniti ekran na Zvonimirovom laptopu za konfiguraciju centrala",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "notes": null,
+            "title": "Na dva kompjutera u kuhinji (aco i danicic) kreirati nove profile Kuhinja sa sifrom kuhinja",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "698d1990d7c4be97e903568a"
+        },
+        {
+            "notes": null,
+            "title": "Ožićenje u uredu",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-04",
+            "client_id": "69846dfb1bfb479345c82b3a"
+        },
+        {
+            "notes": null,
+            "title": "Update nas",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-04",
+            "client_id": "698d1990d7c4be97e903568a"
+        },
+        {
+            "notes": null,
+            "title": "Ubaciti diskove u NAS",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "698d1990d7c4be97e903568a"
+        },
+        {
+            "notes": null,
+            "title": "Instalirati dva nova kompa",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "698d1990d7c4be97e903568a"
+        },
+        {
+            "notes": null,
+            "title": "Shema struje za ups na 0 kat Ariston",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-03-28",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Preuzimanje Mljeta",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-02-20",
+            "client_id": "69846dfb1bfb479345c82b3a"
+        },
+        {
+            "notes": null,
+            "title": "Printer nakon spajanja na žicu",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-04",
+            "client_id": "69846dfb1bfb479345c82b3a"
+        },
+        {
+            "notes": null,
+            "title": "Imam neke clanke oko kojih moram pitati Vlahušić",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "698d1ab40a405eb5af1c1bce"
+        },
+        {
+            "notes": null,
+            "title": "Vidjeti sto ce biti sa exchange transferom",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "notes": null,
+            "title": "Naci se s njima oko dozvola na NAS",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846de159e6a3f1e39619e5"
+        },
+        {
+            "notes": null,
+            "title": "Ponedjeljkom update Synology",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "69846d1524aadd8a3584ed8a"
+        },
+        {
+            "notes": null,
+            "title": "Napraviti web stranicu",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "698909165677308211afb0fa"
+        },
+        {
+            "notes": null,
+            "title": "Updateati nas",
+            "priority": "high",
+            "done": true,
+            "done_date": "2026-04-04",
+            "client_id": "6983b23ebe69deef00997348"
+        },
+        {
+            "notes": null,
+            "title": "Telefon 3415 ima adapter",
+            "priority": "normal",
+            "done": true,
+            "done_date": "2026-04-01",
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        },
+        {
+            "notes": null,
+            "title": "Nabaciti konektore na linkove u Blue strojarnici",
+            "priority": "normal",
+            "done": false,
+            "done_date": null,
+            "client_id": "69846da2c5684e04c5e0d5c2"
+        }
+    ],
+    "NotificationSettings": [
+        {
+            "user_id": "stjepoh@gmail.com",
+            "project_deadline_warnings": true,
+            "project_status_changes": true,
+            "task_assignments": true,
+            "task_status_changes": true,
+            "client_interactions": true,
+            "calendar_reminders": true,
+            "email_notifications": true,
+            "in_app_notifications": true
+        }
+    ]
+}

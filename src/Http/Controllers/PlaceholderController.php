@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Repositories\ClientRepository;
-use App\Repositories\ContractRepository;
 use App\Repositories\WorkLogRepository;
 
 final class PlaceholderController extends AdminController
@@ -55,7 +54,7 @@ final class PlaceholderController extends AdminController
 
     public function notes(): void
     {
-        $this->render('Specifič.', 'notes', 'U pripremi. Ovdje dolaze bilješke i specifičnosti klijenata.');
+        $this->render('Specifičnosti', 'notes', 'U pripremi. Ovdje dolaze bilješke i specifičnosti klijenata.');
     }
 
     public function notifications(): void
@@ -91,116 +90,175 @@ final class PlaceholderController extends AdminController
 
         ob_start();
         ?>
-        <section class="panel pad" style="margin-bottom:18px">
-            <div class="section-title" style="align-items:flex-start">
+        <style>
+            .reports-shell{display:grid;gap:16px}
+            .reports-tabs{display:inline-flex;gap:0;background:#f4f6fb;border:1px solid #e1e7f2;border-radius:12px;padding:3px}
+            .reports-tab{display:inline-flex;align-items:center;justify-content:center;min-width:146px;height:32px;padding:0 18px;border-radius:9px;font-weight:700;color:#6c7a90}
+            .reports-tab.active{background:#fff;color:#0f2444;box-shadow:0 2px 8px rgba(16,35,63,.08)}
+            .reports-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+            .reports-kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:#5a82ff}
+            .reports-kicker .dot{width:8px;height:8px;border-radius:50%;background:#5a82ff;display:inline-block}
+            .reports-title{margin:8px 0 0;font-size:30px;line-height:1.08;letter-spacing:-.04em}
+            .reports-sub{margin-top:6px;color:#6f7f97;font-size:14px}
+            .reports-panel{padding:18px}
+            .reports-filter-grid{display:grid;grid-template-columns:1fr 1fr 1.15fr auto auto auto;gap:12px;align-items:end}
+            .reports-filter-grid label{display:block;margin:0 0 8px;font-size:13px;font-weight:700;color:#294164}
+            .reports-btn{height:40px;padding:0 16px;border-radius:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #dce3ee;background:#fff;color:#0f2444}
+            .reports-btn.primary{background:linear-gradient(180deg,#47b34f 0,#36a549 100%);border-color:#36a549;color:#fff}
+            .reports-btn.active{border-color:#bfd2ff;background:#eef4ff;color:#1f4ed8}
+            .reports-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+            .reports-stat{display:flex;gap:14px;align-items:center;padding:16px;border-radius:20px}
+            .reports-stat .icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:20px;background:#e9f0ff;color:#3d6ef3;flex:0 0 auto}
+            .reports-stat .icon.purple{background:#f0e9ff;color:#a057ff}
+            .reports-stat .icon.gold{background:#fff3cd;color:#d49100}
+            .reports-stat .icon.green{background:rgba(255,255,255,.16);color:#fff}
+            .reports-stat .meta{min-width:0}
+            .reports-stat .label{font-size:13px;letter-spacing:0;color:#6f7f97}
+            .reports-stat .value{margin-top:4px;font-size:25px;line-height:1.1;font-weight:800;letter-spacing:-.04em}
+            .reports-stat .sub{margin-top:4px;font-size:12px;color:#6f7f97}
+            .reports-stat.lead{background:linear-gradient(180deg,#43b64d 0,#37a647 100%);color:#fff}
+            .reports-stat.lead .label,.reports-stat.lead .sub{color:rgba(255,255,255,.82)}
+            .reports-table{overflow:hidden}
+            .reports-table table thead th{font-size:12px;color:#6a778f;background:#fbfcfe}
+            .reports-table table tbody td{font-size:14px}
+            .reports-date-row td{background:#fcfdff;font-weight:800;color:#142647;padding-top:14px;padding-bottom:10px}
+            .reports-date-row .summary{font-weight:600;color:#6f7f97;font-size:13px}
+            .reports-total-row td{background:#f5f8fd;font-weight:800}
+            .reports-empty{padding:24px;color:#6f7f97}
+            .reports-amount{font-weight:800}
+            @media (max-width: 1260px){.reports-filter-grid{grid-template-columns:1fr 1fr;}.reports-summary{grid-template-columns:repeat(2,minmax(0,1fr));}}
+            @media (max-width: 760px){.reports-filter-grid,.reports-summary{grid-template-columns:1fr;}.reports-title{font-size:26px}.reports-tab{min-width:0;flex:1}}
+        </style>
+        <div class="reports-shell">
+            <section class="reports-head">
                 <div>
-                    <div class="chip" style="background:#eaf1ff;color:#1f4ed8">Izvještaj</div>
-                    <h2 style="margin-top:10px"><?= htmlspecialchars($titleLabel, ENT_QUOTES, 'UTF-8') ?></h2>
-                    <div class="muted" style="margin-top:8px">Radovi po klijentu • <?= htmlspecialchars($periodLabel . ' · ' . $rangeLabel, ENT_QUOTES, 'UTF-8') ?></div>
+                    <div class="reports-kicker"><span class="dot"></span><span>Izvještaji</span></div>
+                    <h2 class="reports-title"><?= htmlspecialchars($titleLabel, ENT_QUOTES, 'UTF-8') ?></h2>
+                    <div class="reports-sub">Generirajte detaljne izvještaje o radu i projektima</div>
                 </div>
-                <a class="btn secondary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">PDF</a>
+                <a class="reports-btn primary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">↓ PDF</a>
+            </section>
+
+            <div class="reports-tabs" role="tablist" aria-label="Izvještaji">
+                <span class="reports-tab active">Radovi po klijentu</span>
+                <span class="reports-tab">Projekti i vrijeme</span>
             </div>
-            <form method="get" action="/reports" class="grid-4" style="align-items:end" id="reports-filter-form">
-                <div>
-                    <label>Period</label>
-                    <select class="input" name="period">
-                        <option value="weekly" <?= $period === 'weekly' ? 'selected' : '' ?>>Tjedni</option>
-                        <option value="monthly" <?= $period === 'monthly' ? 'selected' : '' ?>>Mjesečni</option>
-                        <option value="yearly" <?= $period === 'yearly' ? 'selected' : '' ?>>Godišnji</option>
-                    </select>
+
+            <section class="panel reports-panel">
+                <form method="get" action="/reports" id="reports-filter-form">
+                    <div class="reports-filter-grid">
+                        <div>
+                            <label>Period</label>
+                            <select class="input" name="period">
+                                <option value="weekly" <?= $period === 'weekly' ? 'selected' : '' ?>>Tjedni</option>
+                                <option value="monthly" <?= $period === 'monthly' ? 'selected' : '' ?>>Mjesečni</option>
+                                <option value="yearly" <?= $period === 'yearly' ? 'selected' : '' ?>>Godišnji</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label><?= $this->rangeLabelName($period) ?></label>
+                            <?php if ($period === 'weekly'): ?>
+                                <input class="input" type="week" name="range" value="<?= htmlspecialchars($range, ENT_QUOTES, 'UTF-8') ?>">
+                            <?php elseif ($period === 'yearly'): ?>
+                                <input class="input" type="number" min="2000" max="2100" name="range" value="<?= htmlspecialchars($range ?: (string) date('Y'), ENT_QUOTES, 'UTF-8') ?>">
+                            <?php else: ?>
+                                <input class="input" type="month" name="range" value="<?= htmlspecialchars($range ?: date('Y-m'), ENT_QUOTES, 'UTF-8') ?>">
+                            <?php endif; ?>
+                        </div>
+                        <div>
+                            <label>Klijent</label>
+                            <select class="input" name="client_id">
+                                <option value="0">Svi klijenti</option>
+                                <?php foreach ($clients as $client): ?>
+                                    <option value="<?= (int) $client['id'] ?>" <?= $clientId === (int) $client['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars((string) $client['name'], ENT_QUOTES, 'UTF-8') ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <button class="reports-btn<?= $billedOnly ? ' active' : '' ?>" type="submit" name="billed" value="1">✓ Naplaćeno</button>
+                        <a class="reports-btn" href="/reports">Sve</a>
+                        <a class="reports-btn primary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">↓ PDF</a>
+                    </div>
+                </form>
+            </section>
+
+            <section class="reports-summary">
+                <div class="panel reports-stat">
+                    <div class="icon">📅</div>
+                    <div class="meta"><div class="label">Radova</div><div class="value"><?= (int) $totals['count'] ?></div></div>
                 </div>
-                <div>
-                    <label><?= $this->rangeLabelName($period) ?></label>
-                    <?php if ($period === 'weekly'): ?>
-                        <input class="input" type="week" name="range" value="<?= htmlspecialchars($range, ENT_QUOTES, 'UTF-8') ?>">
-                    <?php elseif ($period === 'yearly'): ?>
-                        <input class="input" type="number" min="2000" max="2100" name="range" value="<?= htmlspecialchars($range ?: (string) date('Y'), ENT_QUOTES, 'UTF-8') ?>">
+                <div class="panel reports-stat">
+                    <div class="icon purple">⏱</div>
+                    <div class="meta"><div class="label">Ukupno vrijeme</div><div class="value"><?= htmlspecialchars(number_format($totals['minutes'] / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h</div></div>
+                </div>
+                <div class="panel reports-stat">
+                    <div class="icon gold">🧮</div>
+                    <div class="meta"><div class="label">Cijena/sat</div><div class="value"><?= htmlspecialchars(number_format((float) $totals['hourly_rate'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</div></div>
+                </div>
+                <div class="panel reports-stat lead">
+                    <div class="icon green">€</div>
+                    <div class="meta"><div class="label">Ukupan iznos</div><div class="value"><?= htmlspecialchars(number_format($totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</div></div>
+                </div>
+            </section>
+
+            <section class="panel reports-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Opis</th>
+                        <th>Sati</th>
+                        <th>Iznos</th>
+                        <th>Naplaćeno</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php if ($rows === []): ?>
+                        <tr><td colspan="5" class="reports-empty">Nema radova za odabrane kriterije.</td></tr>
                     <?php else: ?>
-                        <input class="input" type="month" name="range" value="<?= htmlspecialchars($range ?: date('Y-m'), ENT_QUOTES, 'UTF-8') ?>">
-                    <?php endif; ?>
-                </div>
-                <div>
-                    <label>Klijent</label>
-                    <select class="input" name="client_id">
-                        <option value="0">Svi klijenti</option>
-                        <?php foreach ($clients as $client): ?>
-                            <option value="<?= (int) $client['id'] ?>" <?= $clientId === (int) $client['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars((string) $client['name'], ENT_QUOTES, 'UTF-8') ?>
-                            </option>
+                        <?php
+                        $dayTotals = [];
+                        foreach ($rows as $row) {
+                            $dateKey = (string) ($row['work_date'] ?? '');
+                            $dayTotals[$dateKey]['minutes'] = ($dayTotals[$dateKey]['minutes'] ?? 0) + (int) ($row['duration_minutes'] ?? 0);
+                            $dayTotals[$dateKey]['amount'] = ($dayTotals[$dateKey]['amount'] ?? 0) + (float) ($row['amount'] ?? 0);
+                        }
+                        $currentDate = null;
+                        foreach ($rows as $row):
+                            $dateKey = (string) ($row['work_date'] ?? '');
+                            if ($currentDate !== $dateKey):
+                                $currentDate = $dateKey;
+                                $dateSummaryMinutes = (int) ($dayTotals[$dateKey]['minutes'] ?? 0);
+                                $dateSummaryAmount = (float) ($dayTotals[$dateKey]['amount'] ?? 0);
+                                ?>
+                                <tr class="reports-date-row">
+                                    <td colspan="5">
+                                        <?= htmlspecialchars($this->formatDate($dateKey), ENT_QUOTES, 'UTF-8') ?>
+                                        <span class="summary"> · <?= htmlspecialchars(number_format($dateSummaryMinutes / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h · <?= htmlspecialchars(number_format($dateSummaryAmount, 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</span>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                            <tr>
+                                <td></td>
+                                <td><?= htmlspecialchars((string) ($row['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?= htmlspecialchars(number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="reports-amount"><?= htmlspecialchars(number_format((float) ($row['amount'] ?? 0), 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
+                                <td><span class="chip <?= ((int) ($row['billed'] ?? 0) === 1) ? 'green' : 'gray' ?>"><?= ((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne' ?></span></td>
+                            </tr>
                         <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="actions">
-                    <button class="btn secondary" type="submit" name="billed" value="1"><?= $billedOnly ? 'Naplaćeno' : 'Sve' ?></button>
-                    <a class="btn secondary" href="/reports">Poništi</a>
-                </div>
-            </form>
-            <div class="muted" style="margin-top:12px">Prikaz: <?= htmlspecialchars($periodLabel . ' · ' . $rangeLabel . ' · ' . $selectedClient, ENT_QUOTES, 'UTF-8') ?></div>
-        </section>
-
-        <section class="grid-4">
-            <div class="panel stat"><div class="label">Radova</div><div class="value"><?= (int) $totals['count'] ?></div><div class="sub">Broj zapisa</div></div>
-            <div class="panel stat"><div class="label">Ukupno vrijeme</div><div class="value"><?= htmlspecialchars(number_format($totals['minutes'] / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h</div><div class="sub"><?= (int) $totals['minutes'] ?> min</div></div>
-            <div class="panel stat"><div class="label">Cijena/sat</div><div class="value"><?= htmlspecialchars(number_format((float) $totals['hourly_rate'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</div><div class="sub">Za odabrani klijent</div></div>
-            <div class="panel stat" style="background:linear-gradient(180deg,#39b54a 0,#2f9d42 100%);color:#fff"><div class="label" style="color:rgba(255,255,255,.8)">Ukupan iznos</div><div class="value"><?= htmlspecialchars(number_format($totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</div><div class="sub" style="color:rgba(255,255,255,.86)">Naplaćeno / obračun</div></div>
-        </section>
-
-        <section class="panel" style="margin-top:18px">
-            <table>
-                <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Opis</th>
-                    <th>Sati</th>
-                    <th>Iznos</th>
-                    <th>Naplaćeno</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php if ($rows === []): ?>
-                    <tr><td colspan="5" class="muted">Nema radova za odabrane kriterije.</td></tr>
-                <?php else: ?>
-                    <?php
-                    $dayTotals = [];
-                    foreach ($rows as $row) {
-                        $dateKey = (string) ($row['work_date'] ?? '');
-                        $dayTotals[$dateKey]['minutes'] = ($dayTotals[$dateKey]['minutes'] ?? 0) + (int) ($row['duration_minutes'] ?? 0);
-                        $dayTotals[$dateKey]['amount'] = ($dayTotals[$dateKey]['amount'] ?? 0) + (float) ($row['amount'] ?? 0);
-                    }
-                    $currentDate = null;
-                    foreach ($rows as $row):
-                        $dateKey = (string) ($row['work_date'] ?? '');
-                        if ($currentDate !== $dateKey):
-                            $currentDate = $dateKey;
-                            $dateSummaryMinutes = (int) ($dayTotals[$dateKey]['minutes'] ?? 0);
-                            $dateSummaryAmount = (float) ($dayTotals[$dateKey]['amount'] ?? 0);
-                    ?>
-                        <tr style="background:#fbfdff">
-                            <td colspan="5" style="font-weight:700;color:#1f2d4d">
-                                <?= htmlspecialchars($this->formatDate($dateKey), ENT_QUOTES, 'UTF-8') ?>
-                                <span class="muted" style="font-weight:500"> · <?= htmlspecialchars(number_format($dateSummaryMinutes / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h · <?= htmlspecialchars(number_format($dateSummaryAmount, 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</span>
-                            </td>
+                        <tr class="reports-total-row">
+                            <td>UKUPNO</td>
+                            <td></td>
+                            <td><?= htmlspecialchars(number_format($totals['minutes'] / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars(number_format((float) $totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
+                            <td></td>
                         </tr>
                     <?php endif; ?>
-                    <tr>
-                        <td></td>
-                        <td><?= htmlspecialchars((string) ($row['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars(number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
-                        <td style="font-weight:700"><?= htmlspecialchars(number_format((float) ($row['amount'] ?? 0), 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
-                        <td><span class="chip <?= ((int) ($row['billed'] ?? 0) === 1) ? 'green' : 'gray' ?>"><?= ((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne' ?></span></td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <tr style="background:#f3f6fb;font-weight:700">
-                        <td>UKUPNO</td>
-                        <td></td>
-                        <td><?= htmlspecialchars(number_format($totals['minutes'] / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars(number_format((float) $totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
-                        <td></td>
-                    </tr>
-                <?php endif; ?>
-                </tbody>
-            </table>
-        </section>
+                    </tbody>
+                </table>
+            </section>
+        </div>
         <?php
         $html = (string) ob_get_clean();
         $html .= <<<HTML
@@ -290,7 +348,7 @@ HTML;
 
     private function matchesWeek(int $timestamp, string $range): bool
     {
-        if (!preg_match('/^(\\d{4})-W(\\d{2})$/', $range, $matches)) {
+        if (!preg_match('/^(\d{4})-W(\d{2})$/', $range, $matches)) {
             return false;
         }
 
@@ -325,7 +383,7 @@ HTML;
 
     private function monthLabel(string $range): string
     {
-        if (!preg_match('/^(\\d{4})-(\\d{2})$/', $range, $m)) {
+        if (!preg_match('/^(\d{4})-(\d{2})$/', $range, $m)) {
             return $range;
         }
 
@@ -357,8 +415,15 @@ HTML;
         $lines[] = $this->pdfText('Ukupno minuta: ' . (int) $data['totals']['minutes']);
         $lines[] = $this->pdfText('Ukupan iznos: ' . number_format((float) $data['totals']['amount'], 2, '.', '') . ' EUR');
         $lines[] = '';
+
         foreach ($data['rows'] as $row) {
-            $lines[] = $this->pdfText($this->formatDate((string) ($row['work_date'] ?? '')) . ' | ' . (string) ($row['description'] ?? '') . ' | ' . number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, '.', '') . ' h | ' . number_format((float) ($row['amount'] ?? 0), 2, '.', '') . ' EUR | ' . (((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne'));
+            $lines[] = $this->pdfText(
+                $this->formatDate((string) ($row['work_date'] ?? ''))
+                . ' | ' . (string) ($row['description'] ?? '')
+                . ' | ' . number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, '.', '')
+                . ' h | ' . number_format((float) ($row['amount'] ?? 0), 2, '.', '')
+                . ' EUR | ' . (((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne')
+            );
         }
 
         return $this->makeSimplePdf($lines);

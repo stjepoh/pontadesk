@@ -28,35 +28,35 @@ final class Page
             .nav a:hover{background:rgba(255,255,255,.06);color:#fff}
             .top-actions{display:flex;align-items:center;gap:12px}
             .icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.04)}
-            .page{max-width:1500px;margin:0 auto;padding:34px 24px 56px}
+            .page{max-width:1500px;margin:0 auto;padding:28px 24px 48px}
             .hero{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:22px}
-            .hero h1{margin:0;font-size:42px;line-height:1.05;letter-spacing:-.04em}
-            .hero p{margin:8px 0 0;color:var(--muted);font-size:16px}
+            .hero h1{margin:0;font-size:34px;line-height:1.08;letter-spacing:-.04em}
+            .hero p{margin:6px 0 0;color:var(--muted);font-size:14px}
             .panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
-            .panel.pad{padding:22px}
-            .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:44px;padding:0 16px;border-radius:12px;background:linear-gradient(180deg,var(--blue2),var(--blue));color:#fff;font-weight:700;border:0}
+            .panel.pad{padding:18px}
+            .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:40px;padding:0 14px;border-radius:12px;background:linear-gradient(180deg,var(--blue2),var(--blue));color:#fff;font-weight:700;border:0}
             .btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
-            .input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:12px;padding:12px 14px;font-size:15px;outline:none;box-shadow:0 1px 2px rgba(16,35,63,.03)}
+            .input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:12px;padding:10px 12px;font-size:14px;outline:none;box-shadow:0 1px 2px rgba(16,35,63,.03)}
             .input:focus,select:focus,textarea:focus{border-color:#b7c9ff;box-shadow:0 0 0 4px rgba(63,109,246,.10)}
             .section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 16px}
-            .section-title h2{margin:0;font-size:18px}
+            .section-title h2{margin:0;font-size:16px}
             .muted{color:var(--muted)}
             .content{display:grid;gap:18px}
             table{width:100%;border-collapse:separate;border-spacing:0}
-            thead th{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#6d7e96;text-align:left;padding:16px 14px;border-bottom:1px solid var(--line);background:#fbfcfe}
-            tbody td{padding:16px 14px;border-bottom:1px solid #edf1f6;vertical-align:middle}
+            thead th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#6d7e96;text-align:left;padding:12px 12px;border-bottom:1px solid var(--line);background:#fbfcfe}
+            tbody td{padding:12px 12px;border-bottom:1px solid #edf1f6;vertical-align:middle;font-size:14px}
             tbody tr:hover{background:#fbfdff}
             .actions{display:flex;gap:8px;flex-wrap:wrap}
-            .chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;background:#eef4ff;color:#3761db;font-weight:700;font-size:13px}
+            .chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;background:#eef4ff;color:#3761db;font-weight:700;font-size:12px}
             .chip.green{background:#e9f9ef;color:#1a8f4a}
             .chip.gray{background:#f1f5f9;color:#5c6f86}
             .grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}
             .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
             .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-            .stat{padding:20px}
-            .stat .label{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-            .stat .value{margin-top:10px;font-size:34px;font-weight:800;letter-spacing:-.04em}
-            .stat .sub{margin-top:8px;color:var(--muted)}
+            .stat{padding:16px}
+            .stat .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+            .stat .value{margin-top:8px;font-size:26px;font-weight:800;letter-spacing:-.04em}
+            .stat .sub{margin-top:6px;color:var(--muted);font-size:13px}
             .searchbar{display:flex;gap:10px;align-items:center}
             .searchbar .input{padding-left:42px}
             .searchwrap{position:relative;flex:1}
@@ -73,7 +73,7 @@ final class Page
             .date-field:hover .date-display,.date-field:focus-within .date-display{border-color:#9cb7ff;box-shadow:0 0 0 4px rgba(63,109,246,.10)}
             .date-help{font-size:12px;color:var(--muted);margin-top:6px}
             @media (max-width: 1080px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr}.hero{flex-direction:column;align-items:flex-start}}
-            @media (max-width: 760px){.nav{display:none}.page{padding:18px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero h1{font-size:34px}.topbar{padding:0 16px}}
+            @media (max-width: 760px){.nav{display:none}.page{padding:16px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero h1{font-size:30px}.topbar{padding:0 16px}}
         </style></head><body>';
 
         echo '<header class="topbar">';

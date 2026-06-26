@@ -35,7 +35,16 @@ final class WorkLogController extends AdminController
         $clients = (new ClientRepository())->all();
         $selectedClientId = (int) ($_GET['client_id'] ?? 0);
         $selectedDate = $this->parseDateInput((string) ($_GET['work_date'] ?? date('Y-m-d')));
-        $this->renderPage('Novi rad', 'Dodavanje više zadataka za isti klijent i datum.', $this->formContent($clients, $selectedClientId, $selectedDate, null), 'work', '', 'work-page');
+        $existingRows = $this->existingRowsForDay((new WorkLogRepository())->all(), $selectedClientId, $selectedDate);
+
+        $this->renderPage(
+            'Novi rad',
+            'Dodavanje više zadataka za isti klijent i datum.',
+            $this->formContent($clients, $selectedClientId, $selectedDate, null, $existingRows),
+            'work',
+            '',
+            'work-page'
+        );
     }
 
     public function edit(): void
@@ -51,7 +60,14 @@ final class WorkLogController extends AdminController
         }
 
         $clients = (new ClientRepository())->all();
-        $this->renderPage('Uredi rad', 'Ažuriranje postojećeg zapisa.', $this->formContent($clients, (int) ($row['client_id'] ?? 0), $this->formatDate((string) ($row['work_date'] ?? '')), $row), 'work', '', 'work-page');
+        $this->renderPage(
+            'Uredi rad',
+            'Ažuriranje postojećeg zapisa.',
+            $this->formContent($clients, (int) ($row['client_id'] ?? 0), $this->formatDate((string) ($row['work_date'] ?? '')), $row),
+            'work',
+            '',
+            'work-page'
+        );
     }
 
     public function store(): void
@@ -257,6 +273,20 @@ final class WorkLogController extends AdminController
         return (string) ob_get_clean();
     }
 
+    private function existingRowsForDay(array $rows, int $clientId, string $workDate): array
+    {
+        if ($clientId <= 0 || $workDate === '') {
+            return [];
+        }
+
+        $matches = array_values(array_filter($rows, static function (array $row) use ($clientId, $workDate): bool {
+            return (int) ($row['client_id'] ?? 0) === $clientId && (string) ($row['work_date'] ?? '') === $workDate;
+        }));
+
+        usort($matches, static fn(array $a, array $b): int => (int) ($a['id'] ?? 0) <=> (int) ($b['id'] ?? 0));
+        return $matches;
+    }
+
     private function parseDateInput(string $value): string
     {
         $value = trim($value);
@@ -293,9 +323,10 @@ final class WorkLogController extends AdminController
         ][(int) date('N', $timestamp)] ?? '';
     }
 
-    private function formContent(array $clients, int $selectedClientId, string $selectedDate, ?array $row): string
+    private function formContent(array $clients, int $selectedClientId, string $selectedDate, ?array $row, array $existingRows = []): string
     {
         $singleMode = $row !== null;
+        $existingMinutes = array_sum(array_map(static fn(array $item): int => (int) ($item['duration_minutes'] ?? 0), $existingRows));
         ob_start();
         ?>
         <form method="post" action="<?= $singleMode ? '/work-logs/update?id=' . (int) $row['id'] : '/work-logs' ?>" class="content" id="work-form">
@@ -322,6 +353,29 @@ final class WorkLogController extends AdminController
                     </div>
                 </div>
 
+                <?php if (!$singleMode && $existingRows !== []): ?>
+                    <section class="panel pad" style="margin-top:18px;background:#fbfdff">
+                        <div class="section-title">
+                            <h2>Već upisani zadaci</h2>
+                            <div class="muted"><?= count($existingRows) ?> zadataka, <?= $existingMinutes ?> min</div>
+                        </div>
+                        <div class="mini-list">
+                            <?php foreach ($existingRows as $index => $item): ?>
+                                <div class="mini-item" style="align-items:flex-start">
+                                    <div style="display:flex;gap:10px;min-width:0">
+                                        <span class="muted" style="font-weight:800"><?= (int) $index + 1 ?>.</span>
+                                        <div style="min-width:0">
+                                            <div style="font-weight:700;color:#14213d;line-height:1.45"><?= htmlspecialchars((string) ($item['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></div>
+                                            <div class="muted" style="margin-top:4px"><?= (int) ($item['duration_minutes'] ?? 0) ?> min<?= ((int) ($item['billed'] ?? 0) === 1) ? ' · Naplaćeno' : '' ?></div>
+                                        </div>
+                                    </div>
+                                    <a class="chip gray" href="/work-logs/edit?id=<?= (int) ($item['id'] ?? 0) ?>">Uredi</a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </section>
+                <?php endif; ?>
+
                 <?php if ($singleMode): ?>
                     <div class="grid-2" style="margin-top:18px">
                         <div>
@@ -336,8 +390,8 @@ final class WorkLogController extends AdminController
                 <?php else: ?>
                     <div style="margin-top:18px">
                         <div class="section-title">
-                            <h2>Zadaci za dan *</h2>
-                            <div class="muted">Možeš dodati više zasebnih zadataka za isti klijent i datum.</div>
+                            <h2>Novi zadaci za dan *</h2>
+                            <div class="muted">Dodaje se na isti klijent i datum.</div>
                         </div>
                         <div id="task-list" class="content"></div>
                     </div>

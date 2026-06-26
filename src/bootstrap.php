@@ -3,7 +3,28 @@ declare(strict_types=1);
 
 require __DIR__ . '/Support/Env.php';
 
-App\Support\Env::load(dirname(__DIR__) . '/.env');
+function pontadesk_env_path(): ?string
+{
+    $candidates = [
+        dirname(__DIR__) . '/.env',
+        dirname(__DIR__) . '/../public_html/dashboard.hladilo.com/.env',
+        dirname(__DIR__) . '/../../public_html/dashboard.hladilo.com/.env',
+        '/home/hladilo/public_html/dashboard.hladilo.com/.env',
+    ];
+
+    foreach ($candidates as $candidate) {
+        if (is_file($candidate)) {
+            return $candidate;
+        }
+    }
+
+    return null;
+}
+
+$envPath = pontadesk_env_path();
+if ($envPath !== null) {
+    App\Support\Env::load($envPath);
+}
 
 spl_autoload_register(static function (string $class): void {
     $prefix = 'App\\';

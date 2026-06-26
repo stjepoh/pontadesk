@@ -41,6 +41,8 @@ $router->get('/notes', [App\Http\Controllers\PlaceholderController::class, 'note
 $router->get('/notifications', [App\Http\Controllers\PlaceholderController::class, 'notifications']);
 $router->get('/import-map', [App\Http\Controllers\ImportMapController::class, 'index']);
 $router->post('/import-map', [App\Http\Controllers\ImportMapController::class, 'store']);
+$router->get('/data-import', [App\Http\Controllers\DataImportController::class, 'index']);
+$router->post('/data-import', [App\Http\Controllers\DataImportController::class, 'store']);
 
 $router->dispatch(
     $_SERVER['REQUEST_METHOD'] ?? 'GET',

@@ -115,7 +115,7 @@ final class ContractController extends AdminController
                         <tr>
                             <td><strong><?= htmlspecialchars((string) ($row['client_name'] ?? ''), ENT_QUOTES, 'UTF-8') ?></strong></td>
                             <td><?= htmlspecialchars((string) ($row['contract_name'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= htmlspecialchars((string) ($row['end_date'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($this->formatDate((string) ($row['end_date'] ?? '')), ENT_QUOTES, 'UTF-8') ?></td>
                             <td><span class="chip gray"><?= htmlspecialchars((string) ($row['status'] ?? ''), ENT_QUOTES, 'UTF-8') ?></span></td>
                             <td style="color:#2b9c3d;font-weight:700"><?= number_format((float) ($row['value'] ?? 0), 2, ',', '.') ?> €</td>
                             <td><div class="actions"><a class="chip" href="/contracts/edit?id=<?= (int) $row['id'] ?>">Uredi</a><a class="chip gray" href="/contracts/delete?id=<?= (int) $row['id'] ?>" onclick="return confirm('Obrisati ugovor?')">Briši</a></div></td>

@@ -50,4 +50,27 @@ abstract class AdminController
     {
         Page::render($title, $subtitle, $content, $this->nav($activeNav));
     }
+
+    protected function formatDate(?string $value): string
+    {
+        $value = trim((string) $value);
+        if ($value === '') {
+            return '';
+        }
+
+        $formats = ['Y-m-d', 'Y-m-d H:i:s', 'd/m/Y', DATE_ATOM];
+        foreach ($formats as $format) {
+            $date = \DateTimeImmutable::createFromFormat($format, $value);
+            if ($date instanceof \DateTimeImmutable) {
+                return $date->format('d/m/Y');
+            }
+        }
+
+        $timestamp = strtotime($value);
+        if ($timestamp !== false) {
+            return date('d/m/Y', $timestamp);
+        }
+
+        return $value;
+    }
 }

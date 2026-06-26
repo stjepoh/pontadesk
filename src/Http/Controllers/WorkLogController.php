@@ -132,7 +132,7 @@ final class WorkLogController extends AdminController
                     <?php foreach ($groups as $group): ?>
                         <tr>
                             <td><strong><?= htmlspecialchars((string) $group['client_name'], ENT_QUOTES, 'UTF-8') ?></strong></td>
-                            <td><?= htmlspecialchars((string) $group['date'], ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($this->formatDate((string) $group['date']), ENT_QUOTES, 'UTF-8') ?></td>
                             <td><?= (int) ($group['total_minutes'] ?? 0) ?> min</td>
                             <td><?= count($group['items'] ?? []) ?></td>
                             <td><span class="chip <?= $this->groupPaid($group['items'] ?? []) ? 'green' : 'gray' ?>"><?= $this->groupPaid($group['items'] ?? []) ? 'Da' : 'Ne' ?></span></td>

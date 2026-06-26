@@ -264,7 +264,7 @@ final class ClientController extends AdminController
                         <div class="mini-item">
                             <div>
                                 <strong><?= htmlspecialchars((string) ($row['contract_name'] ?? ''), ENT_QUOTES, 'UTF-8') ?></strong>
-                                <div class="muted"><?= htmlspecialchars((string) ($row['start_date'] ?? ''), ENT_QUOTES, 'UTF-8') ?> · <?= htmlspecialchars((string) ($row['end_date'] ?? ''), ENT_QUOTES, 'UTF-8') ?></div>
+                                <div class="muted"><?= htmlspecialchars($this->formatDate((string) ($row['start_date'] ?? '')), ENT_QUOTES, 'UTF-8') ?> · <?= htmlspecialchars($this->formatDate((string) ($row['end_date'] ?? '')), ENT_QUOTES, 'UTF-8') ?></div>
                             </div>
                             <span class="chip gray"><?= htmlspecialchars((string) ($row['status'] ?? ''), ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
@@ -279,7 +279,7 @@ final class ClientController extends AdminController
                     <?php else: foreach ($workLogs as $row): ?>
                         <div class="mini-item">
                             <div>
-                                <strong><?= htmlspecialchars((string) ($row['date'] ?? ''), ENT_QUOTES, 'UTF-8') ?></strong>
+                                <strong><?= htmlspecialchars($this->formatDate((string) ($row['date'] ?? '')), ENT_QUOTES, 'UTF-8') ?></strong>
                                 <div class="muted"><?= htmlspecialchars((string) ($row['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></div>
                             </div>
                             <span class="chip <?= !empty($row['billed']) ? 'green' : 'gray' ?>"><?= (int) ($row['duration_minutes'] ?? 0) ?> min</span>

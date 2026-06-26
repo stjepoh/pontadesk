@@ -11,6 +11,7 @@ final class ImportService
     public function import(array $export, array $map = [], bool $reset = false): array
     {
         $pdo = Connection::pdo();
+        $this->prepareCharset($pdo);
         if ($reset) {
             $this->truncate($pdo);
         }
@@ -50,6 +51,22 @@ final class ImportService
             $pdo->exec("TRUNCATE TABLE {$table}");
         }
         $pdo->exec('SET FOREIGN_KEY_CHECKS=1');
+    }
+
+    private function prepareCharset(PDO $pdo): void
+    {
+        $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+        $pdo->exec("SET CHARACTER SET utf8mb4");
+
+        $database = getenv('DB_DATABASE');
+        if (is_string($database) && $database !== '') {
+            $quoted = $pdo->quote($database);
+            $pdo->exec("ALTER DATABASE {$quoted} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+        }
+
+        foreach (['users', 'clients', 'contracts', 'work_logs', 'projects', 'project_tasks', 'client_notes', 'client_tasks'] as $table) {
+            $pdo->exec("ALTER TABLE {$table} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+        }
     }
 
     private function insertClient(PDO $pdo, array $client): int

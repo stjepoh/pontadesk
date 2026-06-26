@@ -60,8 +60,8 @@ final class ImportService
 
         $database = getenv('DB_DATABASE');
         if (is_string($database) && $database !== '') {
-            $quoted = $pdo->quote($database);
-            $pdo->exec("ALTER DATABASE {$quoted} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+            $safeDatabase = preg_replace('/[^a-zA-Z0-9_]/', '', $database) ?: $database;
+            $pdo->exec("ALTER DATABASE `{$safeDatabase}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
         }
 
         foreach (['users', 'clients', 'contracts', 'work_logs', 'projects', 'project_tasks', 'client_notes', 'client_tasks'] as $table) {

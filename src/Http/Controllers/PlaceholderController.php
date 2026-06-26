@@ -94,7 +94,7 @@ final class PlaceholderController extends AdminController
                 <h2>Radovi po klijentu</h2>
                 <a class="btn secondary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">PDF</a>
             </div>
-            <form method="get" action="/reports" class="grid-4" style="align-items:end">
+            <form method="get" action="/reports" class="grid-4" style="align-items:end" id="reports-filter-form">
                 <div>
                     <label>Period</label>
                     <select class="input" name="period">
@@ -166,7 +166,28 @@ final class PlaceholderController extends AdminController
             </table>
         </section>
         <?php
-        return (string) ob_get_clean();
+        $html = (string) ob_get_clean();
+        $html .= <<<HTML
+<script>
+(function () {
+    const form = document.getElementById('reports-filter-form');
+    if (!form) return;
+
+    const autoFields = form.querySelectorAll('select[name="period"], select[name="client_id"], input[name="range"]');
+    autoFields.forEach(function (field) {
+        field.addEventListener('change', function () {
+            form.requestSubmit ? form.requestSubmit() : form.submit();
+        });
+        field.addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') {
+                form.requestSubmit ? form.requestSubmit() : form.submit();
+            }
+        });
+    });
+})();
+</script>
+HTML;
+        return $html;
     }
 
     private function filterWorkLogs(array $rows, array $clients, string $period, string $range, int $clientId, bool $billedOnly): array

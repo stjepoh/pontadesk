@@ -6,9 +6,9 @@ namespace App\Support;
 final class Page
 {
     /**
-     * @param array<int, array{label:string, href:string, active?:bool}> $navItems
+     * @param array<int, array{label:string, href:string, icon?:string, active?:bool}> $navItems
      */
-    public static function render(string $title, string $subtitle, string $content, array $navItems): void
+    public static function render(string $title, string $subtitle, string $content, array $navItems, string $actions = '', string $pageClass = ''): void
     {
         header('Content-Type: text/html; charset=UTF-8');
 
@@ -19,22 +19,23 @@ final class Page
             *{box-sizing:border-box}
             body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#f7f9fc 0,#eef3f9 100%);color:var(--text)}
             a{text-decoration:none;color:inherit}
-            .topbar{height:68px;background:linear-gradient(180deg,var(--nav) 0,var(--nav2) 100%);color:#fff;display:flex;align-items:center;padding:0 22px;position:sticky;top:0;z-index:50;box-shadow:0 8px 24px rgba(3,8,20,.24)}
-            .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.02em;font-size:20px}
-            .brand-badge{width:36px;height:36px;border-radius:12px;background:linear-gradient(180deg,var(--blue2),var(--blue));display:grid;place-items:center}
-            .nav{display:flex;align-items:center;gap:10px;margin:0 auto;padding:0 24px;overflow:auto}
-            .nav a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;color:rgba(255,255,255,.84);font-weight:600;white-space:nowrap}
-            .nav-ico{display:inline-grid;place-items:center;width:18px;font-size:16px;line-height:1;opacity:.95}
+            .topbar{height:46px;background:linear-gradient(180deg,var(--nav) 0,var(--nav2) 100%);color:#fff;display:flex;align-items:center;padding:0 18px;position:sticky;top:0;z-index:50;box-shadow:0 8px 24px rgba(3,8,20,.16)}
+            .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px}
+            .brand-badge{width:18px;height:18px;border-radius:6px;background:linear-gradient(180deg,var(--blue2),var(--blue));display:grid;place-items:center;font-size:11px}
+            .nav{display:flex;align-items:center;gap:6px;margin:0 auto;padding:0 18px;overflow:auto}
+            .nav a{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:9px;color:rgba(255,255,255,.78);font-size:13px;font-weight:700;white-space:nowrap}
+            .nav-ico{display:inline-grid;place-items:center;width:15px;font-size:14px;line-height:1;opacity:.9}
             .nav-label{display:inline}
             .nav a.active{background:linear-gradient(180deg,#4d79ff 0,#3566f1 100%);color:#fff;box-shadow:0 8px 18px rgba(65,106,238,.3)}
             .nav a:hover{background:rgba(255,255,255,.06);color:#fff}
-            .top-actions{display:flex;align-items:center;gap:12px}
-            .icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.04)}
-            .page{max-width:1500px;margin:0 auto;padding:28px 24px 48px}
+            .top-actions{display:flex;align-items:center;gap:10px}
+            .icon-btn{width:30px;height:30px;border-radius:10px;border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.04)}
+            .page{max-width:1180px;margin:0 auto;padding:24px 22px 46px}
             .hero{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:22px}
-            .hero h1{margin:0;font-size:34px;line-height:1.08;letter-spacing:-.04em}
-            .hero p{margin:6px 0 0;color:var(--muted);font-size:14px}
-            .panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+            .hero h1{margin:0;font-size:30px;line-height:1.08;letter-spacing:-.02em}
+            .hero p{margin:5px 0 0;color:var(--muted);font-size:13px}
+            .hero-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+            .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 16px rgba(16,35,63,.05)}
             .panel.pad{padding:18px}
             .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:40px;padding:0 14px;border-radius:12px;background:linear-gradient(180deg,var(--blue2),var(--blue));color:#fff;font-weight:700;border:0}
             .btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
@@ -75,7 +76,7 @@ final class Page
             .date-field:hover .date-display,.date-field:focus-within .date-display{border-color:#9cb7ff;box-shadow:0 0 0 4px rgba(63,109,246,.10)}
             .date-help{font-size:12px;color:var(--muted);margin-top:6px}
             @media (max-width: 1080px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr}.hero{flex-direction:column;align-items:flex-start}}
-            @media (max-width: 760px){.page{padding:16px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero h1{font-size:30px}.topbar{padding:0 16px}.nav{gap:6px;padding:0 10px}.nav a{padding:10px 10px}.nav-label{display:none}.nav-ico{width:auto;font-size:18px}}
+            @media (max-width: 760px){.page{padding:16px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero{align-items:flex-start}.hero h1{font-size:28px}.topbar{padding:0 10px}.brand span:last-child{display:none}.nav{gap:4px;padding:0 8px}.nav a{padding:8px 8px}.nav-label{display:none}.nav-ico{width:auto;font-size:17px}.hero-actions{width:100%}.hero-actions .btn{width:100%}}
         </style></head><body>';
 
         echo '<header class="topbar">';
@@ -92,8 +93,13 @@ final class Page
         echo '<div class="top-actions"><a class="icon-btn" href="/logout" title="Odjava">↗</a></div>';
         echo '</header>';
 
-        echo '<main class="page">';
-        echo '<div class="hero"><div><h1>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h1><p>' . htmlspecialchars($subtitle, ENT_QUOTES, 'UTF-8') . '</p></div></div>';
+        $pageClassAttr = trim($pageClass) !== '' ? ' ' . htmlspecialchars($pageClass, ENT_QUOTES, 'UTF-8') : '';
+        echo '<main class="page' . $pageClassAttr . '">';
+        echo '<div class="hero"><div><h1>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h1><p>' . htmlspecialchars($subtitle, ENT_QUOTES, 'UTF-8') . '</p></div>';
+        if ($actions !== '') {
+            echo '<div class="hero-actions">' . $actions . '</div>';
+        }
+        echo '</div>';
         echo $content;
         echo '<script>
         document.querySelectorAll("[data-date-field]").forEach(function (field) {

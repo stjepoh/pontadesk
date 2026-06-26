@@ -46,9 +46,9 @@ abstract class AdminController
         }, $items);
     }
 
-    protected function renderPage(string $title, string $subtitle, string $content, string $activeNav): void
+    protected function renderPage(string $title, string $subtitle, string $content, string $activeNav, string $actions = '', string $pageClass = ''): void
     {
-        Page::render($title, $subtitle, $content, $this->nav($activeNav));
+        Page::render($title, $subtitle, $content, $this->nav($activeNav), $actions, $pageClass);
     }
 
     protected function formatDate(?string $value): string

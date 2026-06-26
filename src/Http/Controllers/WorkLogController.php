@@ -11,25 +11,37 @@ final class WorkLogController extends AdminController
     public function index(): void
     {
         $this->requireAdmin();
+
         $rows = (new WorkLogRepository())->all();
         $clients = (new ClientRepository())->all();
         $selectedClientId = (int) ($_GET['client_id'] ?? 0);
         $showBilled = isset($_GET['billed']) && (string) $_GET['billed'] !== '0';
-        $this->renderPage('Radovi', 'Evidencija obavljenih radova.', $this->indexContent($rows, $clients, $selectedClientId, $showBilled), 'work');
+        $actions = '<a class="btn" href="/work-logs/create">+ Novi rad</a>';
+
+        $this->renderPage(
+            'Radovi',
+            'Evidencija obavljenih radova.',
+            $this->indexContent($rows, $clients, $selectedClientId, $showBilled),
+            'work',
+            $actions,
+            'work-page'
+        );
     }
 
     public function create(): void
     {
         $this->requireAdmin();
+
         $clients = (new ClientRepository())->all();
         $selectedClientId = (int) ($_GET['client_id'] ?? 0);
         $selectedDate = $this->parseDateInput((string) ($_GET['work_date'] ?? date('Y-m-d')));
-        $this->renderPage('Novi rad', 'Dodavanje više zadataka za isti klijent i datum.', $this->formContent($clients, $selectedClientId, $selectedDate, null), 'work');
+        $this->renderPage('Novi rad', 'Dodavanje više zadataka za isti klijent i datum.', $this->formContent($clients, $selectedClientId, $selectedDate, null), 'work', '', 'work-page');
     }
 
     public function edit(): void
     {
         $this->requireAdmin();
+
         $id = (int) ($_GET['id'] ?? 0);
         $row = (new WorkLogRepository())->find($id);
         if ($row === null) {
@@ -39,12 +51,13 @@ final class WorkLogController extends AdminController
         }
 
         $clients = (new ClientRepository())->all();
-        $this->renderPage('Uredi rad', 'Ažuriranje postojećeg zapisa.', $this->formContent($clients, (int) ($row['client_id'] ?? 0), $this->formatDate((string) ($row['work_date'] ?? '')), $row), 'work');
+        $this->renderPage('Uredi rad', 'Ažuriranje postojećeg zapisa.', $this->formContent($clients, (int) ($row['client_id'] ?? 0), $this->formatDate((string) ($row['work_date'] ?? '')), $row), 'work', '', 'work-page');
     }
 
     public function store(): void
     {
         $this->requireAdmin();
+
         $clientId = (int) ($_POST['client_id'] ?? 0);
         $workDate = $this->parseDateInput((string) ($_POST['work_date'] ?? ''));
         $billed = isset($_POST['billed']) ? 1 : 0;
@@ -79,6 +92,7 @@ final class WorkLogController extends AdminController
     public function update(): void
     {
         $this->requireAdmin();
+
         $id = (int) ($_GET['id'] ?? 0);
         (new WorkLogRepository())->update($id, [
             'client_id' => (int) ($_POST['client_id'] ?? 0),
@@ -94,6 +108,23 @@ final class WorkLogController extends AdminController
     {
         $this->requireAdmin();
         (new WorkLogRepository())->delete((int) ($_GET['id'] ?? 0));
+        $this->redirect('/work-logs');
+    }
+
+    public function deleteDay(): void
+    {
+        $this->requireAdmin();
+
+        $clientId = (int) ($_GET['client_id'] ?? 0);
+        $workDate = $this->parseDateInput((string) ($_GET['work_date'] ?? ''));
+        $repo = new WorkLogRepository();
+
+        foreach ($repo->all() as $row) {
+            if ((int) ($row['client_id'] ?? 0) === $clientId && (string) ($row['work_date'] ?? '') === $workDate) {
+                $repo->delete((int) ($row['id'] ?? 0));
+            }
+        }
+
         $this->redirect('/work-logs');
     }
 
@@ -113,15 +144,6 @@ final class WorkLogController extends AdminController
             $rows = array_values(array_filter($rows, static fn(array $row): bool => (int) ($row['billed'] ?? 0) === 1));
         }
 
-        $selectedClientName = 'Svi';
-        foreach ($clients as $client) {
-            if ((int) ($client['id'] ?? 0) === $selectedClientId) {
-                $selectedClientName = (string) ($client['name'] ?? 'Svi');
-                break;
-            }
-        }
-
-        $totalMinutesAll = array_sum(array_map(static fn(array $row): int => (int) ($row['duration_minutes'] ?? 0), $rows));
         $groups = [];
         foreach ($rows as $row) {
             $key = (string) ($row['client_name'] ?? $row['client_id'] ?? 'Nepoznato') . '|' . (string) ($row['work_date'] ?? '');
@@ -130,7 +152,6 @@ final class WorkLogController extends AdminController
             $groups[$key]['items'][] = $row;
             $groups[$key]['total_minutes'] = ($groups[$key]['total_minutes'] ?? 0) + (int) ($row['duration_minutes'] ?? 0);
         }
-        $groupCount = count($groups);
 
         uasort($groups, static function (array $a, array $b): int {
             return strcmp((string) ($b['date'] ?? ''), (string) ($a['date'] ?? ''));
@@ -138,44 +159,47 @@ final class WorkLogController extends AdminController
 
         ob_start();
         ?>
-        <section class="panel pad" style="margin-bottom:18px;background:linear-gradient(135deg,#fff 0,#f8fbff 100%)">
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap">
-                <div>
-                    <div class="chip" style="background:#eaf1ff;color:#1f4ed8">Radovi</div>
-                    <div class="muted" style="margin-top:10px"><?= $groupCount ?> dana, <?= $totalMinutesAll ?> minuta ukupno</div>
-                </div>
-                <div class="actions">
-                    <span class="chip gray">Klijent: <?= htmlspecialchars($selectedClientName, ENT_QUOTES, 'UTF-8') ?></span>
-                    <span class="chip gray">Naplaćeni: <?= $showBilled ? 'Da' : 'Ne' ?></span>
-                </div>
-            </div>
-        </section>
+        <style>
+            .work-page{max-width:820px}
+            .work-filters{display:flex;gap:12px;align-items:end;margin-bottom:22px;flex-wrap:wrap}
+            .work-filters select{width:220px}
+            .work-day{margin-top:18px}
+            .work-day-title{display:flex;align-items:center;gap:8px;margin:0 0 10px;color:#162946;font-weight:800;font-size:15px}
+            .work-day-title .cal{color:#3f6df6;font-size:15px}
+            .work-card{padding:14px 16px}
+            .work-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+            .work-card-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+            .work-card-actions{display:flex;align-items:center;gap:8px}
+            .work-icon-link{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;color:#6f7f97;font-weight:800}
+            .work-icon-link:hover{background:#f2f6ff;color:#1f4ed8}
+            .work-icon-link.danger{color:#e74b4b}
+            .work-task{display:grid;grid-template-columns:26px 1fr 72px;gap:8px;align-items:start;padding:7px 0;font-size:13px}
+            .work-task + .work-task{border-top:1px solid #eef2f7}
+            .work-task-number{color:#8795ad;font-weight:700}
+            .work-task-desc{line-height:1.45;color:#14213d}
+            .work-task-duration{color:#8a98b0;font-weight:700;text-align:right;white-space:nowrap}
+            @media (max-width:760px){.work-page{max-width:none}.work-filters select,.work-filters .btn{width:100%}.work-task{grid-template-columns:24px 1fr}.work-task-duration{grid-column:2;text-align:left}}
+        </style>
 
-        <section class="panel pad" style="margin-bottom:18px">
-            <div class="section-title">
-                <h2>Filtri</h2>
-                <div class="muted">Pregled po klijentu i naplaćenim radovima.</div>
+        <form method="get" action="/work-logs" class="work-filters">
+            <div>
+                <label>Svi klijenti</label>
+                <select class="input" name="client_id">
+                    <option value="0">Svi klijenti</option>
+                    <?php foreach ($clients as $client): ?>
+                        <option value="<?= (int) $client['id'] ?>" <?= $selectedClientId === (int) $client['id'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars((string) $client['name'], ENT_QUOTES, 'UTF-8') ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-            <form method="get" action="/work-logs" class="grid-2" style="align-items:end">
-                <div>
-                    <label>Svi klijenti</label>
-                    <select class="input" name="client_id">
-                        <option value="0">Svi klijenti</option>
-                        <?php foreach ($clients as $client): ?>
-                            <option value="<?= (int) $client['id'] ?>" <?= $selectedClientId === (int) $client['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars((string) $client['name'], ENT_QUOTES, 'UTF-8') ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-                    <button class="btn secondary" type="submit" name="billed" value="1">Prikaži naplaćene</button>
-                    <a class="btn secondary" href="/work-logs">Poništi filtre</a>
-                </div>
-            </form>
-        </section>
+            <button class="btn secondary" type="submit" name="billed" value="1">Prikaži naplaćene</button>
+            <?php if ($selectedClientId > 0 || $showBilled): ?>
+                <a class="btn secondary" href="/work-logs">Poništi</a>
+            <?php endif; ?>
+        </form>
 
-        <section class="content">
+        <section>
             <?php if ($groups === []): ?>
                 <div class="panel pad">
                     <div class="muted">Nema radnih sati.</div>
@@ -191,59 +215,46 @@ final class WorkLogController extends AdminController
                     $taskCount = count($group['items'] ?? []);
                     $clientId = (string) ($group['items'][0]['client_id'] ?? '');
                     ?>
-                    <div class="section-title" style="margin-top:22px">
-                        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                            <span style="font-size:18px">📅</span>
-                            <h2 style="margin:0"><?= htmlspecialchars($weekdayLabel, ENT_QUOTES, 'UTF-8') ?>, <?= htmlspecialchars($dateLabel, ENT_QUOTES, 'UTF-8') ?></h2>
+                    <div class="work-day">
+                        <div class="work-day-title">
+                            <span class="cal">📅</span>
+                            <span><?= htmlspecialchars($weekdayLabel, ENT_QUOTES, 'UTF-8') ?>, <?= htmlspecialchars($dateLabel, ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
-                    </div>
-                    <section class="panel pad" style="margin-bottom:18px">
-                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap">
-                            <div>
-                                <span class="chip" style="background:#eaf1ff;color:#1f4ed8"><?= htmlspecialchars((string) $group['client_name'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="muted" style="margin-left:10px">🕒 <?= $totalMinutes ?> min (<?= $totalHours ?> h)</span>
-                                <span class="chip gray" style="margin-left:10px"><?= $taskCount ?> zadataka</span>
-                            </div>
-                            <div class="actions">
-                                <a class="chip" href="/work-logs/create?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>">+ Dodaj zadatak</a>
-                                <a class="chip gray" href="/work-logs/create?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>">Uredi dan</a>
-                            </div>
-                        </div>
-
-                        <div style="margin-top:16px">
-                            <?php foreach ($group['items'] as $index => $item): ?>
-                                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:12px 0;<?= $index === 0 ? '' : 'border-top:1px solid #eef2f7;' ?>">
-                            <div style="display:flex;gap:12px;align-items:flex-start;flex:1;min-width:0">
-                                        <div style="color:#8a98b0;font-weight:700;min-width:24px"><?= (int) $index + 1 ?>.</div>
-                                        <div style="min-width:0;flex:1">
-                                            <div style="font-weight:600;color:#14213d;line-height:1.5"><?= htmlspecialchars((string) ($item['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></div>
-                                            <div class="muted" style="margin-top:4px"><?= ((int) ($item['billed'] ?? 0) === 1) ? 'Naplaćeno' : '' ?></div>
-                                        </div>
-                                    </div>
-                                    <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-                                        <span class="muted" style="font-weight:700"><?= (int) ($item['duration_minutes'] ?? 0) ?> min</span>
-                                        <a class="chip gray" href="/work-logs/edit?id=<?= (int) $item['id'] ?>">Uredi</a>
-                                        <a class="chip gray" href="/work-logs/delete?id=<?= (int) $item['id'] ?>" onclick="return confirm('Obrisati zapis?')">Briši</a>
-                                    </div>
+                        <section class="panel work-card">
+                            <div class="work-card-head">
+                                <div class="work-card-meta">
+                                    <span class="chip" style="background:#eaf1ff;color:#1f4ed8"><?= htmlspecialchars((string) $group['client_name'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    <span class="muted">🕒 <?= $totalMinutes ?> min (<?= $totalHours ?> h)</span>
+                                    <span class="chip gray"><?= $taskCount ?> zadataka</span>
                                 </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </section>
+                                <div class="work-card-actions">
+                                    <a class="work-icon-link" title="Dodaj zadatak" href="/work-logs/create?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>">+</a>
+                                    <a class="work-icon-link" title="Uredi dan" href="/work-logs/create?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>">✎</a>
+                                    <a class="work-icon-link danger" title="Obriši dan" href="/work-logs/delete-day?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>" onclick="return confirm('Obrisati sve radove za ovaj dan i klijenta?')">🗑</a>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:10px">
+                                <?php foreach ($group['items'] as $index => $item): ?>
+                                    <div class="work-task">
+                                        <div class="work-task-number"><?= (int) $index + 1 ?>.</div>
+                                        <div class="work-task-desc">
+                                            <?= htmlspecialchars((string) ($item['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?>
+                                            <?php if ((int) ($item['billed'] ?? 0) === 1): ?>
+                                                <span class="chip green" style="margin-left:8px">Naplaćeno</span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="work-task-duration"><?= (int) ($item['duration_minutes'] ?? 0) ?> min</div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </section>
+                    </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </section>
         <?php
         return (string) ob_get_clean();
-    }
-
-    private function groupPaid(array $items): bool
-    {
-        foreach ($items as $item) {
-            if ((int) ($item['billed'] ?? 0) === 1) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private function parseDateInput(string $value): string

@@ -50,6 +50,7 @@ $router->get('/work-logs', [App\Http\Controllers\WorkLogController::class, 'inde
 $router->get('/work-logs/create', [App\Http\Controllers\WorkLogController::class, 'create']);
 $router->get('/work-logs/edit', [App\Http\Controllers\WorkLogController::class, 'edit']);
 $router->get('/work-logs/delete', [App\Http\Controllers\WorkLogController::class, 'delete']);
+$router->get('/work-logs/delete-day', [App\Http\Controllers\WorkLogController::class, 'deleteDay']);
 $router->post('/work-logs', [App\Http\Controllers\WorkLogController::class, 'store']);
 $router->post('/work-logs/update', [App\Http\Controllers\WorkLogController::class, 'update']);
 

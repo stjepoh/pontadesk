@@ -111,55 +111,65 @@ final class WorkLogController extends AdminController
             $groups[$key]['total_minutes'] = ($groups[$key]['total_minutes'] ?? 0) + (int) ($row['duration_minutes'] ?? 0);
         }
 
+        uasort($groups, static function (array $a, array $b): int {
+            return strcmp((string) ($b['date'] ?? ''), (string) ($a['date'] ?? ''));
+        });
+
         ob_start();
         ?>
-        <section class="panel">
-            <table>
-                <thead>
-                <tr>
-                    <th>Klijent</th>
-                    <th>Datum</th>
-                    <th>Ukupno</th>
-                    <th>Zadaci</th>
-                    <th>Naplaćeno</th>
-                    <th>Akcije</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php if ($groups === []): ?>
-                    <tr><td colspan="6" class="muted">Nema radnih sati.</td></tr>
-                <?php else: ?>
-                    <?php foreach ($groups as $group): ?>
-                        <tr>
-                            <td><strong><?= htmlspecialchars((string) $group['client_name'], ENT_QUOTES, 'UTF-8') ?></strong></td>
-                            <td><?= htmlspecialchars($this->formatDate((string) $group['date']), ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= (int) ($group['total_minutes'] ?? 0) ?> min</td>
-                            <td><?= count($group['items'] ?? []) ?></td>
-                            <td><span class="chip <?= $this->groupPaid($group['items'] ?? []) ? 'green' : 'gray' ?>"><?= $this->groupPaid($group['items'] ?? []) ? 'Da' : 'Ne' ?></span></td>
-                            <td><div class="actions"><a class="chip" href="/work-logs/create?client_id=<?= urlencode((string) ($group['items'][0]['client_id'] ?? '')) ?>&work_date=<?= urlencode((string) $group['date']) ?>">Dodaj zadatak</a></div></td>
-                        </tr>
-                        <tr>
-                            <td colspan="6" style="padding-top:0">
-                                <div class="mini-list" style="margin:0 0 12px 0">
-                                    <?php foreach ($group['items'] as $item): ?>
-                                        <div class="mini-item">
-                                            <div>
-                                                <strong><?= htmlspecialchars((string) ($item['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></strong>
-                                                <div class="muted"><?= (int) ($item['duration_minutes'] ?? 0) ?> min</div>
-                                            </div>
-                                            <div class="actions">
-                                                <a class="chip gray" href="/work-logs/edit?id=<?= (int) $item['id'] ?>">Uredi</a>
-                                                <a class="chip gray" href="/work-logs/delete?id=<?= (int) $item['id'] ?>" onclick="return confirm('Obrisati zapis?')">Briši</a>
-                                            </div>
+        <section class="content">
+            <?php if ($groups === []): ?>
+                <div class="panel pad">
+                    <div class="muted">Nema radnih sati.</div>
+                </div>
+            <?php else: ?>
+                <?php foreach ($groups as $group): ?>
+                    <?php
+                    $dateValue = (string) ($group['date'] ?? '');
+                    $dateLabel = $this->formatDate($dateValue);
+                    $weekdayLabel = $this->weekdayLabel($dateValue);
+                    $totalMinutes = (int) ($group['total_minutes'] ?? 0);
+                    $totalHours = number_format($totalMinutes / 60, 1, ',', '.');
+                    $clientId = (string) ($group['items'][0]['client_id'] ?? '');
+                    ?>
+                    <div class="section-title" style="margin-top:22px">
+                        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                            <span style="font-size:18px">📅</span>
+                            <h2 style="margin:0"><?= htmlspecialchars($weekdayLabel, ENT_QUOTES, 'UTF-8') ?>, <?= htmlspecialchars($dateLabel, ENT_QUOTES, 'UTF-8') ?></h2>
+                        </div>
+                    </div>
+                    <section class="panel pad" style="margin-bottom:18px">
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap">
+                            <div>
+                                <span class="chip" style="background:#eaf1ff;color:#1f4ed8"><?= htmlspecialchars((string) $group['client_name'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="muted" style="margin-left:10px">🕒 <?= $totalMinutes ?> min (<?= $totalHours ?> h)</span>
+                            </div>
+                            <div class="actions">
+                                <a class="chip" href="/work-logs/create?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>">+ Dodaj zadatak</a>
+                                <a class="chip gray" href="/work-logs/create?client_id=<?= urlencode($clientId) ?>&work_date=<?= urlencode($dateValue) ?>">Uredi dan</a>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:16px">
+                            <?php foreach ($group['items'] as $index => $item): ?>
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:12px 0;border-top:1px solid #eef2f7">
+                                    <div style="display:flex;gap:10px;align-items:flex-start;flex:1;min-width:0">
+                                        <div style="color:#8a98b0;font-weight:700;min-width:24px"><?= (int) $index + 1 ?>.</div>
+                                        <div style="min-width:0;flex:1">
+                                            <div style="font-weight:600;color:#14213d;line-height:1.5"><?= htmlspecialchars((string) ($item['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></div>
                                         </div>
-                                    <?php endforeach; ?>
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+                                        <span class="muted"><?= (int) ($item['duration_minutes'] ?? 0) ?> min</span>
+                                        <a class="chip gray" href="/work-logs/edit?id=<?= (int) $item['id'] ?>">Uredi</a>
+                                        <a class="chip gray" href="/work-logs/delete?id=<?= (int) $item['id'] ?>" onclick="return confirm('Obrisati zapis?')">Briši</a>
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-                </tbody>
-            </table>
+                            <?php endforeach; ?>
+                        </div>
+                    </section>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </section>
         <?php
         return (string) ob_get_clean();
@@ -173,6 +183,24 @@ final class WorkLogController extends AdminController
             }
         }
         return false;
+    }
+
+    private function weekdayLabel(string $value): string
+    {
+        $timestamp = strtotime($value);
+        if ($timestamp === false) {
+            return '';
+        }
+
+        return [
+            1 => 'ponedjeljak',
+            2 => 'utorak',
+            3 => 'srijeda',
+            4 => 'četvrtak',
+            5 => 'petak',
+            6 => 'subota',
+            7 => 'nedjelja',
+        ][(int) date('N', $timestamp)] ?? '';
     }
 
     private function formContent(array $clients, int $selectedClientId, string $selectedDate, ?array $row): string

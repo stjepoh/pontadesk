@@ -1,7 +1,25 @@
 <?php
 declare(strict_types=1);
 
-require __DIR__ . '/../src/bootstrap.php';
+function pontadesk_bootstrap_path(): string
+{
+    $candidates = [
+        __DIR__ . '/../src/bootstrap.php',
+        __DIR__ . '/../../repositories/pontadesk/src/bootstrap.php',
+        '/home/hladilo/repositories/pontadesk/src/bootstrap.php',
+        '/home/' . (getenv('USER') ?: 'hladilo') . '/repositories/pontadesk/src/bootstrap.php',
+    ];
+
+    foreach ($candidates as $candidate) {
+        if (is_file($candidate)) {
+            return $candidate;
+        }
+    }
+
+    throw new RuntimeException('PontaDesk bootstrap nije pronađen.');
+}
+
+require pontadesk_bootstrap_path();
 
 $router = new App\Routing\Router();
 

@@ -66,10 +66,12 @@ final class Page
             .mini-list{display:grid;gap:10px}
             .mini-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border:1px solid #edf1f6;border-radius:14px;background:#fcfdff}
             .date-field{position:relative;display:flex;align-items:center;gap:8px}
-            .date-field .date-display{padding-right:42px}
+            .date-field .date-display{padding-right:48px;background:linear-gradient(180deg,#fff 0,#fbfcff 100%);font-weight:600;letter-spacing:.02em}
             .date-field .date-native{position:absolute;inset:0;opacity:0;cursor:pointer}
-            .date-field .date-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:#eef4ff;color:#3761db;width:30px;height:30px;border-radius:10px;cursor:pointer}
+            .date-field .date-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:#eef4ff;color:#3761db;width:32px;height:32px;border-radius:10px;cursor:pointer;box-shadow:0 1px 2px rgba(16,35,63,.06)}
             .date-field .date-toggle:hover{background:#dfe9ff}
+            .date-field:hover .date-display,.date-field:focus-within .date-display{border-color:#9cb7ff;box-shadow:0 0 0 4px rgba(63,109,246,.10)}
+            .date-help{font-size:12px;color:var(--muted);margin-top:6px}
             @media (max-width: 1080px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr}.hero{flex-direction:column;align-items:flex-start}}
             @media (max-width: 760px){.nav{display:none}.page{padding:18px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero h1{font-size:34px}.topbar{padding:0 16px}}
         </style></head><body>';

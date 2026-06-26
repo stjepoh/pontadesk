@@ -20,7 +20,7 @@ final class WorkLogController extends AdminController
         $this->requireAdmin();
         $clients = (new ClientRepository())->all();
         $selectedClientId = (int) ($_GET['client_id'] ?? 0);
-        $selectedDate = (string) ($_GET['work_date'] ?? date('Y-m-d'));
+        $selectedDate = $this->parseDateInput((string) ($_GET['work_date'] ?? date('Y-m-d')));
         $this->renderPage('Novi rad', 'Dodavanje više zadataka za isti klijent i datum.', $this->formContent($clients, $selectedClientId, $selectedDate, null), 'work');
     }
 
@@ -36,14 +36,14 @@ final class WorkLogController extends AdminController
         }
 
         $clients = (new ClientRepository())->all();
-        $this->renderPage('Uredi rad', 'Ažuriranje postojećeg zapisa.', $this->formContent($clients, (int) ($row['client_id'] ?? 0), (string) ($row['work_date'] ?? ''), $row), 'work');
+        $this->renderPage('Uredi rad', 'Ažuriranje postojećeg zapisa.', $this->formContent($clients, (int) ($row['client_id'] ?? 0), $this->formatDate((string) ($row['work_date'] ?? '')), $row), 'work');
     }
 
     public function store(): void
     {
         $this->requireAdmin();
         $clientId = (int) ($_POST['client_id'] ?? 0);
-        $workDate = (string) ($_POST['work_date'] ?? '');
+        $workDate = $this->parseDateInput((string) ($_POST['work_date'] ?? ''));
         $billed = isset($_POST['billed']) ? 1 : 0;
         $durations = $_POST['duration_minutes'] ?? [];
         $descriptions = $_POST['description'] ?? [];
@@ -79,7 +79,7 @@ final class WorkLogController extends AdminController
         $id = (int) ($_GET['id'] ?? 0);
         (new WorkLogRepository())->update($id, [
             'client_id' => (int) ($_POST['client_id'] ?? 0),
-            'work_date' => (string) ($_POST['work_date'] ?? ''),
+            'work_date' => $this->parseDateInput((string) ($_POST['work_date'] ?? '')),
             'duration_minutes' => (int) ($_POST['duration_minutes'] ?? 0),
             'description' => (string) ($_POST['description'] ?? ''),
             'billed' => isset($_POST['billed']) ? 1 : 0,
@@ -185,6 +185,24 @@ final class WorkLogController extends AdminController
         return false;
     }
 
+    private function parseDateInput(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        foreach (['d/m/Y', 'Y-m-d'] as $format) {
+            $date = \DateTimeImmutable::createFromFormat($format, $value);
+            if ($date instanceof \DateTimeImmutable) {
+                return $date->format('Y-m-d');
+            }
+        }
+
+        $timestamp = strtotime($value);
+        return $timestamp !== false ? date('Y-m-d', $timestamp) : $value;
+    }
+
     private function weekdayLabel(string $value): string
     {
         $timestamp = strtotime($value);
@@ -228,7 +246,7 @@ final class WorkLogController extends AdminController
                     </div>
                     <div>
                         <label>Datum *</label>
-                        <input class="input" type="date" name="work_date" required value="<?= htmlspecialchars($selectedDate, ENT_QUOTES, 'UTF-8') ?>">
+                        <input class="input" type="text" name="work_date" inputmode="numeric" placeholder="dd/mm/yyyy" required value="<?= htmlspecialchars($selectedDate, ENT_QUOTES, 'UTF-8') ?>">
                     </div>
                 </div>
 

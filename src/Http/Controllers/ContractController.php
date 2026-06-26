@@ -65,8 +65,8 @@ final class ContractController extends AdminController
             'client_id' => (int) ($input['client_id'] ?? 0),
             'contract_name' => (string) ($input['contract_name'] ?? ''),
             'contract_number' => $this->n($input['contract_number'] ?? null),
-            'start_date' => (string) ($input['start_date'] ?? ''),
-            'end_date' => (string) ($input['end_date'] ?? ''),
+            'start_date' => $this->parseDateInput((string) ($input['start_date'] ?? '')),
+            'end_date' => $this->parseDateInput((string) ($input['end_date'] ?? '')),
             'status' => (string) ($input['status'] ?? 'active'),
             'contract_file_url' => $this->n($input['contract_file_url'] ?? null),
             'contract_file_name' => $this->n($input['contract_file_name'] ?? null),
@@ -83,6 +83,24 @@ final class ContractController extends AdminController
     {
         $value = is_string($value) ? trim($value) : '';
         return $value === '' ? null : $value;
+    }
+
+    private function parseDateInput(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        foreach (['d/m/Y', 'Y-m-d'] as $format) {
+            $date = \DateTimeImmutable::createFromFormat($format, $value);
+            if ($date instanceof \DateTimeImmutable) {
+                return $date->format('Y-m-d');
+            }
+        }
+
+        $timestamp = strtotime($value);
+        return $timestamp !== false ? date('Y-m-d', $timestamp) : $value;
     }
 
     private function redirect(string $path): never
@@ -152,8 +170,8 @@ final class ContractController extends AdminController
                     <div><label>Naziv ugovora</label><input class="input" name="contract_name" required value="<?= $value('contract_name') ?>"></div>
                     <div><label>Broj ugovora</label><input class="input" name="contract_number" value="<?= $value('contract_number') ?>"></div>
                     <div><label>Status</label><select class="input" name="status"><?php foreach (['active','expired','terminated'] as $option): ?><option value="<?= $option ?>" <?= $selected($row, 'status', $option, 'active') ?>><?= $option ?></option><?php endforeach; ?></select></div>
-                    <div><label>Početak</label><input class="input" name="start_date" type="date" required value="<?= $value('start_date') ?>"></div>
-                    <div><label>Kraj</label><input class="input" name="end_date" type="date" required value="<?= $value('end_date') ?>"></div>
+                    <div><label>Početak</label><input class="input" name="start_date" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" required value="<?= htmlspecialchars($this->formatDate((string) ($row['start_date'] ?? '')), ENT_QUOTES, 'UTF-8') ?>"></div>
+                    <div><label>Kraj</label><input class="input" name="end_date" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" required value="<?= htmlspecialchars($this->formatDate((string) ($row['end_date'] ?? '')), ENT_QUOTES, 'UTF-8') ?>"></div>
                     <div><label>Vrijednost</label><input class="input" name="value" inputmode="decimal" value="<?= $value('value') ?>"></div>
                     <div><label>Podsjetnik dana prije isteka</label><input class="input" name="reminder_days" type="number" value="<?= htmlspecialchars((string) ($row['reminder_days'] ?? 14), ENT_QUOTES, 'UTF-8') ?>"></div>
                     <div><label>Period održavanja</label><select class="input" name="maintenance_billing_period"><?php foreach (['none','monthly','quarterly','annual'] as $option): ?><option value="<?= $option ?>" <?= $selected($row, 'maintenance_billing_period', $option, 'none') ?>><?= $option ?></option><?php endforeach; ?></select></div>

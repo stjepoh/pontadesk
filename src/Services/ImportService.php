@@ -125,6 +125,23 @@ final class ImportService
         foreach (['users', 'clients', 'contracts', 'work_logs', 'projects', 'project_tasks', 'client_notes', 'client_tasks'] as $table) {
             $pdo->exec("ALTER TABLE {$table} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
         }
+
+        $pdo->exec(
+            'CREATE TABLE IF NOT EXISTS notification_settings (
+                id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                user_id VARCHAR(191) NOT NULL,
+                project_deadline_warnings TINYINT(1) NOT NULL DEFAULT 0,
+                project_status_changes TINYINT(1) NOT NULL DEFAULT 0,
+                task_assignments TINYINT(1) NOT NULL DEFAULT 0,
+                task_status_changes TINYINT(1) NOT NULL DEFAULT 0,
+                client_interactions TINYINT(1) NOT NULL DEFAULT 0,
+                calendar_reminders TINYINT(1) NOT NULL DEFAULT 0,
+                email_notifications TINYINT(1) NOT NULL DEFAULT 0,
+                in_app_notifications TINYINT(1) NOT NULL DEFAULT 0,
+                created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+        );
     }
 
     private function insertClient(PDO $pdo, array $client): int

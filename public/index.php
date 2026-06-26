@@ -54,6 +54,7 @@ $router->post('/work-logs', [App\Http\Controllers\WorkLogController::class, 'sto
 $router->post('/work-logs/update', [App\Http\Controllers\WorkLogController::class, 'update']);
 
 $router->get('/reports', [App\Http\Controllers\PlaceholderController::class, 'reports']);
+$router->get('/reports/pdf', [App\Http\Controllers\PlaceholderController::class, 'reportsPdf']);
 $router->get('/tasks', [App\Http\Controllers\PlaceholderController::class, 'tasks']);
 $router->get('/notes', [App\Http\Controllers\PlaceholderController::class, 'notes']);
 $router->get('/notifications', [App\Http\Controllers\PlaceholderController::class, 'notifications']);

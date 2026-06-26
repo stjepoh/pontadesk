@@ -24,6 +24,8 @@ final class Page
             .brand-badge{width:36px;height:36px;border-radius:12px;background:linear-gradient(180deg,var(--blue2),var(--blue));display:grid;place-items:center}
             .nav{display:flex;align-items:center;gap:10px;margin:0 auto;padding:0 24px;overflow:auto}
             .nav a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;color:rgba(255,255,255,.84);font-weight:600;white-space:nowrap}
+            .nav-ico{display:inline-grid;place-items:center;width:18px;font-size:16px;line-height:1;opacity:.95}
+            .nav-label{display:inline}
             .nav a.active{background:linear-gradient(180deg,#4d79ff 0,#3566f1 100%);color:#fff;box-shadow:0 8px 18px rgba(65,106,238,.3)}
             .nav a:hover{background:rgba(255,255,255,.06);color:#fff}
             .top-actions{display:flex;align-items:center;gap:12px}
@@ -73,7 +75,7 @@ final class Page
             .date-field:hover .date-display,.date-field:focus-within .date-display{border-color:#9cb7ff;box-shadow:0 0 0 4px rgba(63,109,246,.10)}
             .date-help{font-size:12px;color:var(--muted);margin-top:6px}
             @media (max-width: 1080px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr}.hero{flex-direction:column;align-items:flex-start}}
-            @media (max-width: 760px){.nav{display:none}.page{padding:16px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero h1{font-size:30px}.topbar{padding:0 16px}}
+            @media (max-width: 760px){.page{padding:16px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero h1{font-size:30px}.topbar{padding:0 16px}.nav{gap:6px;padding:0 10px}.nav a{padding:10px 10px}.nav-label{display:none}.nav-ico{width:auto;font-size:18px}}
         </style></head><body>';
 
         echo '<header class="topbar">';
@@ -81,7 +83,10 @@ final class Page
         echo '<nav class="nav">';
         foreach ($navItems as $item) {
             $active = !empty($item['active']) ? ' active' : '';
-            echo '<a class="' . $active . '" href="' . htmlspecialchars($item['href'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') . '</a>';
+            echo '<a class="' . $active . '" href="' . htmlspecialchars($item['href'], ENT_QUOTES, 'UTF-8') . '">'
+                . '<span class="nav-ico" aria-hidden="true">' . htmlspecialchars((string) ($item['icon'] ?? ''), ENT_QUOTES, 'UTF-8') . '</span>'
+                . '<span class="nav-label">' . htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') . '</span>'
+                . '</a>';
         }
         echo '</nav>';
         echo '<div class="top-actions"><a class="icon-btn" href="/logout" title="Odjava">↗</a></div>';

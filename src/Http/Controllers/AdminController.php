@@ -24,19 +24,19 @@ abstract class AdminController
     }
 
     /**
-     * @return array<int, array{label:string, href:string, active?:bool}>
+     * @return array<int, array{label:string, href:string, icon:string, active?:bool}>
      */
     protected function nav(string $active): array
     {
         $items = [
-            ['label' => 'Početna', 'href' => '/', 'key' => 'home'],
-            ['label' => 'Klijenti', 'href' => '/clients', 'key' => 'clients'],
-            ['label' => 'Ugovori', 'href' => '/contracts', 'key' => 'contracts'],
-            ['label' => 'Radovi', 'href' => '/work-logs', 'key' => 'work'],
-            ['label' => 'Izvještaji', 'href' => '/reports', 'key' => 'reports'],
-            ['label' => 'To-Do', 'href' => '/tasks', 'key' => 'tasks'],
-            ['label' => 'Specifič.', 'href' => '/notes', 'key' => 'notes'],
-            ['label' => 'Notif.', 'href' => '/notifications', 'key' => 'notifications'],
+            ['label' => 'Početna', 'href' => '/', 'key' => 'home', 'icon' => '⌂'],
+            ['label' => 'Klijenti', 'href' => '/clients', 'key' => 'clients', 'icon' => '👥'],
+            ['label' => 'Ugovori', 'href' => '/contracts', 'key' => 'contracts', 'icon' => '📄'],
+            ['label' => 'Radovi', 'href' => '/work-logs', 'key' => 'work', 'icon' => '🕒'],
+            ['label' => 'Izvještaji', 'href' => '/reports', 'key' => 'reports', 'icon' => '📊'],
+            ['label' => 'To-Do', 'href' => '/tasks', 'key' => 'tasks', 'icon' => '☑'],
+            ['label' => 'Specifič.', 'href' => '/notes', 'key' => 'notes', 'icon' => '⚙'],
+            ['label' => 'Notif.', 'href' => '/notifications', 'key' => 'notifications', 'icon' => '🔔'],
         ];
 
         return array_map(static function (array $item) use ($active): array {

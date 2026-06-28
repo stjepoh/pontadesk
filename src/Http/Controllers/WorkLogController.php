@@ -34,6 +34,9 @@ final class WorkLogController extends AdminController
 
         $clients = (new ClientRepository())->all();
         $selectedClientId = (int) ($_GET['client_id'] ?? 0);
+        if ($selectedClientId <= 0) {
+            $selectedClientId = $this->preferredClientId($clients);
+        }
         $selectedDate = $this->parseDateInput((string) ($_GET['work_date'] ?? date('Y-m-d')));
         $existingRows = $this->existingRowsForDay((new WorkLogRepository())->all(), $selectedClientId, $selectedDate);
 
@@ -179,6 +182,8 @@ final class WorkLogController extends AdminController
             .work-page{max-width:820px}
             .work-filters{display:flex;gap:12px;align-items:end;margin-bottom:22px;flex-wrap:wrap}
             .work-filters select{width:220px}
+            .work-filter-toggle{height:40px;display:inline-flex;align-items:center;gap:8px;border:1px solid #d8e0ec;border-radius:9px;padding:0 16px;background:#fff;color:#14213d;font-weight:800;box-shadow:0 2px 8px rgba(15,23,42,.04);cursor:pointer}
+            .work-filter-toggle input{width:16px;height:16px;accent-color:#3f6df6}
             .work-day{margin-top:18px}
             .work-day-title{display:flex;align-items:center;gap:8px;margin:0 0 10px;color:#162946;font-weight:800;font-size:15px}
             .work-day-title .cal{color:#3f6df6;font-size:15px}
@@ -194,10 +199,10 @@ final class WorkLogController extends AdminController
             .work-task-number{color:#8795ad;font-weight:700}
             .work-task-desc{line-height:1.45;color:#14213d}
             .work-task-duration{color:#8a98b0;font-weight:700;text-align:right;white-space:nowrap}
-            @media (max-width:760px){.work-page{max-width:none}.work-filters select,.work-filters .btn{width:100%}.work-task{grid-template-columns:24px 1fr}.work-task-duration{grid-column:2;text-align:left}}
+            @media (max-width:760px){.work-page{max-width:none}.work-filters select,.work-filters .btn,.work-filter-toggle{width:100%}.work-task{grid-template-columns:24px 1fr}.work-task-duration{grid-column:2;text-align:left}}
         </style>
 
-        <form method="get" action="/work-logs" class="work-filters">
+        <form method="get" action="/work-logs" class="work-filters" data-auto-filter>
             <div>
                 <label>Svi klijenti</label>
                 <select class="input" name="client_id">
@@ -209,11 +214,31 @@ final class WorkLogController extends AdminController
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button class="btn secondary" type="submit" name="billed" value="1">Prikaži naplaćene</button>
+            <label class="work-filter-toggle">
+                <input type="checkbox" name="billed" value="1" <?= $showBilled ? 'checked' : '' ?>>
+                Prikaži naplaćene
+            </label>
             <?php if ($selectedClientId > 0 || $showBilled): ?>
                 <a class="btn secondary" href="/work-logs">Poništi</a>
             <?php endif; ?>
         </form>
+
+        <script>
+        (function () {
+            const form = document.querySelector('[data-auto-filter]');
+            if (!form) return;
+
+            form.querySelectorAll('select, input[type="checkbox"]').forEach((field) => {
+                field.addEventListener('change', function () {
+                    if (form.requestSubmit) {
+                        form.requestSubmit();
+                    } else {
+                        form.submit();
+                    }
+                });
+            });
+        })();
+        </script>
 
         <section>
             <?php if ($groups === []): ?>
@@ -285,6 +310,17 @@ final class WorkLogController extends AdminController
 
         usort($matches, static fn(array $a, array $b): int => (int) ($a['id'] ?? 0) <=> (int) ($b['id'] ?? 0));
         return $matches;
+    }
+
+    private function preferredClientId(array $clients): int
+    {
+        foreach ($clients as $client) {
+            if (strcasecmp(trim((string) ($client['name'] ?? '')), 'Royal Hotels & Resort') === 0) {
+                return (int) ($client['id'] ?? 0);
+            }
+        }
+
+        return (int) ($clients[0]['id'] ?? 0);
     }
 
     private function parseDateInput(string $value): string
@@ -430,9 +466,20 @@ final class WorkLogController extends AdminController
 
             <script>
             (function () {
+                const form = document.getElementById('work-form');
                 const list = document.getElementById('task-list');
                 const template = document.getElementById('task-template');
                 const addBtn = document.getElementById('add-task-btn');
+                const clientSelect = form ? form.querySelector('select[name="client_id"]') : null;
+                const dateInput = form ? form.querySelector('input[name="work_date"]') : null;
+
+                function refreshForSelection() {
+                    if (!clientSelect || !dateInput) return;
+                    const params = new URLSearchParams();
+                    params.set('client_id', clientSelect.value);
+                    params.set('work_date', dateInput.value);
+                    window.location.href = '/work-logs/create?' + params.toString();
+                }
 
                 function updateTitles() {
                     list.querySelectorAll('.task-card').forEach((card, index) => {
@@ -460,6 +507,12 @@ final class WorkLogController extends AdminController
                 }
 
                 addBtn.addEventListener('click', addTask);
+                if (clientSelect) {
+                    clientSelect.addEventListener('change', refreshForSelection);
+                }
+                if (dateInput) {
+                    dateInput.addEventListener('change', refreshForSelection);
+                }
                 addTask();
             })();
             </script>

@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Repositories\ClientRepository;
 use App\Repositories\WorkLogRepository;
 
+require_once __DIR__ . '/../../Support/Pdf/tcpdf.php';
+
 final class PlaceholderController extends AdminController
 {
     public function reports(): void
@@ -480,77 +482,95 @@ HTML;
     {
         $totals = $data['totals'];
         $rows = $data['rows'];
-        $pages = [];
-        $content = '';
-        $pageNumber = 1;
-        $y = $this->pdfStartPage($content, $title, $totals, $pageNumber, $client, $periodLabel, true);
-        $lastDate = null;
-        $rowIndexForDate = [];
 
-        foreach ($rows as $row) {
-            $date = (string) ($row['work_date'] ?? '');
-            $description = trim((string) ($row['description'] ?? ''));
-            $descriptionLines = $this->wrapPdfText($description, 68);
-            $rowHeight = max(18, 10 + (count($descriptionLines) * 8));
+        $clientName = htmlspecialchars((string) ($client['name'] ?? 'Svi klijenti'), ENT_QUOTES, 'UTF-8');
+        $clientAddress = htmlspecialchars(trim((string) ($client['address'] ?? '')), ENT_QUOTES, 'UTF-8');
+        $clientCity = htmlspecialchars(trim(implode(' ', array_filter([
+            (string) ($client['postal_code'] ?? ''),
+            (string) ($client['city'] ?? ''),
+        ]))), ENT_QUOTES, 'UTF-8');
+        $clientVat = htmlspecialchars(trim((string) ($client['vat_id'] ?? '')), ENT_QUOTES, 'UTF-8');
+        $period = htmlspecialchars($periodLabel, ENT_QUOTES, 'UTF-8');
+        $logoPath = htmlspecialchars($this->absoluteAssetPath('public/assets/img/ponta-logo.jpg'), ENT_QUOTES, 'UTF-8');
+        $generatedAt = htmlspecialchars(date('d/m/Y H:i'), ENT_QUOTES, 'UTF-8');
 
-            if ($y - $rowHeight < 84) {
-                $this->pdfFooter($content, $pageNumber);
-                $pages[] = $content;
-                $content = '';
-                $pageNumber++;
-                $y = $this->pdfStartPage($content, $title, $totals, $pageNumber, $client, $periodLabel, false);
-                $lastDate = null;
-            }
-
-            $dateText = '';
-            if ($date !== $lastDate) {
-                $dateText = $this->formatDate($date);
-                $lastDate = $date;
-                $rowIndexForDate[$date] = 0;
-            }
-            $rowIndexForDate[$date] = ($rowIndexForDate[$date] ?? 0) + 1;
-
-            $fill = (($rowIndexForDate[$date] ?? 1) % 2 === 0) ? '0.98 0.99 1' : '1 1 1';
-            $this->pdfRect($content, 42, $y - $rowHeight + 5, 511, $rowHeight, $fill);
-            $this->pdfLine($content, 42, $y + 5, 553, $y + 5, '0.87 0.90 0.94');
-            $this->pdfTextAt($content, 46, $y - 7, 9, $dateText, true, '0.05 0.05 0.05');
-
-            $lineY = $y - 7;
-            foreach ($descriptionLines as $line) {
-                $this->pdfTextAt($content, 112, $lineY, 8, $line, false, '0 0 0');
-                $lineY -= 9;
-            }
-
-            $hours = number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, '.', '');
-            $amount = number_format((float) ($row['amount'] ?? 0), 2, '.', '');
-
-            $this->pdfTextAt($content, 430, $y - 7, 9, $hours, false, '0 0 0');
-            $this->pdfTextAt($content, 492, $y - 7, 9, $amount, false, '0 0 0');
-            $y -= $rowHeight;
-        }
-
+        $rowsHtml = '';
         if ($rows === []) {
-            $this->pdfTextAt($content, 48, $y - 10, 9, 'Nema radova za odabrane kriterije.', false, '0.42 0.42 0.42');
-            $y -= 26;
+            $rowsHtml = '<tr><td colspan="4" class="empty">Nema radova za odabrane kriterije.</td></tr>';
+        } else {
+            $lastDate = null;
+            foreach ($rows as $row) {
+                $date = (string) ($row['work_date'] ?? '');
+                if ($date !== $lastDate) {
+                    $lastDate = $date;
+                    $rowsHtml .= '<tr class="group"><td colspan="4">' . htmlspecialchars($this->formatDate($date), ENT_QUOTES, 'UTF-8') . '</td></tr>';
+                }
+
+                $rowsHtml .= '<tr>'
+                    . '<td class="date">' . htmlspecialchars($this->formatDate($date), ENT_QUOTES, 'UTF-8') . '</td>'
+                    . '<td class="desc">' . nl2br(htmlspecialchars((string) ($row['description'] ?? ''), ENT_QUOTES, 'UTF-8')) . '</td>'
+                    . '<td class="num">' . htmlspecialchars(number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') . '</td>'
+                    . '<td class="num">' . htmlspecialchars(number_format((float) ($row['amount'] ?? 0), 2, ',', '.'), ENT_QUOTES, 'UTF-8') . '</td>'
+                    . '</tr>';
+            }
         }
 
-        if ($y < 92) {
-            $this->pdfFooter($content, $pageNumber);
-            $pages[] = $content;
-            $content = '';
-            $pageNumber++;
-            $y = $this->pdfStartPage($content, $title, $totals, $pageNumber, $client, $periodLabel, false);
-        }
+        $html = '<!doctype html><html><head><meta charset="utf-8"><style>'
+            . 'body{font-family:dejavusans;font-size:10pt;color:#111;}'
+            . '.top{display:flex;justify-content:space-between;align-items:flex-start;margin:0 0 18px 0;}'
+            . '.logo{width:145px;height:auto;}'
+            . '.company{text-align:right;font-size:9pt;line-height:1.45;}'
+            . '.banner{background:#4f80ea;color:#fff;text-align:center;padding:14px 18px 12px;margin:14px 0 26px;}'
+            . '.banner h1{margin:0;font-size:19pt;letter-spacing:.2px;}'
+            . '.banner .period{margin-top:3px;font-size:11pt;}'
+            . '.client{display:grid;grid-template-columns:150px 1fr;gap:12px;margin:0 0 18px 0;font-size:10.5pt;}'
+            . '.client .label{font-weight:700;}'
+            . '.client .value{line-height:1.42;}'
+            . '.rate{display:grid;grid-template-columns:150px 1fr;gap:12px;margin:0 0 20px 0;font-size:10.5pt;}'
+            . '.rate .label{font-weight:400;}'
+            . '.rate .value{font-weight:700;}'
+            . '.summary{margin-top:18px;background:#f1f6fd;border-top:1px solid #d7e2f1;font-weight:700;}'
+            . 'table{width:100%;border-collapse:collapse;}'
+            . 'thead{display:table-header-group;}'
+            . 'th,td{padding:7px 8px;border-bottom:1px solid #dfe7f2;vertical-align:top;}'
+            . 'th{background:#f6f9fe;text-align:left;font-size:9.5pt;}'
+            . '.date{width:95px;font-weight:700;}'
+            . '.num{width:75px;text-align:right;white-space:nowrap;}'
+            . '.group td{background:#fbfdff;font-weight:700;color:#17304f;border-bottom:0;padding-top:12px;padding-bottom:5px;}'
+            . '.empty{padding:18px;color:#6c7a90;}'
+            . '.footer{margin-top:18px;font-size:8.5pt;color:#666;text-align:right;}'
+            . '</style></head><body>'
+            . '<div class="top">'
+            . '<img class="logo" src="' . $logoPath . '" alt="Ponta logo">'
+            . '<div class="company">PONTA, Obrt za internetske portale, vl. Stjepo Hladilo<br>Nova Mokošica, Vinogradska 7<br>OIB: 77663681014</div>'
+            . '</div>'
+            . '<div class="banner"><h1>IZVJEŠTAJ O RADOVIMA</h1><div class="period">' . $period . '</div></div>'
+            . '<div class="client"><div class="label">Klijent:</div><div class="value"><strong>' . $clientName . '</strong><br>' . ($clientAddress !== '' ? $clientAddress . '<br>' : '') . ($clientCity !== '' ? $clientCity . '<br>' : '') . ($clientVat !== '' ? 'OIB: ' . $clientVat : '') . '</div></div>'
+            . '<div class="rate"><div class="label">Cijena po satu:</div><div class="value">' . htmlspecialchars(number_format((float) $totals['hourly_rate'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') . ' EUR</div></div>'
+            . '<table><thead><tr><th>Datum</th><th>Opis</th><th style="text-align:right;">Sati</th><th style="text-align:right;">Iznos (EUR)</th></tr></thead><tbody>' . $rowsHtml . '</tbody>'
+            . '<tfoot><tr class="summary"><td>UKUPNO</td><td></td><td style="text-align:right;">' . htmlspecialchars(number_format(((int) $totals['minutes']) / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') . '</td><td style="text-align:right;">' . htmlspecialchars(number_format((float) $totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') . ' EUR</td></tr></tfoot></table>'
+            . '<div class="footer">Generirano: ' . $generatedAt . '</div>'
+            . '</body></html>';
 
-        $this->pdfRect($content, 42, $y - 20, 511, 20, '0.16 0.74 0.32');
-        $this->pdfTextAt($content, 46, $y - 14, 11, 'UKUPNO', true, '1 1 1');
-        $this->pdfTextAt($content, 430, $y - 14, 11, number_format(((int) $totals['minutes']) / 60, 1, '.', ''), true, '1 1 1');
-        $this->pdfTextAt($content, 486, $y - 14, 11, number_format((float) $totals['amount'], 2, '.', '') . ' EUR', true, '1 1 1');
+        $pdf = new \TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetCreator('Ponta Desk');
+        $pdf->SetAuthor('Ponta Desk');
+        $pdf->SetTitle($title);
+        $pdf->SetMargins(18, 16, 18);
+        $pdf->SetAutoPageBreak(true, 16);
+        $pdf->setImageScale(1.25);
+        $pdf->AddPage();
+        $pdf->SetFont('dejavusans', '', 10);
+        $pdf->writeHTML($html, true, false, true, false, '');
 
-        $this->pdfFooter($content, $pageNumber);
-        $pages[] = $content;
+        return $pdf->Output($title . '.pdf', 'S');
+    }
 
-        return $this->makeSimplePdf($pages);
+    private function absoluteAssetPath(string $relativePath): string
+    {
+        return realpath(__DIR__ . '/../../../' . ltrim($relativePath, '/\\')) ?: (__DIR__ . '/../../../' . ltrim($relativePath, '/\\'));
     }
 
     private function pdfText(string $value): string

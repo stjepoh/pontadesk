@@ -64,6 +64,44 @@ final class AuthService
         return true;
     }
 
+    /**
+     * @param array<string, mixed> $profile
+     */
+    public function attemptGoogle(array $profile): bool
+    {
+        $email = strtolower(trim((string) ($profile['email'] ?? '')));
+        if ($email === '' || empty($profile['verified_email'])) {
+            return false;
+        }
+
+        $google = new GoogleAuthService();
+        $allowedEmails = $google->allowedEmails();
+        $allowedDomain = $google->allowedDomain();
+        $domainAllowed = $allowedDomain !== '' && str_ends_with($email, '@' . $allowedDomain);
+
+        if ($this->dbAvailable()) {
+            $user = (new UserRepository())->findByEmail($email);
+            if ($user) {
+                $_SESSION['user_id'] = (int) $user['id'];
+                $_SESSION['auth_user'] = $user;
+                return true;
+            }
+        }
+
+        if (!in_array($email, $allowedEmails, true) && !$domainAllowed) {
+            return false;
+        }
+
+        $_SESSION['auth_user'] = [
+            'id' => 0,
+            'email' => $email,
+            'full_name' => (string) ($profile['name'] ?? $email),
+            'role' => 'admin',
+        ];
+
+        return true;
+    }
+
     public function logout(): void
     {
         unset($_SESSION['user_id']);

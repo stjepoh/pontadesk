@@ -25,6 +25,8 @@ $router = new App\Routing\Router();
 
 $router->get('/login', [App\Http\Controllers\AuthController::class, 'login']);
 $router->post('/login', [App\Http\Controllers\AuthController::class, 'authenticate']);
+$router->get('/login/google', [App\Http\Controllers\AuthController::class, 'googleRedirect']);
+$router->get('/login/google/callback', [App\Http\Controllers\AuthController::class, 'googleCallback']);
 $router->get('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
 
 $router->get('/', [App\Http\Controllers\DashboardController::class, 'index']);

@@ -591,7 +591,7 @@ HTML;
         }
 
         if ($firstPage) {
-            $this->pdfImageAt($content, 'public/assets/img/ponta-logo.jpg', 42, 747, 125, 30);
+            $this->pdfImageAt($content, 'public/assets/img/ponta-logo.jpg', 38, 748, 129, 31);
             $this->pdfTextAt($content, 362, 805, 9, 'PONTA, Obrt za internetske portale, vl. Stjepo Hladilo', false, '0.05 0.05 0.05');
             $this->pdfTextAt($content, 426, 792, 9, 'Nova Mokošica, Vinogradarska 7', false, '0.05 0.05 0.05');
             $this->pdfTextAt($content, 451, 779, 9, 'OIB: 77663681014', false, '0.05 0.05 0.05');

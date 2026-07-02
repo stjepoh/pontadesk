@@ -70,9 +70,14 @@ final class AuthService
     public function attemptGoogle(array $profile): bool
     {
         $email = strtolower(trim((string) ($profile['email'] ?? '')));
-        if ($email === '' || empty($profile['verified_email'])) {
-            return false;
-        }
+        $emailVerified = filter_var(
+    $profile['email_verified'] ?? $profile['verified_email'] ?? false,
+    FILTER_VALIDATE_BOOLEAN
+);
+
+if ($email === '' || !$emailVerified) {
+    return false;
+}
 
         $google = new GoogleAuthService();
         $allowedEmails = $google->allowedEmails();

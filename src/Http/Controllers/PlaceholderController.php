@@ -24,7 +24,7 @@ final class PlaceholderController extends AdminController
 
         $data = $this->filterWorkLogs($workLogs, $clients, $period, $range, $clientId, $billedOnly);
         $content = $this->reportsContent($clients, $data, $period, $range, $clientId, $billedOnly);
-        $this->renderPage('IzvjeÅ¡taji', 'Generirajte detaljne izvjeÅ¡taje o radu i projektima.', $content, 'reports');
+        $this->renderPage('Izvještaji', 'Generirajte detaljne izvještaje o radu i projektima.', $content, 'reports');
     }
 
     public function reportsPdf(): void
@@ -59,19 +59,19 @@ final class PlaceholderController extends AdminController
 
     public function notes(): void
     {
-        $this->render('SpecifiÄnosti', 'notes', 'U pripremi. Ovdje dolaze biljeÅ¡ke i specifiÄnosti klijenata.');
+        $this->render('Specifičnosti', 'notes', 'U pripremi. Ovdje dolaze bilješke i specifičnosti klijenata.');
     }
 
     public function notifications(): void
     {
-        $this->render('Notif.', 'notifications', 'U pripremi. Ovdje dolaze notifikacije i korisniÄke postavke.');
+        $this->render('Notif.', 'notifications', 'U pripremi. Ovdje dolaze notifikacije i korisničke postavke.');
     }
 
     private function render(string $title, string $active, string $message): void
     {
         $this->requireAdmin();
         $content = '<section class="panel pad"><div class="muted">' . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . '</div></section>';
-        $this->renderPage($title, 'Ova sekcija joÅ¡ se razvija.', $content, $active);
+        $this->renderPage($title, 'Ova sekcija još se razvija.', $content, $active);
     }
 
     private function reportsContent(array $clients, array $data, string $period, string $range, int $clientId, bool $billedOnly): string
@@ -79,8 +79,8 @@ final class PlaceholderController extends AdminController
         $selectedClient = $clientId > 0 ? $this->clientNameById($clients, $clientId) : 'Svi klijenti';
         $periodLabel = match ($period) {
             'weekly' => 'Tjedni',
-            'yearly' => 'GodiÅ¡nji',
-            default => 'MjeseÄni',
+            'yearly' => 'Godišnji',
+            default => 'Mjesečni',
         };
         $rangeLabel = $this->rangeLabel($period, $range);
         $titleLabel = $this->reportTitle($clients, $period, $range, $clientId);
@@ -149,14 +149,14 @@ final class PlaceholderController extends AdminController
         <div class="reports-shell">
             <section class="reports-head">
                 <div>
-                    <div class="reports-kicker"><span class="dot"></span><span>IzvjeÅ¡taji</span></div>
+                    <div class="reports-kicker"><span class="dot"></span><span>Izvještaji</span></div>
                     <h2 class="reports-title"><?= htmlspecialchars($titleLabel, ENT_QUOTES, 'UTF-8') ?></h2>
-                    <div class="reports-sub">Generirajte detaljne izvjeÅ¡taje o radu i projektima</div>
+                    <div class="reports-sub">Generirajte detaljne izvještaje o radu i projektima</div>
                 </div>
-                <a class="reports-btn primary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">â†“ PDF</a>
+                <a class="reports-btn primary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">↓ PDF</a>
             </section>
 
-            <div class="reports-tabs" role="tablist" aria-label="IzvjeÅ¡taji">
+            <div class="reports-tabs" role="tablist" aria-label="Izvještaji">
                 <span class="reports-tab active">Radovi po klijentu</span>
                 <span class="reports-tab">Projekti i vrijeme</span>
             </div>
@@ -168,8 +168,8 @@ final class PlaceholderController extends AdminController
                             <label>Period</label>
                             <select class="input" name="period">
                                 <option value="weekly" <?= $period === 'weekly' ? 'selected' : '' ?>>Tjedni</option>
-                                <option value="monthly" <?= $period === 'monthly' ? 'selected' : '' ?>>MjeseÄni</option>
-                                <option value="yearly" <?= $period === 'yearly' ? 'selected' : '' ?>>GodiÅ¡nji</option>
+                                <option value="monthly" <?= $period === 'monthly' ? 'selected' : '' ?>>Mjesečni</option>
+                                <option value="yearly" <?= $period === 'yearly' ? 'selected' : '' ?>>Godišnji</option>
                             </select>
                         </div>
                         <div>
@@ -193,29 +193,29 @@ final class PlaceholderController extends AdminController
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <button class="reports-btn<?= $billedOnly ? ' active' : '' ?>" type="submit" name="billed" value="1">âœ“ NaplaÄ‡eno</button>
+                        <button class="reports-btn<?= $billedOnly ? ' active' : '' ?>" type="submit" name="billed" value="1">✓ Naplaćeno</button>
                         <a class="reports-btn" href="/reports">Sve</a>
-                        <a class="reports-btn primary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">â†“ PDF</a>
+                        <a class="reports-btn primary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">↓ PDF</a>
                     </div>
                 </form>
             </section>
 
             <section class="reports-summary">
                 <div class="panel reports-stat">
-                    <div class="icon">ðŸ“…</div>
+                    <div class="icon">📅</div>
                     <div class="meta"><div class="label">Radova</div><div class="value"><?= (int) $totals['count'] ?></div></div>
                 </div>
                 <div class="panel reports-stat">
-                    <div class="icon purple">â±</div>
+                    <div class="icon purple">⏱</div>
                     <div class="meta"><div class="label">Ukupno vrijeme</div><div class="value"><?= htmlspecialchars(number_format($totals['minutes'] / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h</div></div>
                 </div>
                 <div class="panel reports-stat">
-                    <div class="icon gold">ðŸ§®</div>
-                    <div class="meta"><div class="label">Cijena/sat</div><div class="value"><?= htmlspecialchars(number_format((float) $totals['hourly_rate'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> â‚¬</div></div>
+                    <div class="icon gold">🧮</div>
+                    <div class="meta"><div class="label">Cijena/sat</div><div class="value"><?= htmlspecialchars(number_format((float) $totals['hourly_rate'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</div></div>
                 </div>
                 <div class="panel reports-stat lead">
-                    <div class="icon green">â‚¬</div>
-                    <div class="meta"><div class="label">Ukupan iznos</div><div class="value"><?= htmlspecialchars(number_format($totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> â‚¬</div></div>
+                    <div class="icon green">€</div>
+                    <div class="meta"><div class="label">Ukupan iznos</div><div class="value"><?= htmlspecialchars(number_format($totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</div></div>
                 </div>
             </section>
 
@@ -227,7 +227,7 @@ final class PlaceholderController extends AdminController
                         <th>Opis</th>
                         <th>Sati</th>
                         <th>Iznos</th>
-                        <th>NaplaÄ‡eno</th>
+                        <th>Naplaćeno</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -252,7 +252,7 @@ final class PlaceholderController extends AdminController
                                 <tr class="reports-date-row">
                                     <td colspan="5">
                                         <?= htmlspecialchars($this->formatDate($dateKey), ENT_QUOTES, 'UTF-8') ?>
-                                        <span class="summary"> Â· <?= htmlspecialchars(number_format($dateSummaryMinutes / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h Â· <?= htmlspecialchars(number_format($dateSummaryAmount, 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> â‚¬</span>
+                                        <span class="summary"> · <?= htmlspecialchars(number_format($dateSummaryMinutes / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?> h · <?= htmlspecialchars(number_format($dateSummaryAmount, 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</span>
                                     </td>
                                 </tr>
                             <?php endif; ?>
@@ -260,7 +260,7 @@ final class PlaceholderController extends AdminController
                                 <td></td>
                                 <td><?= htmlspecialchars((string) ($row['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                 <td><?= htmlspecialchars(number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
-                                <td class="reports-amount"><?= htmlspecialchars(number_format((float) ($row['amount'] ?? 0), 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> â‚¬</td>
+                                <td class="reports-amount"><?= htmlspecialchars(number_format((float) ($row['amount'] ?? 0), 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
                                 <td><span class="chip <?= ((int) ($row['billed'] ?? 0) === 1) ? 'green' : 'gray' ?>"><?= ((int) ($row['billed'] ?? 0) === 1) ? 'Da' : 'Ne' ?></span></td>
                             </tr>
                         <?php endforeach; ?>
@@ -268,7 +268,7 @@ final class PlaceholderController extends AdminController
                             <td>UKUPNO</td>
                             <td></td>
                             <td><?= htmlspecialchars(number_format($totals['minutes'] / 60, 1, ',', '.'), ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= htmlspecialchars(number_format((float) $totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> â‚¬</td>
+                            <td><?= htmlspecialchars(number_format((float) $totals['amount'], 2, ',', '.'), ENT_QUOTES, 'UTF-8') ?> €</td>
                             <td></td>
                         </tr>
                     <?php endif; ?>
@@ -404,7 +404,7 @@ HTML;
             return $range;
         }
 
-        $months = [1 => 'sijeÄanj', 2 => 'veljaÄa', 3 => 'oÅ¾ujak', 4 => 'travanj', 5 => 'svibanj', 6 => 'lipanj', 7 => 'srpanj', 8 => 'kolovoz', 9 => 'rujan', 10 => 'listopad', 11 => 'studeni', 12 => 'prosinac'];
+        $months = [1 => 'siječanj', 2 => 'veljača', 3 => 'ožujak', 4 => 'travanj', 5 => 'svibanj', 6 => 'lipanj', 7 => 'srpanj', 8 => 'kolovoz', 9 => 'rujan', 10 => 'listopad', 11 => 'studeni', 12 => 'prosinac'];
         return ($months[(int) $m[2]] ?? $m[2]) . ' ' . $m[1];
     }
 
@@ -441,7 +441,7 @@ HTML;
     {
         $value = $this->pdfText($value);
         $value = str_replace(
-            ['Ä', 'Ä‡', 'Ä‘', 'Å¡', 'Å¾', 'ÄŒ', 'Ä†', 'Ä', 'Å ', 'Å½'],
+            ['č', 'ć', 'đ', 'š', 'ž', 'Č', 'Ć', 'Đ', 'Š', 'Ž'],
             ['c', 'c', 'd', 's', 'z', 'C', 'C', 'D', 'S', 'Z'],
             $value
         );
@@ -454,7 +454,7 @@ HTML;
     private function reportTitle(array $clients, string $period, string $range, int $clientId): string
     {
         $client = $clientId > 0 ? $this->clientNameById($clients, $clientId) : 'Svi klijenti';
-        return 'IzvjeÅ¡taj ' . $client . ' ' . $this->rangeLabel($period, $range);
+        return 'Izvještaj ' . $client . ' ' . $this->rangeLabel($period, $range);
     }
 
     private function clientNameById(array $clients, int $clientId): string
@@ -482,6 +482,12 @@ HTML;
     {
         $totals = $data['totals'];
         $rows = $data['rows'];
+        $dateW = 26.0;
+        $descW = 95.0;
+        $hoursW = 20.0;
+        $amountW = 33.0;
+        $tableW = $dateW + $descW + $hoursW + $amountW;
+        $left = 18.0;
 
         $pdf = new \TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
@@ -489,116 +495,124 @@ HTML;
         $pdf->SetCreator('Ponta Desk');
         $pdf->SetAuthor('Ponta Desk');
         $pdf->SetTitle($title);
-        $pdf->SetMargins(18, 14, 18);
+        $pdf->SetMargins($left, 14, 18);
         $pdf->SetAutoPageBreak(true, 16);
         $pdf->AddPage();
 
-        $logoPath = $this->absoluteAssetPath('public/assets/img/ponta-logo-crop.jpg');
+        $logoPath = $this->absoluteAssetPath('public/assets/img/ponta-logo.jpg');
         if (is_file($logoPath)) {
-            $pdf->Image($logoPath, 18, 14, 42, 10, 'JPG');
+            $pdf->Image($logoPath, $left, 13, 64, 0, 'JPG');
         }
 
         $pdf->SetTextColor(18, 18, 18);
         $pdf->SetFont('dejavusans', '', 9);
-        $pdf->SetXY(122, 14);
-        $pdf->MultiCell(70, 4.2, "PONTA, Obrt za internetske portale, vl. Stjepo Hladilo\nNova Mokošica, Vinogradarska 7\nOIB: 77663681014", 0, 'R', false, 1);
+        $pdf->SetXY(118, 14);
+        $pdf->MultiCell(74, 4.2, "PONTA, Obrt za internetske portale, vl. Stjepo Hladilo\nNova Mokošica, Vinogradarska 7\nOIB: 77663681014", 0, 'R', false, 1);
 
         $pdf->SetFillColor(79, 128, 234);
-        $pdf->Rect(18, 31, 174, 18, 'F');
+        $pdf->Rect($left, 36, 174, 18, 'F');
         $pdf->SetTextColor(255, 255, 255);
-        $pdf->SetFont('dejavusans', 'B', 19);
-        $pdf->SetXY(18, 34);
+        $pdf->SetFont('dejavusans', 'B', 18);
+        $pdf->SetXY($left, 39);
         $pdf->Cell(174, 7, 'IZVJEŠTAJ O RADOVIMA', 0, 1, 'C', false);
-        $pdf->SetFont('dejavusans', '', 11);
-        $pdf->SetX(18);
+        $pdf->SetFont('dejavusans', '', 10.5);
+        $pdf->SetX($left);
         $pdf->Cell(174, 5, $periodLabel, 0, 1, 'C', false);
 
-        $pdf->SetTextColor(18, 18, 18);
-        $pdf->SetFont('dejavusans', '', 10.5);
-        $pdf->SetXY(18, 57);
-        $pdf->Cell(35, 6, 'Klijent:', 0, 0, 'L', false);
-        $clientLines = [(string) ($client['name'] ?? 'Svi klijenti')];
+        $clientName = (string) ($client['name'] ?? 'Svi klijenti');
         $address = trim((string) ($client['address'] ?? ''));
         $postalCode = trim((string) ($client['postal_code'] ?? ''));
         $city = trim((string) ($client['city'] ?? ''));
-        $cityLine = trim(implode(' ', array_filter([$postalCode, $city])));
-        if ($address !== '') {
-            $clientLines[] = $address;
-        }
-        if ($cityLine !== '') {
-            $clientLines[] = $cityLine;
-        }
         $vatId = trim((string) ($client['vat_id'] ?? ''));
-        if ($vatId !== '') {
-            $clientLines[] = 'OIB: ' . $vatId;
+        $cityLine = trim(implode(' ', array_filter([$postalCode, $city])));
+
+        $clientY = 66.0;
+        $pdf->SetTextColor(18, 18, 18);
+        $pdf->SetFont('dejavusans', 'B', 10);
+        $pdf->SetXY($left, $clientY);
+        $pdf->Cell(35, 5, 'Klijent:', 0, 0, 'L', false);
+        $pdf->SetXY(58, $clientY);
+        $pdf->Cell(120, 5, $clientName, 0, 1, 'L', false);
+        $lineY = $clientY + 5.2;
+        $pdf->SetFont('dejavusans', '', 9.2);
+        foreach (array_filter([$address, $cityLine]) as $line) {
+            $pdf->SetXY(58, $lineY);
+            $pdf->Cell(120, 4.6, $line, 0, 1, 'L', false);
+            $lineY += 4.6;
         }
-        $pdf->SetXY(58, 57);
-        $pdf->SetFont('dejavusans', 'B', 10.5);
-        $pdf->MultiCell(120, 5.2, implode("\n", $clientLines), 0, 'L', false, 1);
+        if ($vatId !== '') {
+            $pdf->SetXY(58, $lineY);
+            $pdf->Cell(120, 4.6, 'OIB: ' . $vatId, 0, 1, 'L', false);
+            $lineY += 4.6;
+        }
 
-        $pdf->SetFont('dejavusans', '', 10.5);
-        $pdf->SetXY(18, 76);
-        $pdf->Cell(35, 6, 'Cijena po satu:', 0, 0, 'L', false);
-        $pdf->SetFont('dejavusans', 'B', 10.5);
-        $pdf->Cell(60, 6, number_format((float) $totals['hourly_rate'], 2, ',', '.') . ' EUR', 0, 1, 'L', false);
+        $rateY = max(87.0, $lineY + 6.0);
+        $pdf->SetFont('dejavusans', '', 10);
+        $pdf->SetXY($left, $rateY);
+        $pdf->Cell(35, 5, 'Cijena po satu:', 0, 0, 'L', false);
+        $pdf->SetFont('dejavusans', 'B', 10);
+        $pdf->SetXY(58, $rateY);
+        $pdf->Cell(60, 5, number_format((float) $totals['hourly_rate'], 2, ',', '.') . ' EUR', 0, 1, 'L', false);
 
-        $pdf->SetY(92);
-        $pdf->SetFont('dejavusans', 'B', 9.5);
-        $pdf->SetFillColor(245, 248, 253);
-        $pdf->SetDrawColor(220, 228, 239);
-        $pdf->Cell(26, 8, 'Datum', 1, 0, 'L', true);
-        $pdf->Cell(104, 8, 'Opis', 1, 0, 'L', true);
-        $pdf->Cell(20, 8, 'Sati', 1, 0, 'R', true);
-        $pdf->Cell(24, 8, 'Iznos (EUR)', 1, 1, 'R', true);
+        $this->drawTcpdfReportTableHeader($pdf, $left, $rateY + 13.0, $dateW, $descW, $hoursW, $amountW);
 
-        $pdf->SetFont('dejavusans', '', 9.5);
         if ($rows === []) {
-            $pdf->MultiCell(174, 10, 'Nema radova za odabrane kriterije.', 1, 'L', false, 1);
+            $pdf->SetFont('dejavusans', '', 9.2);
+            $pdf->MultiCell($tableW, 10, 'Nema radova za odabrane kriterije.', 1, 'L', false, 1, $left, $pdf->GetY());
         } else {
+            $pdf->SetFont('dejavusans', '', 8.8);
             foreach ($rows as $row) {
                 $date = $this->formatDate((string) ($row['work_date'] ?? ''));
                 $description = trim((string) ($row['description'] ?? ''));
                 $hours = number_format(((int) ($row['duration_minutes'] ?? 0)) / 60, 1, ',', '.');
                 $amount = number_format((float) ($row['amount'] ?? 0), 2, ',', '.');
-                $lineCount = max(1, (int) ceil(strlen($description) / 42));
-                $rowHeight = max(8, $lineCount * 5.2);
+                $rowHeight = max(8.0, $pdf->getStringHeight($descW, $description, false, true, '', 1) + 2.0);
 
                 if ($pdf->GetY() + $rowHeight + 20 > 282) {
                     $pdf->AddPage();
-                    $pdf->SetFont('dejavusans', 'B', 9.5);
-                    $pdf->SetFillColor(245, 248, 253);
-                    $pdf->SetDrawColor(220, 228, 239);
-                    $pdf->Cell(26, 8, 'Datum', 1, 0, 'L', true);
-                    $pdf->Cell(104, 8, 'Opis', 1, 0, 'L', true);
-                    $pdf->Cell(20, 8, 'Sati', 1, 0, 'R', true);
-                    $pdf->Cell(24, 8, 'Iznos (EUR)', 1, 1, 'R', true);
-                    $pdf->SetFont('dejavusans', '', 9.5);
+                    $this->drawTcpdfReportTableHeader($pdf, $left, 18.0, $dateW, $descW, $hoursW, $amountW);
+                    $pdf->SetFont('dejavusans', '', 8.8);
                 }
 
-                $startY = $pdf->GetY();
-                $pdf->Cell(26, $rowHeight, $date, 1, 0, 'L', false);
-                $startX = $pdf->GetX();
-                $pdf->MultiCell(104, $rowHeight, $description, 1, 'L', false, 0, $startX, $startY, true, 0, false, true, $rowHeight, 'T');
-                $pdf->SetXY($startX + 104, $startY);
-                $pdf->Cell(20, $rowHeight, $hours, 1, 0, 'R', false);
-                $pdf->Cell(24, $rowHeight, $amount, 1, 1, 'R', false);
+                $y = $pdf->GetY();
+                $pdf->SetXY($left, $y);
+                $pdf->Cell($dateW, $rowHeight, $date, 1, 0, 'L', false);
+                $pdf->MultiCell($descW, $rowHeight, $description, 1, 'L', false, 0, $left + $dateW, $y, true, 0, false, true, $rowHeight, 'M');
+                $pdf->SetXY($left + $dateW + $descW, $y);
+                $pdf->Cell($hoursW, $rowHeight, $hours, 1, 0, 'R', false);
+                $pdf->Cell($amountW, $rowHeight, $amount, 1, 1, 'R', false);
             }
         }
 
         if ($pdf->GetY() + 18 > 280) {
             $pdf->AddPage();
+            $pdf->SetY(18);
         }
-        $pdf->SetFont('dejavusans', 'B', 9.5);
+        $pdf->SetFont('dejavusans', 'B', 9.2);
         $pdf->SetFillColor(243, 247, 253);
-        $pdf->Cell(130, 10, 'UKUPNO', 1, 0, 'L', true);
-        $pdf->Cell(20, 10, number_format(((int) $totals['minutes']) / 60, 1, ',', '.'), 1, 0, 'R', true);
-        $pdf->Cell(24, 10, number_format((float) $totals['amount'], 2, ',', '.') . ' EUR', 1, 1, 'R', true);
-        $pdf->SetFont('dejavusans', '', 8.5);
+        $pdf->Cell($dateW + $descW, 9, 'UKUPNO', 1, 0, 'L', true);
+        $pdf->Cell($hoursW, 9, number_format(((int) $totals['minutes']) / 60, 1, ',', '.'), 1, 0, 'R', true);
+        $pdf->Cell($amountW, 9, number_format((float) $totals['amount'], 2, ',', '.') . ' EUR', 1, 1, 'R', true);
+
+        $pdf->SetFont('dejavusans', '', 8);
         $pdf->SetTextColor(110, 110, 110);
         $pdf->Ln(4);
         $pdf->Cell(0, 5, 'Generirano: ' . date('d/m/Y H:i'), 0, 1, 'R');
 
         return $pdf->Output($title . '.pdf', 'S');
+    }
+
+    private function drawTcpdfReportTableHeader(\TCPDF $pdf, float $left, float $top, float $dateW, float $descW, float $hoursW, float $amountW): void
+    {
+        $pdf->SetY($top);
+        $pdf->SetFont('dejavusans', 'B', 9.2);
+        $pdf->SetTextColor(18, 18, 18);
+        $pdf->SetFillColor(245, 248, 253);
+        $pdf->SetDrawColor(220, 228, 239);
+        $pdf->Cell($dateW, 8, 'Datum', 1, 0, 'L', true);
+        $pdf->Cell($descW, 8, 'Opis', 1, 0, 'L', true);
+        $pdf->Cell($hoursW, 8, 'Sati', 1, 0, 'R', true);
+        $pdf->Cell($amountW, 8, 'Iznos (EUR)', 1, 1, 'R', true);
     }
 
     private function absoluteAssetPath(string $relativePath): string
@@ -615,7 +629,7 @@ HTML;
     private function pdfCleanPeriod(string $value): string
     {
         $value = str_replace(
-            ['sijeÄanj', 'veljaÄa', 'oÅ¾ujak', 'svibanj', 'lipanj', 'srpanj', 'kolovoz', 'rujan', 'listopad', 'studeni', 'prosinac'],
+            ['siječanj', 'veljača', 'ožujak', 'svibanj', 'lipanj', 'srpanj', 'kolovoz', 'rujan', 'listopad', 'studeni', 'prosinac'],
             ['sijecanj', 'veljaca', 'ozujak', 'svibanj', 'lipanj', 'srpanj', 'kolovoz', 'rujan', 'listopad', 'studeni', 'prosinac'],
             $value
         );
@@ -646,11 +660,11 @@ HTML;
         if ($firstPage) {
             $this->pdfImageAt($content, 'public/assets/img/ponta-logo.jpg', 38, 748, 129, 31);
             $this->pdfTextAt($content, 362, 805, 9, 'PONTA, Obrt za internetske portale, vl. Stjepo Hladilo', false, '0.05 0.05 0.05');
-            $this->pdfTextAt($content, 426, 792, 9, 'Nova MokoÅ¡ica, Vinogradarska 7', false, '0.05 0.05 0.05');
+            $this->pdfTextAt($content, 426, 792, 9, 'Nova Mokošica, Vinogradarska 7', false, '0.05 0.05 0.05');
             $this->pdfTextAt($content, 451, 779, 9, 'OIB: 77663681014', false, '0.05 0.05 0.05');
 
             $this->pdfRect($content, 42, 708, 511, 52, '0.24 0.50 0.93');
-            $this->pdfTextAt($content, 186, 733, 20, 'IZVJEÅ TAJ O RADOVIMA', true, '1 1 1');
+            $this->pdfTextAt($content, 186, 733, 20, 'IZVJEŠTAJ O RADOVIMA', true, '1 1 1');
             $this->pdfTextAt($content, 267, 716, 11, $period, false, '1 1 1');
 
             $this->pdfTextAt($content, 42, 666, 10, 'Klijent:', true, '0.05 0.05 0.05');

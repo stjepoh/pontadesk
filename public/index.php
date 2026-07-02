@@ -60,7 +60,10 @@ $router->get('/tasks', [App\Http\Controllers\ClientTaskController::class, 'index
 $router->post('/tasks', [App\Http\Controllers\ClientTaskController::class, 'store']);
 $router->post('/tasks/toggle', [App\Http\Controllers\ClientTaskController::class, 'toggle']);
 $router->post('/tasks/delete', [App\Http\Controllers\ClientTaskController::class, 'delete']);
-$router->get('/notes', [App\Http\Controllers\PlaceholderController::class, 'notes']);
+$router->get('/notes', [App\Http\Controllers\ClientNoteController::class, 'index']);
+$router->get('/notes/client', [App\Http\Controllers\ClientNoteController::class, 'detail']);
+$router->post('/notes', [App\Http\Controllers\ClientNoteController::class, 'store']);
+$router->post('/notes/delete', [App\Http\Controllers\ClientNoteController::class, 'delete']);
 $router->get('/notifications', [App\Http\Controllers\PlaceholderController::class, 'notifications']);
 $router->get('/import-map', [App\Http\Controllers\ImportMapController::class, 'index']);
 $router->post('/import-map', [App\Http\Controllers\ImportMapController::class, 'store']);

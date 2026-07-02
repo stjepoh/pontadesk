@@ -116,6 +116,7 @@ final class DashboardController extends AdminController
             'amount_clients' => array_slice($byAmount, 0, 3),
             'contract_value' => $contractValue,
             'maintenance_value' => $maintenanceValue,
+            'expiring_contracts' => $this->expiringContracts($contracts),
             'tasks' => $this->pendingTasks(),
         ];
     }
@@ -163,6 +164,17 @@ final class DashboardController extends AdminController
             .dash-client-money-row .line strong{color:#061a3b}
             .dash-client-money-row .sub{font-size:12px}
             .dash-contract-row{display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:start}
+            .dash-contract-alert{padding:18px 20px;border-color:#ffb4b4;background:linear-gradient(180deg,#fff5f5 0,#ffe9e9 100%);box-shadow:0 10px 28px rgba(220,38,38,.12)}
+            .dash-contract-alert-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:14px}
+            .dash-contract-alert-title{display:flex;align-items:center;gap:10px;color:#b91c1c;font-size:18px;font-weight:900}
+            .dash-contract-alert-title span{width:34px;height:34px;border-radius:11px;background:#dc2626;color:#fff;display:grid;place-items:center;font-weight:950}
+            .dash-contract-alert-sub{color:#7f1d1d;font-size:13px;margin-top:4px}
+            .dash-contract-alert-link{color:#b91c1c;font-weight:800;font-size:13px}
+            .dash-contract-alert-list{display:grid;gap:10px}
+            .dash-contract-alert-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:12px 14px;border:1px solid rgba(220,38,38,.18);border-radius:14px;background:rgba(255,255,255,.72)}
+            .dash-contract-alert-row strong{display:block;color:#7f1d1d;font-size:14px}
+            .dash-contract-alert-row small{display:block;color:#991b1b;margin-top:3px;font-size:12px}
+            .dash-contract-days{height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:0 11px;background:#dc2626;color:#fff;font-size:12px;font-weight:900;white-space:nowrap}
             .dash-tasks{padding:24px 26px}
             .dash-tasks-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
             .dash-tasks-title{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:850;color:#0d1f3d}
@@ -264,6 +276,29 @@ final class DashboardController extends AdminController
                         </div>
                     </div>
                 </article>
+
+                <?php if (($stats['expiring_contracts'] ?? []) !== []): ?>
+                    <article class="panel dash-contract-alert">
+                        <div class="dash-contract-alert-head">
+                            <div>
+                                <div class="dash-contract-alert-title"><span>!</span> Alarm: ugovori pred istekom</div>
+                                <div class="dash-contract-alert-sub">Istječu u narednih 30 dana. Provjeriti obnovu ili novi ugovor.</div>
+                            </div>
+                            <a class="dash-contract-alert-link" href="/contracts?status=active">Svi aktivni ugovori →</a>
+                        </div>
+                        <div class="dash-contract-alert-list">
+                            <?php foreach ($stats['expiring_contracts'] as $contract): ?>
+                                <a class="dash-contract-alert-row" href="/contracts/edit?id=<?= (int) $contract['id'] ?>&status=active">
+                                    <span>
+                                        <strong><?= htmlspecialchars((string) $contract['contract_name'], ENT_QUOTES, 'UTF-8') ?></strong>
+                                        <small><?= htmlspecialchars((string) $contract['client_name'], ENT_QUOTES, 'UTF-8') ?> · ističe <?= htmlspecialchars($this->formatDate((string) $contract['end_date']), ENT_QUOTES, 'UTF-8') ?></small>
+                                    </span>
+                                    <span class="dash-contract-days"><?= (int) $contract['days_left'] ?> dana</span>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </article>
+                <?php endif; ?>
             </section>
 
             <section class="panel dash-tasks">
@@ -434,6 +469,39 @@ final class DashboardController extends AdminController
     private function money(float $amount): string
     {
         return number_format($amount, 2, '.', '') . ' €';
+    }
+
+    /**
+     * @param array<int, array<string, mixed>> $contracts
+     * @return array<int, array<string, mixed>>
+     */
+    private function expiringContracts(array $contracts): array
+    {
+        $today = new \DateTimeImmutable('today');
+        $limit = $today->modify('+30 days');
+        $rows = [];
+
+        foreach ($contracts as $contract) {
+            if ((string) ($contract['status'] ?? 'active') !== 'active') {
+                continue;
+            }
+
+            $endDate = \DateTimeImmutable::createFromFormat('Y-m-d', (string) ($contract['end_date'] ?? ''));
+            if (!$endDate instanceof \DateTimeImmutable) {
+                continue;
+            }
+
+            if ($endDate < $today || $endDate > $limit) {
+                continue;
+            }
+
+            $contract['days_left'] = (int) $today->diff($endDate)->format('%a');
+            $rows[] = $contract;
+        }
+
+        usort($rows, static fn(array $a, array $b): int => ((int) $a['days_left'] <=> (int) $b['days_left']) ?: strcmp((string) ($a['client_name'] ?? ''), (string) ($b['client_name'] ?? '')));
+
+        return array_slice($rows, 0, 6);
     }
 
     /**

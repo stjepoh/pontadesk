@@ -597,7 +597,7 @@ HTML;
             $this->pdfTextAt($content, 451, 779, 9, 'OIB: 77663681014', false, '0.05 0.05 0.05');
 
             $this->pdfRect($content, 42, 708, 511, 52, '0.24 0.50 0.93');
-            $this->pdfTextAt($content, 186, 733, 20, 'IZVJESTAJ O RADOVIMA', true, '1 1 1');
+            $this->pdfTextAt($content, 186, 733, 20, 'IZVJEŠTAJ O RADOVIMA', true, '1 1 1');
             $this->pdfTextAt($content, 267, 716, 11, $period, false, '1 1 1');
 
             $this->pdfTextAt($content, 42, 666, 10, 'Klijent:', true, '0.05 0.05 0.05');

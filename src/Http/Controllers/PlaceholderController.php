@@ -591,8 +591,7 @@ HTML;
         }
 
         if ($firstPage) {
-            $this->pdfTextAt($content, 42, 790, 26, 'PONT', false, '0.05 0.05 0.05');
-            $this->pdfTextAt($content, 128, 790, 26, 'A', true, '0.90 0.18 0.14');
+            $this->pdfImageAt($content, 'public/assets/img/ponta-logo.jpg', 42, 747, 125, 30);
             $this->pdfTextAt($content, 362, 805, 9, 'PONTA, Obrt za internetske portale, vl. Stjepo Hladilo', false, '0.05 0.05 0.05');
             $this->pdfTextAt($content, 426, 792, 9, 'Nova Mokošica, Vinogradarska 7', false, '0.05 0.05 0.05');
             $this->pdfTextAt($content, 451, 779, 9, 'OIB: 77663681014', false, '0.05 0.05 0.05');
@@ -623,8 +622,6 @@ HTML;
             return 562;
         }
 
-        $this->pdfTextAt($content, 42, 790, 12, 'PONTA', false, '0.05 0.05 0.05');
-        $this->pdfTextAt($content, 91, 790, 12, 'A', true, '0.90 0.18 0.14');
         $this->pdfTextAt($content, 512, 792, 8, 'Stranica ' . $pageNumber, false, '0.42 0.42 0.42');
 
         $this->pdfRect($content, 42, 574, 511, 18, '0.94 0.96 0.98');
@@ -703,10 +700,21 @@ HTML;
         $content .= "{$color} RG 0.6 w {$x1} {$y1} m {$x2} {$y2} l S\n";
     }
 
+    private function pdfImageAt(string &$content, string $path, int $x, int $y, int $w, int $h): void
+    {
+        $data = @file_get_contents($path);
+        if ($data === false) {
+            return;
+        }
+
+        $content .= "q {$w} 0 0 {$h} {$x} {$y} cm /Im1 Do Q\n";
+    }
+
     private function makeSimplePdf(array $pageContents): string
     {
         $pageCount = count($pageContents);
-        $fontRegularObject = 3 + ($pageCount * 2);
+        $imageObject = 3 + ($pageCount * 2);
+        $fontRegularObject = $imageObject + 1;
         $fontBoldObject = $fontRegularObject + 1;
 
         $objects = [];
@@ -720,10 +728,16 @@ HTML;
         foreach ($pageContents as $index => $pageContent) {
             $pageObject = 3 + ($index * 2);
             $contentObject = $pageObject + 1;
-            $objects[] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents ' . $contentObject . ' 0 R /Resources << /Font << /F1 ' . $fontRegularObject . ' 0 R /F2 ' . $fontBoldObject . ' 0 R >> >> >>';
+            $objects[] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents ' . $contentObject . ' 0 R /Resources << /Font << /F1 ' . $fontRegularObject . ' 0 R /F2 ' . $fontBoldObject . ' 0 R >> /XObject << /Im1 ' . $imageObject . ' 0 R >> >> >>';
             $objects[] = '<< /Length ' . strlen($pageContent) . ' >> stream' . "\n" . $pageContent . "\n" . 'endstream';
         }
 
+        $imagePath = __DIR__ . '/../../../public/assets/img/ponta-logo.jpg';
+        $imageData = @file_get_contents($imagePath);
+        if ($imageData === false) {
+            $imageData = '';
+        }
+        $objects[] = '<< /Type /XObject /Subtype /Image /Width 406 /Height 100 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' . strlen($imageData) . ' >> stream' . "\n" . $imageData . "\n" . 'endstream';
         $objects[] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
         $objects[] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
 

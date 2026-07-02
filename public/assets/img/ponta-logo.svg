@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="406" height="100" viewBox="0 0 406 100">
+  <rect width="406" height="100" fill="#ffffff"/>
+  <g fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="300">
+    <text x="10" y="77" letter-spacing="1">PONT</text>
+  </g>
+  <g transform="translate(274,18)">
+    <path d="M38 0 L56 35 H20 Z" fill="#e6291b"/>
+    <path d="M20 42 H56 L74 77 H2 Z" fill="#e6291b"/>
+    <rect x="20" y="35" width="36" height="7" fill="#ffffff"/>
+  </g>
+</svg>

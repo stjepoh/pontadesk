@@ -56,7 +56,10 @@ $router->post('/work-logs/update', [App\Http\Controllers\WorkLogController::clas
 
 $router->get('/reports', [App\Http\Controllers\PlaceholderController::class, 'reports']);
 $router->get('/reports/pdf', [App\Http\Controllers\PlaceholderController::class, 'reportsPdf']);
-$router->get('/tasks', [App\Http\Controllers\PlaceholderController::class, 'tasks']);
+$router->get('/tasks', [App\Http\Controllers\ClientTaskController::class, 'index']);
+$router->post('/tasks', [App\Http\Controllers\ClientTaskController::class, 'store']);
+$router->post('/tasks/toggle', [App\Http\Controllers\ClientTaskController::class, 'toggle']);
+$router->post('/tasks/delete', [App\Http\Controllers\ClientTaskController::class, 'delete']);
 $router->get('/notes', [App\Http\Controllers\PlaceholderController::class, 'notes']);
 $router->get('/notifications', [App\Http\Controllers\PlaceholderController::class, 'notifications']);
 $router->get('/import-map', [App\Http\Controllers\ImportMapController::class, 'index']);

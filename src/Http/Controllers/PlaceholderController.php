@@ -589,9 +589,6 @@ HTML;
         } elseif ($clientCountry !== '') {
             $clientLines[] = $clientCountry;
         }
-        if ($clientVat !== '') {
-            $clientLines[] = 'OIB: ' . $clientVat;
-        }
 
         if ($firstPage) {
             $this->pdfTextAt($content, 42, 790, 26, 'PONT', false, '0.05 0.05 0.05');
@@ -609,6 +606,9 @@ HTML;
             foreach ($clientLines as $index => $line) {
                 $this->pdfTextAt($content, 142, $lineY, $index === 0 ? 10 : 9, $line, $index === 0, '0.05 0.05 0.05');
                 $lineY -= 14;
+            }
+            if ($clientVat !== '') {
+                $this->pdfTextAt($content, 142, $lineY - 2, 9, 'OIB: ' . $clientVat, false, '0.05 0.05 0.05');
             }
             $this->pdfTextAt($content, 42, 616, 10, 'Cijena po satu:', false, '0.05 0.05 0.05');
             $this->pdfTextAt($content, 142, 616, 10, number_format((float) $totals['hourly_rate'], 2, '.', '') . ' EUR', true, '0.05 0.05 0.05');

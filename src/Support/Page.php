@@ -14,6 +14,15 @@ final class Page
 
         echo '<!doctype html><html lang="hr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">';
         echo '<title>PontaDesk - ' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</title>';
+        echo '<link rel="icon" href="/favicon.ico" sizes="any">';
+        echo '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
+        echo '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';
+        echo '<link rel="apple-touch-icon" href="/apple-touch-icon.png">';
+        echo '<link rel="manifest" href="/site.webmanifest">';
+        echo '<meta name="theme-color" content="#111827">';
+        echo '<meta name="mobile-web-app-capable" content="yes">';
+        echo '<meta name="apple-mobile-web-app-capable" content="yes">';
+        echo '<meta name="apple-mobile-web-app-title" content="PontaDesk">';
         echo '<style>
             :root{--panel:#fff;--nav:#0d1629;--nav2:#17233d;--text:#10233f;--muted:#6f7f97;--line:#dbe3ee;--blue:#3f6df6;--blue2:#5a82ff;--green:#1fae57;--red:#e74b4b;--shadow:0 10px 30px rgba(16,35,63,.08)}
             *{box-sizing:border-box}
@@ -21,6 +30,7 @@ final class Page
             a{text-decoration:none;color:inherit}
             .topbar{height:46px;background:linear-gradient(180deg,var(--nav) 0,var(--nav2) 100%);color:#fff;display:flex;align-items:center;padding:0 18px;position:sticky;top:0;z-index:50;box-shadow:0 8px 24px rgba(3,8,20,.16)}
             .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px}
+            .brand-logo{width:28px;height:28px;border-radius:8px;object-fit:cover;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.16)}
             .brand-badge{width:18px;height:18px;border-radius:6px;background:linear-gradient(180deg,var(--blue2),var(--blue));display:grid;place-items:center;font-size:11px}
             .nav{display:flex;align-items:center;gap:6px;margin:0 auto;padding:0 18px;overflow:auto}
             .nav a{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:9px;color:rgba(255,255,255,.78);font-size:13px;font-weight:700;white-space:nowrap}
@@ -80,7 +90,7 @@ final class Page
         </style></head><body>';
 
         echo '<header class="topbar">';
-        echo '<div class="brand"><div class="brand-badge"><span>◔</span></div><span>PontaDesk</span></div>';
+        echo '<div class="brand"><img class="brand-logo" src="/assets/img/ponta-app-logo.png" alt="PontaDesk"><span>PontaDesk</span></div>';
         echo '<nav class="nav">';
         foreach ($navItems as $item) {
             $active = !empty($item['active']) ? ' active' : '';

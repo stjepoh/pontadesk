@@ -555,7 +555,7 @@ HTML;
 
     private function pdfText(string $value): string
     {
-        $converted = @iconv('UTF-8', 'windows-1252//TRANSLIT', $value);
+        $converted = @iconv('UTF-8', 'windows-1250//TRANSLIT', $value);
         return $converted !== false ? $converted : $value;
     }
 

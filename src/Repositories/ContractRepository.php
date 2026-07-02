@@ -63,7 +63,7 @@ final class ContractRepository
 
     private function dbAvailable(): bool
     {
-        return getenv('DB_DATABASE') !== false && getenv('DB_DATABASE') !== '';
+        return in_array('mysql', \PDO::getAvailableDrivers(), true) && getenv('DB_DATABASE') !== false && getenv('DB_DATABASE') !== '';
     }
 
     private function allFromExport(): array

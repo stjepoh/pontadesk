@@ -72,6 +72,6 @@ final class AuthService
 
     private function dbAvailable(): bool
     {
-        return extension_loaded('pdo_mysql') && getenv('DB_DATABASE') !== false && getenv('DB_DATABASE') !== '';
+        return in_array('mysql', \PDO::getAvailableDrivers(), true) && getenv('DB_DATABASE') !== false && getenv('DB_DATABASE') !== '';
     }
 }

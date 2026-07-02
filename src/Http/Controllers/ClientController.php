@@ -247,7 +247,7 @@ final class ClientController extends AdminController
                     <div class="section-title"><h2>Brze radnje</h2></div>
                     <div class="actions">
                         <a class="btn" href="/clients/edit?id=<?= (int) $client['id'] ?>">Uredi klijenta</a>
-                        <a class="btn secondary" href="/contracts/create">Novi ugovor</a>
+                        <a class="btn secondary" href="/contracts/create?client_id=<?= (int) $client['id'] ?>">Novi ugovor</a>
                         <a class="btn secondary" href="/work-logs/create">Novi radni sat</a>
                     </div>
                 </div>

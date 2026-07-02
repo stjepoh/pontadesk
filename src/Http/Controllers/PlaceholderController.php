@@ -76,14 +76,6 @@ final class PlaceholderController extends AdminController
 
     private function reportsContent(array $clients, array $data, string $period, string $range, int $clientId, bool $billedOnly): string
     {
-        $selectedClient = $clientId > 0 ? $this->clientNameById($clients, $clientId) : 'Svi klijenti';
-        $periodLabel = match ($period) {
-            'weekly' => 'Tjedni',
-            'yearly' => 'Godišnji',
-            default => 'Mjesečni',
-        };
-        $rangeLabel = $this->rangeLabel($period, $range);
-        $titleLabel = $this->reportTitle($clients, $period, $range, $clientId);
         $rows = $data['rows'];
         $totals = $data['totals'];
         $pdfUrl = '/reports/pdf?' . http_build_query([
@@ -97,14 +89,6 @@ final class PlaceholderController extends AdminController
         ?>
         <style>
             .reports-shell{display:grid;gap:16px}
-            .reports-tabs{display:inline-flex;gap:0;background:#f4f6fb;border:1px solid #e1e7f2;border-radius:12px;padding:3px}
-            .reports-tab{display:inline-flex;align-items:center;justify-content:center;min-width:146px;height:32px;padding:0 18px;border-radius:9px;font-weight:700;color:#6c7a90}
-            .reports-tab.active{background:#fff;color:#0f2444;box-shadow:0 2px 8px rgba(16,35,63,.08)}
-            .reports-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
-            .reports-kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:#5a82ff}
-            .reports-kicker .dot{width:8px;height:8px;border-radius:50%;background:#5a82ff;display:inline-block}
-            .reports-title{margin:8px 0 0;font-size:30px;line-height:1.08;letter-spacing:-.04em}
-            .reports-sub{margin-top:6px;color:#6f7f97;font-size:14px}
             .reports-panel{padding:18px}
             .reports-filter-grid{display:grid;grid-template-columns:1fr 1fr 1.15fr auto auto auto;gap:12px;align-items:end}
             .reports-filter-grid label{display:block;margin:0 0 8px;font-size:13px;font-weight:700;color:#294164}
@@ -132,7 +116,7 @@ final class PlaceholderController extends AdminController
             .reports-empty{padding:24px;color:#6f7f97}
             .reports-amount{font-weight:800}
             @media (max-width: 1260px){.reports-filter-grid{grid-template-columns:1fr 1fr;}.reports-summary{grid-template-columns:repeat(2,minmax(0,1fr));}}
-            @media (max-width: 760px){.reports-filter-grid,.reports-summary{grid-template-columns:1fr;}.reports-title{font-size:25px}.reports-tab{min-width:0;flex:1}}
+            @media (max-width: 760px){.reports-filter-grid,.reports-summary{grid-template-columns:1fr;}}
             .reports-shell .panel{border-radius:18px}
             .reports-shell .reports-panel{padding:14px}
             .reports-shell .reports-summary{gap:10px}
@@ -143,24 +127,9 @@ final class PlaceholderController extends AdminController
             .reports-shell .reports-table table tbody td{padding:9px 10px}
             .reports-shell .reports-date-row td{padding-top:10px;padding-bottom:7px}
             .reports-shell .reports-date-row .summary{font-size:11px}
-            .reports-shell .reports-tab{height:28px;min-width:136px;font-size:13px}
             .reports-shell .reports-btn{height:36px;padding:0 12px;font-size:13px}
         </style>
         <div class="reports-shell">
-            <section class="reports-head">
-                <div>
-                    <div class="reports-kicker"><span class="dot"></span><span>Izvještaji</span></div>
-                    <h2 class="reports-title"><?= htmlspecialchars($titleLabel, ENT_QUOTES, 'UTF-8') ?></h2>
-                    <div class="reports-sub">Generirajte detaljne izvještaje o radu i projektima</div>
-                </div>
-                <a class="reports-btn primary" href="<?= htmlspecialchars($pdfUrl, ENT_QUOTES, 'UTF-8') ?>">↓ PDF</a>
-            </section>
-
-            <div class="reports-tabs" role="tablist" aria-label="Izvještaji">
-                <span class="reports-tab active">Radovi po klijentu</span>
-                <span class="reports-tab">Projekti i vrijeme</span>
-            </div>
-
             <section class="panel reports-panel">
                 <form method="get" action="/reports" id="reports-filter-form">
                     <div class="reports-filter-grid">
